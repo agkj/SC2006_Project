@@ -12,6 +12,18 @@
         android:theme="@style/Theme.SC2006_Project"
         tools:targetApi="31">
         <activity
+            android:name=".CarparkLotDisplay"
+            android:exported="false" />
+        <activity
+            android:name=".MapActivity"
+            android:exported="false" />
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyAP4bKASiRJpEAhmX1d1Auk9dCESpwDVic" />
+        <activity
+            android:name=".TempCarparkView"
+            android:exported="false" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
