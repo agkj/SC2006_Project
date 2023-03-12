@@ -17,12 +17,19 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class AccountRegister extends AppCompatActivity {
 
-    TextInputEditText editTextEmail, editTextPassword;
+    TextInputEditText editTextEmail, editTextPassword, editTextPhone, editTextName, editTextCarPlate;
     Button btnReg;
     FirebaseAuth mAuth;
+    FirebaseFirestore fStore;
+    String userID;
     TextView textView;
 
     @Override
@@ -42,12 +49,18 @@ public class AccountRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_register);
 
+
+        fStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.emailRegister);
         editTextPassword = findViewById(R.id.passwordRegister);
         btnReg = findViewById(R.id.btn_register);
         textView = findViewById(R.id.loginNow);
 
+        //register additional user details
+        editTextPhone = findViewById(R.id.phoneRegister);
+        editTextName = findViewById(R.id.nameRegister);
+        editTextCarPlate = findViewById(R.id.carplateRegister);
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,39 +75,57 @@ public class AccountRegister extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 String email, password;
+                String name, phone, carPlate;
 
                 email = String.valueOf(editTextEmail.getText());
                 password = String.valueOf(editTextPassword.getText());
 
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                //register additional user details
+                name = String.valueOf(editTextName.getText());
+                phone = String.valueOf(editTextPhone.getText());
+                carPlate = String.valueOf(editTextCarPlate.getText());
 
-                    Toast.makeText(AccountRegister.this, "Password or email is empty, try again.", Toast.LENGTH_SHORT).show();
+
+
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name)|| TextUtils.isEmpty(phone) || TextUtils.isEmpty(carPlate)){
+
+                    Toast.makeText(AccountRegister.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
 
-
                 }
-
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    //Log.d(TAG, "createUserWithEmail:success");
+                mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            //Log.d(TAG, "createUserWithEmail:success");
 
 
-                                    //email verification
-                                    mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
-                                        @Override
-                                        public void onComplete(@NonNull Task<Void> task) {
-                                            if(task.isSuccessful()){
+                            //email verification
+                            mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull Task<Void> task) {
+                                    if(task.isSuccessful()){
 
-                                                Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.",
-                                                        Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();
 
-                                                Intent intent = new Intent(getApplicationContext(), Login.class);
-                                                startActivity(intent);
-                                                finish();
+                                        userID = mAuth.getCurrentUser().getUid();
+
+                                        //user object to record and store data into firestore
+                                        DocumentReference documentReference = fStore.collection("users").document(userID);
+                                        Map<String,Object> user = new HashMap<>();
+                                        user.put("email",email);
+                                        user.put("password",password);
+                                        user.put("name",name);
+                                        user.put("phone",phone);
+                                        user.put("carPlate",carPlate);
+                                        documentReference.set(user);
+
+
+
+                                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                                        startActivity(intent);
+                                        finish();
 
 
                                             }

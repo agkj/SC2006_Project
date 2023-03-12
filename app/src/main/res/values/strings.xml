@@ -5,4 +5,7 @@
     <string name="password">Password</string>
     <string name="register">Register</string>
     <string name="click_to_login">click_to_login</string>
+    <string name="phone">Phone</string>
+    <string name="name">Name</string>
+    <string name="car_number_plate">Car Number Plate</string>
 </resources>
