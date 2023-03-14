@@ -58,9 +58,9 @@ public class AccountRegister extends AppCompatActivity {
         //textView = findViewById(R.id.loginNow);
 
         //register additional user details
-        //editTextPhone = findViewById(R.id.phoneRegister);
-        //editTextName = findViewById(R.id.nameRegister);
-        //editTextCarPlate = findViewById(R.id.carplateRegister);
+        editTextPhone = findViewById(R.id.phoneRegister);
+        editTextName = findViewById(R.id.nameRegister);
+        editTextCarPlate = findViewById(R.id.carplateRegister);
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +72,9 @@ public class AccountRegister extends AppCompatActivity {
                 password = String.valueOf(editTextPassword.getText());
 
                 //register additional user details
-                //name = String.valueOf(editTextName.getText());
-                //phone = String.valueOf(editTextPhone.getText());
-                //carPlate = String.valueOf(editTextCarPlate.getText());
+                name = String.valueOf(editTextName.getText());
+                phone = String.valueOf(editTextPhone.getText());
+                carPlate = String.valueOf(editTextCarPlate.getText());
 
 
 
