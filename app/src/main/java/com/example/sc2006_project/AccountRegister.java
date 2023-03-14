@@ -107,9 +107,9 @@ public class AccountRegister extends AppCompatActivity {
                                         Map<String,Object> user = new HashMap<>();
                                         user.put("email",email);
                                         user.put("password",password);
-                                        //user.put("name",name);
-                                        //user.put("phone",phone);
-                                        //user.put("carPlate",carPlate);
+                                        user.put("name",name);
+                                        user.put("phone",phone);
+                                        user.put("carPlate",carPlate);
                                         documentReference.set(user);
 
 
