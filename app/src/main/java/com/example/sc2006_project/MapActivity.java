@@ -18,6 +18,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -44,6 +45,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private RelativeLayout wrapper;
     private Spinner level_select;
     private Resources res;
+    private boolean blank_check = false;
     public int temp;
 
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
@@ -56,7 +58,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                         if(intent != null){
                             LatLng temp_loc = intent.getParcelableExtra(CarparkLotRecViewAdapter.GET_LOT_COORDS);
                             googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(temp_loc, 15));
-
                         }
                     }
                 }
@@ -72,9 +73,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         carpark_map_bounds = intent.getParcelableExtra(CarparkRecViewAdapter.BOUND);
         asset_files = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.ASSET_NAMES);
         levels = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.LEVELS);
+        if(asset_files.size() == 0 || levels.size() == 0){
+            blank_check = true;
+        }
         res = getResources();
-        temp = res.getIdentifier(asset_files.get(0), "raw", getPackageName());
-
+        if(!blank_check){
+            temp = res.getIdentifier(asset_files.get(0), "raw", getPackageName());
+        }
         SupportMapFragment mapfragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
         if(mapfragment != null){
             mapfragment.getMapAsync(this);
@@ -91,23 +96,28 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         level_select.setAdapter(adapter);
         level_select.setSelection(0,false);
-        if(levels.size() != 1){
+        if(levels.size() > 1){
             wrapper.setElevation(2);
         }
         level_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                BitmapDescriptor temp;
-                int res_id;
-                res = getResources();
-                GroundOverlayOptions opts = new GroundOverlayOptions();
-                res_id = res.getIdentifier(asset_files.get(i),"raw", getPackageName());
-                temp = BitmapDescriptorFactory.fromResource(res_id);
-                overlay.remove();
-                opts.positionFromBounds(carpark_map_bounds);
-                opts.image(temp);
-                opts.transparency(0.5f);
-                overlay = googleMap.addGroundOverlay(opts);
+                if(i < asset_files.size()){
+                    BitmapDescriptor temp;
+                    int res_id;
+                    res = getResources();
+                    GroundOverlayOptions opts = new GroundOverlayOptions();
+                    res_id = res.getIdentifier(asset_files.get(i),"raw", getPackageName());
+                    temp = BitmapDescriptorFactory.fromResource(res_id);
+                    overlay.remove();
+                    opts.positionFromBounds(carpark_map_bounds);
+                    opts.image(temp);
+                    opts.transparency(0.5f);
+                    overlay = googleMap.addGroundOverlay(opts);
+                }
+                else{
+                    Toast.makeText(MapActivity.this, "The map for that level does not currently exist", Toast.LENGTH_SHORT).show();
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -128,13 +138,14 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;
         this.googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(carpark_loc, 20));
-        GroundOverlayOptions opts = new GroundOverlayOptions();
-        opts.positionFromBounds(carpark_map_bounds);
-
-        BitmapDescriptor desc = BitmapDescriptorFactory.fromResource(temp);
-        opts.image(desc);
-        opts.transparency(0.5f);
-        overlay = googleMap.addGroundOverlay(opts);
+        if(!blank_check){
+            GroundOverlayOptions opts = new GroundOverlayOptions();
+            opts.positionFromBounds(carpark_map_bounds);
+            BitmapDescriptor desc = BitmapDescriptorFactory.fromResource(temp);
+            opts.image(desc);
+            opts.transparency(0.5f);
+            overlay = googleMap.addGroundOverlay(opts);
+        }
     }
 
 }
