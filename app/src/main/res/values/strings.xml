@@ -8,4 +8,6 @@
     <string name="phone">Phone</string>
     <string name="name">Name</string>
     <string name="car_number_plate">Car Number Plate</string>
+    <string name="create_account"><u>Create New Account</u></string>
+    <string name="forget_password"><u>Forget Password</u></string>
 </resources>

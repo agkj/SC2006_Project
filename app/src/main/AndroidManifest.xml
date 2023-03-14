@@ -26,6 +26,10 @@
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyAP4bKASiRJpEAhmX1d1Auk9dCESpwDVic" />
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
         <activity
             android:name=".TempCarparkView"
             android:exported="false" />
@@ -33,6 +37,9 @@
             android:name=".MainActivity"
             android:exported="false" />
 
+        <activity
+            android:name=".MainSite"
+            android:exported="false" />
 
         <activity
             android:name=".Login"

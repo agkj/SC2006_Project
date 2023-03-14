@@ -47,7 +47,7 @@ public class AccountRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_register);
+        setContentView(R.layout.create_account);
 
 
         fStore = FirebaseFirestore.getInstance();
@@ -55,21 +55,12 @@ public class AccountRegister extends AppCompatActivity {
         editTextEmail = findViewById(R.id.emailRegister);
         editTextPassword = findViewById(R.id.passwordRegister);
         btnReg = findViewById(R.id.btn_register);
-        textView = findViewById(R.id.loginNow);
+        //textView = findViewById(R.id.loginNow);
 
         //register additional user details
-        editTextPhone = findViewById(R.id.phoneRegister);
-        editTextName = findViewById(R.id.nameRegister);
-        editTextCarPlate = findViewById(R.id.carplateRegister);
-
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        //editTextPhone = findViewById(R.id.phoneRegister);
+        //editTextName = findViewById(R.id.nameRegister);
+        //editTextCarPlate = findViewById(R.id.carplateRegister);
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,13 +72,13 @@ public class AccountRegister extends AppCompatActivity {
                 password = String.valueOf(editTextPassword.getText());
 
                 //register additional user details
-                name = String.valueOf(editTextName.getText());
-                phone = String.valueOf(editTextPhone.getText());
-                carPlate = String.valueOf(editTextCarPlate.getText());
+                //name = String.valueOf(editTextName.getText());
+                //phone = String.valueOf(editTextPhone.getText());
+                //carPlate = String.valueOf(editTextCarPlate.getText());
 
 
 
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name)|| TextUtils.isEmpty(phone) || TextUtils.isEmpty(carPlate)){
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
 
                     Toast.makeText(AccountRegister.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
@@ -116,9 +107,9 @@ public class AccountRegister extends AppCompatActivity {
                                         Map<String,Object> user = new HashMap<>();
                                         user.put("email",email);
                                         user.put("password",password);
-                                        user.put("name",name);
-                                        user.put("phone",phone);
-                                        user.put("carPlate",carPlate);
+                                        //user.put("name",name);
+                                        //user.put("phone",phone);
+                                        //user.put("carPlate",carPlate);
                                         documentReference.set(user);
 
 
