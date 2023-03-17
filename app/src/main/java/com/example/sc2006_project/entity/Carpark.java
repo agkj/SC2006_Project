@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.entity;
 
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;

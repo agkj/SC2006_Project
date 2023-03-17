@@ -8,8 +8,10 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.fragment.NavHostFragment;
+//import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.sc2006_project.boundary.MapActivity;
+import com.example.sc2006_project.boundary.TempCarparkView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainSite extends AppCompatActivity {
@@ -25,9 +27,8 @@ public class MainSite extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), CarparkLotDisplay.class);
+                Intent intent = new Intent(getApplicationContext(), TempCarparkView.class);
                 startActivity(intent);
-                finish();
             }
         });
     }

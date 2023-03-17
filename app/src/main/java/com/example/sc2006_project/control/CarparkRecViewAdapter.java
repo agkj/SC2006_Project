@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.control;
 import android.content.Context;
 import android.content.Intent;
 import android.view.LayoutInflater;
@@ -6,7 +6,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.sc2006_project.boundary.MapActivity;
+import com.example.sc2006_project.R;
+import com.example.sc2006_project.entity.Carpark;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 
