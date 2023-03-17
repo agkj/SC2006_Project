@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.control;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,12 +8,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.common.internal.AccountType;
+import com.example.sc2006_project.R;
+import com.example.sc2006_project.entity.CarparkLot;
 
 import java.util.ArrayList;
 

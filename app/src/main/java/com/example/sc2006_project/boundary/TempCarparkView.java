@@ -1,12 +1,14 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.boundary;
 
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
+
+import com.example.sc2006_project.R;
+import com.example.sc2006_project.control.CarparkRecViewAdapter;
+import com.example.sc2006_project.entity.Carpark;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import java.util.ArrayList;

@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.control;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sc2006_project.Login;
+import com.example.sc2006_project.MainActivity;
+import com.example.sc2006_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -51,7 +54,7 @@ public class AccountRegister extends AppCompatActivity {
 
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account_register);
+        setContentView(R.layout.create_account);
 
 
         fStore = FirebaseFirestore.getInstance();
@@ -59,21 +62,12 @@ public class AccountRegister extends AppCompatActivity {
         editTextEmail = findViewById(R.id.emailRegister);
         editTextPassword = findViewById(R.id.passwordRegister);
         btnReg = findViewById(R.id.btn_register);
-        textView = findViewById(R.id.loginNow);
+        //textView = findViewById(R.id.loginNow);
 
         //register additional user details
         editTextPhone = findViewById(R.id.phoneRegister);
         editTextName = findViewById(R.id.nameRegister);
         editTextCarPlate = findViewById(R.id.carplateRegister);
-
-        textView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
-                finish();
-            }
-        });
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +85,7 @@ public class AccountRegister extends AppCompatActivity {
 
 
 
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name)|| TextUtils.isEmpty(phone) || TextUtils.isEmpty(carPlate)){
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
 
                     Toast.makeText(AccountRegister.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;

@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sc2006_project.control.AccountRegister;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
@@ -41,12 +42,12 @@ public class Login extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
+        setContentView(R.layout.login);
 
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.emailLogin);
         editTextPassword = findViewById(R.id.passwordLogin);
-        btnLogin = findViewById(R.id.btn_login);
+        btnLogin = findViewById(R.id.login_button);
         textView = findViewById(R.id.registerNow);
 
 
@@ -85,7 +86,7 @@ public class Login extends AppCompatActivity {
                                     if(mAuth.getCurrentUser().isEmailVerified()){
                                         Toast.makeText(Login.this, "Welcome",
                                                 Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                        Intent intent = new Intent(getApplicationContext(), MainSite.class);
                                         startActivity(intent);
                                         finish();
 
