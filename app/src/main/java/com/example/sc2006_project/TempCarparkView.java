@@ -33,14 +33,14 @@ public class TempCarparkView extends AppCompatActivity{
             level_list.add("L2");
             level_list.add("L3");
             ArrayList<String> test1 = new ArrayList<>();
-            test1.add("bonk");
+            test1.add("carpark_ntu_f");
             ArrayList<String> test2 = new ArrayList<>();
             test2.add("L1");
             carparkRecView = findViewById(R.id.carparkRecView);
             carparks.add(new Carpark(new LatLng(1.345275,103.683411),"Carpark Q/Student Services Centre"));
             carparks.add(new Carpark(
                     new LatLng(1.346776,103.683368),
-                    new LatLngBounds(new LatLng(1.3465, 103.682), new LatLng(1.347, 103.6843)),
+                    new LatLngBounds(new LatLng(1.34635, 103.68311), new LatLng(1.34787, 103.6837)),
                     "Carpark F/Mat Sci Carpark",
                     test1,
                     test2));
