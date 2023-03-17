@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.boundary;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.sc2006_project.MainActivity;
+import com.example.sc2006_project.R;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,11 +44,15 @@ public class AccountRegister extends AppCompatActivity {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
             finish();
+
+
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_account_register);
 
@@ -101,7 +108,7 @@ public class AccountRegister extends AppCompatActivity {
                             //Log.d(TAG, "createUserWithEmail:success");
 
 
-                            //email verification
+                            //send email verification
                             mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -127,7 +134,6 @@ public class AccountRegister extends AppCompatActivity {
                                         startActivity(intent);
                                         finish();
 
-
                                             }
                                             else{
                                                 Toast.makeText(AccountRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -150,8 +156,7 @@ public class AccountRegister extends AppCompatActivity {
             }
         });
 
-
-
+                                        //go back to login page after creating account
 
 
 
