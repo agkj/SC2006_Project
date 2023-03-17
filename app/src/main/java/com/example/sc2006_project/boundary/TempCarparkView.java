@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.boundary;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
@@ -38,7 +39,7 @@ public class TempCarparkView extends AppCompatActivity{
             ArrayList<String> test1 = new ArrayList<>();
             test1.add("carpark_ntu_f");
             ArrayList<String> test2 = new ArrayList<>();
-            test2.add("L1");
+            //test2.add("L1");
             carparkRecView = findViewById(R.id.carparkRecView);
             carparks.add(new Carpark(new LatLng(1.345275,103.683411),"Carpark Q/Student Services Centre"));
             carparks.add(new Carpark(

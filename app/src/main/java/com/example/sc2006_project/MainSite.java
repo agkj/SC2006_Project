@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 //import androidx.navigation.fragment.NavHostFragment;
 
-import com.example.sc2006_project.boundary.MapActivity;
 import com.example.sc2006_project.boundary.TempCarparkView;
 import com.google.firebase.auth.FirebaseAuth;
 

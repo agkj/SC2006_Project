@@ -75,7 +75,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         carpark_map_bounds = intent.getParcelableExtra(CarparkRecViewAdapter.BOUND);
         asset_files = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.ASSET_NAMES);
         levels = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.LEVELS);
-        if(asset_files.size() == 0 || levels.size() == 0){
+        if(asset_files.size() == 0){
             blank_check = true;
         }
         res = getResources();
