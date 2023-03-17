@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "904184147426",
+    "project_id": "parkersc2006",
+    "storage_bucket": "parkersc2006.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:904184147426:android:dc1a24679a9a730fcf9dbb",
+        "android_client_info": {
+          "package_name": "com.example.sc2006_project"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "904184147426-b7bdum38266c4lmnavheakbch0aelokb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBzKtSb4fmB2LFgPlKR0Lx1WJqK-F0MpoM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "904184147426-b7bdum38266c4lmnavheakbch0aelokb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
