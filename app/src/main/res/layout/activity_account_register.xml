@@ -7,7 +7,7 @@
     android:gravity="center"
     android:layout_height="match_parent"
     android:padding="25dp"
-    tools:context=".boundary.AccountRegister">
+    tools:context=".AccountRegister">
 
     <TextView
         android:textSize="20sp"
