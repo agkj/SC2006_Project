@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
         button = findViewById(R.id.logout);
         textView = findViewById(R.id.user_details);
 
-        user = auth.getCurrentUser();
+//        user = auth.getCurrentUser();
         if(user ==null){
             Intent intent = new Intent(getApplicationContext(), Login.class);
             startActivity(intent);
