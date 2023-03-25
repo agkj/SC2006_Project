@@ -11,8 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sc2006_project.Login;
-import com.example.sc2006_project.MainActivity;
+import com.example.sc2006_project.boundary.Login;
+import com.example.sc2006_project.boundary.ManageAccount;
 import com.example.sc2006_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,7 +41,7 @@ public class AccountRegister extends AppCompatActivity {
         // Check if user is signed in, if signed in, go into main page
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ManageAccount.class);
             startActivity(intent);
             finish();
 
@@ -52,10 +52,8 @@ public class AccountRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.create_account);
-
 
         fStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -112,11 +110,11 @@ public class AccountRegister extends AppCompatActivity {
                                         //user object to record and store data into firestore
                                         DocumentReference documentReference = fStore.collection("users").document(userID);
                                         Map<String,Object> user = new HashMap<>();
-                                        user.put("email",email);
-                                        user.put("password",password);
                                         user.put("name",name);
+                                        user.put("email",email);
                                         user.put("phone",phone);
                                         user.put("carPlate",carPlate);
+                                        user.put("password",password);
                                         documentReference.set(user);
 
 

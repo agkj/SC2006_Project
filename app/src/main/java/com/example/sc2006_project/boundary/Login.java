@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.boundary;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.AccountRegister;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -86,7 +87,7 @@ public class Login extends AppCompatActivity {
                                     if(mAuth.getCurrentUser().isEmailVerified()){
                                         Toast.makeText(Login.this, "Welcome",
                                                 Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), MainSite.class);
+                                        Intent intent = new Intent(getApplicationContext(), ManageAccount.class); //used to be MainSite.class -> MainSite HuyPhurong needs to update
                                         startActivity(intent);
                                         finish();
 
