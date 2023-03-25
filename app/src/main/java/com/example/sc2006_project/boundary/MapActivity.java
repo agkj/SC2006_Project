@@ -99,7 +99,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         level_select.setAdapter(adapter);
         level_select.setSelection(0,false);
         if(levels.size() > 1){
-            wrapper.setElevation(2);
+            wrapper.setVisibility(View.INVISIBLE);
         }
         level_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
