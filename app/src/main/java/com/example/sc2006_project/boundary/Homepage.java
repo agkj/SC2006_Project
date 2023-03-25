@@ -3,19 +3,14 @@ package com.example.sc2006_project.boundary;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 //import androidx.navigation.fragment.NavHostFragment;
 
 import com.example.sc2006_project.R;
-import com.example.sc2006_project.boundary.MapActivity;
-import com.example.sc2006_project.boundary.TempCarparkView;
-import com.google.firebase.auth.FirebaseAuth;
 
-public class MainSite extends AppCompatActivity {
+public class Homepage extends AppCompatActivity {
 
     private TextView btnViewCarPark;
     private TextView btnEditProfile;

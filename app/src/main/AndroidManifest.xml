@@ -40,7 +40,7 @@
             android:exported="false" />
 
         <activity
-            android:name=".boundary.MainSite"
+            android:name=".boundary.Homepage"
             android:exported="false" />
 
         <activity
