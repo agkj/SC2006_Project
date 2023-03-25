@@ -28,11 +28,11 @@ import java.util.Map;
 
 public class AccountRegister extends AppCompatActivity {
 
-    TextInputEditText editTextEmail, editTextPassword, editTextPhone, editTextName, editTextCarPlate;
-    Button btnReg;
-    FirebaseAuth mAuth;
-    FirebaseFirestore fStore;
-    String userID;
+    private TextInputEditText editTextEmail, editTextPassword, editTextPhone, editTextName, editTextCarPlate;
+    private Button btnReg;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
     TextView textView;
 
     @Override
@@ -74,6 +74,7 @@ public class AccountRegister extends AppCompatActivity {
                 String name, phone, carPlate;
 
                 email = String.valueOf(editTextEmail.getText());
+
                 password = String.valueOf(editTextPassword.getText());
 
                 //register additional user details
@@ -81,14 +82,30 @@ public class AccountRegister extends AppCompatActivity {
                 phone = String.valueOf(editTextPhone.getText());
                 carPlate = String.valueOf(editTextCarPlate.getText());
 
-
-
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
-
+                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(carPlate)){
                     Toast.makeText(AccountRegister.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
-
                 }
+
+                if(!(email.contains("@gmail.com") || email.contains("@yahoo.com")|| email.contains("@outlook.com")) ){
+                    Toast.makeText(AccountRegister.this, "Invalid email format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(phone.length() != 8){
+                    Toast.makeText(AccountRegister.this, "Phone number be 8 digits", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if(!(carPlate.startsWith("S")) && (carPlate.length() !=7)){
+                    Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+
+
+
+
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {

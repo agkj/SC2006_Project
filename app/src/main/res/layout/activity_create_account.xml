@@ -283,6 +283,7 @@
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
                 android:maxLines="1"
                 android:textSize="20sp"
+
                 android:text="Password"
                 android:textColor="@color/black"
                 android:gravity="left"
@@ -297,12 +298,13 @@
             android:weightSum="1">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordRegister"
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="0.9"
                 android:layout_marginTop="10px"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:gravity="center"
@@ -328,7 +330,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
             android:background="@drawable/gradient_color_button"
-            android:text="Confirm"
+            android:text="Register"
             />
     </LinearLayout>
 
