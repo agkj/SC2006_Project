@@ -137,7 +137,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
-                    android:inputType="text"
+                    android:inputType="textPassword"
                     android:fontFamily="@font/barlow_semi_condensed_extrabold"
                     android:maxLines="1"
                     android:hint="Password"

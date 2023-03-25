@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.boundary;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 
+import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkLotRecViewAdapter;
 import com.example.sc2006_project.entity.CarparkLot;
 import com.google.android.gms.maps.model.LatLng;
