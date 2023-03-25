@@ -93,8 +93,8 @@
                     android:textSize="32sp"
                     android:gravity="center"
                     android:background="@drawable/rounded_corner"
-                    android:text="View Reservation"
-                    android:id="@+id/view_reservation"
+                    android:text="Logout"
+                    android:id="@+id/logout"
                     android:clickable="true"
                     />
             </LinearLayout>

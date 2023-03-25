@@ -18,7 +18,7 @@
             android:exported="false"
             android:theme="@style/Theme.Material3.Light.NoActionBar" />
         <activity
-            android:name=".control.CarparkLotDisplay"
+            android:name=".boundary.CarparkLotDisplay"
             android:exported="false" />
         <activity
             android:name=".boundary.MapActivity"
@@ -38,7 +38,7 @@
             android:name=".boundary.ManageAccount"
             android:exported="false" />
         <activity
-            android:name=".boundary.MainSite"
+            android:name=".boundary.Homepage"
             android:exported="false" />
         <activity
             android:name=".boundary.Login"

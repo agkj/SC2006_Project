@@ -17,7 +17,6 @@ import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
-import com.example.sc2006_project.control.CarparkLotDisplay;
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkLotRecViewAdapter;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
