@@ -22,7 +22,7 @@ public class ManageAccount extends AppCompatActivity {
 
 
 
-    FirebaseAuth auth, fAuth;;
+    FirebaseAuth auth, fAuth;
     Button button;
     TextView userEmail, userName, userPhone;
     FirebaseUser user;
@@ -57,20 +57,20 @@ public class ManageAccount extends AppCompatActivity {
 //            startActivity(intent);
 //            finish();
 //        }else{
-            documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
 
-                @Override
-                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                    // userName.setText(documentSnapshot.getString("name"));
-                    userName.setText(documentSnapshot.getString("name"));
-                    userEmail.setText(documentSnapshot.getString("email"));
-                    userPhone.setText(documentSnapshot.getString("phone"));
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                // userName.setText(documentSnapshot.getString("name"));
+                userName.setText(documentSnapshot.getString("name"));
+                userEmail.setText(documentSnapshot.getString("email"));
+                userPhone.setText(documentSnapshot.getString("phone"));
 
-                }
-            });
+            }
+        });
 
 
-    //    }
+        //    }
 
 
         //signs user out

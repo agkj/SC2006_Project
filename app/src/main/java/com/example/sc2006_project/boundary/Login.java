@@ -87,9 +87,7 @@ public class Login extends AppCompatActivity {
                                     if(mAuth.getCurrentUser().isEmailVerified()){
                                         Toast.makeText(Login.this, "Welcome",
                                                 Toast.LENGTH_SHORT).show();
-
-                                        Intent intent = new Intent(getApplicationContext(), MainSite.class);
-
+                                        Intent intent = new Intent(getApplicationContext(), Homepage.class);
                                         startActivity(intent);
                                         finish();
 
