@@ -44,7 +44,7 @@ public class CarparkLotDisplay extends AppCompatActivity {
 
         //changes daily, generate own accessKey and token
         String accessKey = "ed2ed5ec-8a5e-47ab-ae19-a14d963c707c";
-        String token = "AT4G2-q-9sfa7Vc-@57m8eJvC45aqaaD3gh+aMt986qeFD@-Y88yWr-w78DX2kB44-J6BQbAq3zee5eQPS4CfUee6N+@eZe4adad";
+        String token = "@a59dPSRcb943dg2evykDepcaewY9tCqeb8Bad-Wu1t5C8BmS76dnd183ZQ4321R7kBe2euT@1ZZ-xXe9c2E3Rexas-ar7J4bFd4";
 
         Request request = new Request.Builder()
                 .url(url)
@@ -104,14 +104,14 @@ public class CarparkLotDisplay extends AppCompatActivity {
             }
         });
 
-//        carparklotrecview = findViewById(R.id.carparkLotRecView);
-//        lots.add(new CarparkLot(new LatLng(13,10),"Name 1111"));
-//        lots.add(new CarparkLot(new LatLng(11,12), "Name 2222"));
-//
-//        CarparkLotRecViewAdapter adapter = new CarparkLotRecViewAdapter(this, CarparkLotDisplay.this);
-//        adapter.setLots(lots);
-//
-//        carparklotrecview.setAdapter(adapter);
-//        carparklotrecview.setLayoutManager(new LinearLayoutManager(this));
+        carparklotrecview = findViewById(R.id.carparkLotRecView);
+        lots.add(new CarparkLot(new LatLng(13,10),"Name 1111"));
+        lots.add(new CarparkLot(new LatLng(11,12), "Name 2222"));
+
+        CarparkLotRecViewAdapter adapter = new CarparkLotRecViewAdapter(this, CarparkLotDisplay.this);
+        adapter.setLots(lots);
+
+        carparklotrecview.setAdapter(adapter);
+        carparklotrecview.setLayoutManager(new LinearLayoutManager(this));
     }
 }
