@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.boundary;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 //import androidx.navigation.fragment.NavHostFragment;
 
+import com.example.sc2006_project.R;
 import com.example.sc2006_project.boundary.MapActivity;
 import com.example.sc2006_project.boundary.TempCarparkView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -17,16 +18,27 @@ import com.google.firebase.auth.FirebaseAuth;
 public class MainSite extends AppCompatActivity {
 
     private TextView btnViewCarPark;
+    private TextView btnEditProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_site);
+
         btnViewCarPark = findViewById(R.id.view_car_park);
+        btnEditProfile = findViewById(R.id.edit_profile);
 
         btnViewCarPark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TempCarparkView.class);
+                startActivity(intent);
+            }
+        });
+
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ManageAccount.class);
                 startActivity(intent);
             }
         });

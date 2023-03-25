@@ -37,6 +37,29 @@
                 android:layout_weight="0.12"
                 android:orientation="horizontal"
                 android:weightSum="1"
+                android:layout_marginBottom="20px"
+                android:layout_marginTop="10px">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
+                    android:fontFamily="@font/barlow_semi_condensed_extrabold"
+                    android:lines="1"
+                    android:textSize="32sp"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_corner"
+                    android:text="Edit Proflie"
+                    android:id="@+id/edit_profile"
+                    android:clickable="true"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="0.12"
+                android:orientation="horizontal"
+                android:weightSum="1"
                 android:layout_marginBottom="20px">
                 <TextView
                     android:layout_width="0dp"
