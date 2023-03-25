@@ -48,7 +48,7 @@
                     android:textSize="32sp"
                     android:gravity="center"
                     android:background="@drawable/rounded_corner"
-                    android:text="Edit Proflie"
+                    android:text="View profile"
                     android:id="@+id/edit_profile"
                     android:clickable="true"
                     />

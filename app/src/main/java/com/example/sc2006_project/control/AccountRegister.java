@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sc2006_project.boundary.Login;
-import com.example.sc2006_project.boundary.ManageAccount;
+import com.example.sc2006_project.boundary.ViewProfile;
 import com.example.sc2006_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -41,7 +41,7 @@ public class AccountRegister extends AppCompatActivity {
         // Check if user is signed in, if signed in, go into main page
         FirebaseUser currentUser = mAuth.getCurrentUser();
         if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), ManageAccount.class);
+            Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
             startActivity(intent);
             finish();
 
@@ -53,7 +53,7 @@ public class AccountRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_account);
+        setContentView(R.layout.activity_create_account);
 
         fStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();

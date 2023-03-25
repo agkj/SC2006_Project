@@ -10,8 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sc2006_project.R;
 
-import com.example.sc2006_project.boundary.MapActivity;
-import com.example.sc2006_project.boundary.TempCarparkView;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Homepage extends AppCompatActivity {
@@ -24,7 +22,7 @@ public class Homepage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main_site);
+        setContentView(R.layout.activity_home_page);
 
         btnViewCarPark = findViewById(R.id.view_car_park);
         btnEditProfile = findViewById(R.id.edit_profile);
@@ -41,7 +39,7 @@ public class Homepage extends AppCompatActivity {
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ManageAccount.class);
+                Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
                 startActivity(intent);
             }
         });

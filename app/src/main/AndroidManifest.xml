@@ -35,7 +35,7 @@
             android:name=".boundary.TempCarparkView"
             android:exported="false" />
         <activity
-            android:name=".boundary.ManageAccount"
+            android:name=".boundary.ViewProfile"
             android:exported="false" />
         <activity
             android:name=".boundary.Homepage"
