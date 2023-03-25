@@ -29,7 +29,9 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
+        <activity
+            android:name=".boundary.ManageAccount"
+            android:exported="false" />
         <activity
             android:name=".boundary.TempCarparkView"
             android:exported="false" />
@@ -38,11 +40,11 @@
             android:exported="false" />
 
         <activity
-            android:name=".MainSite"
+            android:name=".boundary.Homepage"
             android:exported="false" />
 
         <activity
-            android:name=".Login"
+            android:name=".boundary.Login"
 
             android:theme="@style/Theme.Material3.Light.NoActionBar"
             android:exported="true">

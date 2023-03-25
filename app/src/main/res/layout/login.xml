@@ -24,7 +24,7 @@
             android:fontFamily="@font/barlow_semi_condensed_extrabold"
             android:gravity="center"
             android:lines="2"
-            android:text="PARKING BOOKER"
+            android:text="PARKER"
             android:textColor="@color/black"
             android:textFontWeight="800"
             android:textSize="32sp" />
