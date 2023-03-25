@@ -25,7 +25,6 @@ public class MainSite extends AppCompatActivity {
         btnViewCarPark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
                 Intent intent = new Intent(getApplicationContext(), TempCarparkView.class);
                 startActivity(intent);
             }
