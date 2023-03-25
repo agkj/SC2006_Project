@@ -133,16 +133,17 @@ public class TempCarparkView extends AppCompatActivity{
 
                             // extract the coordinates of parking lot
                             JSONArray jsonArray1 = new JSONArray(result);
-                            JSONObject result1 = jsonArray1.getJSONObject(0);
-                            JSONArray geometriesArray = result1.getJSONArray("geometries");
-                            JSONObject coordinatesObject = geometriesArray.getJSONObject(0);
+//                            JSONObject result1 = jsonArray1.getJSONObject(0);
+//                            JSONArray geometriesArray = result1.getJSONArray("geometries");
+//                            JSONObject coordinatesObject = geometriesArray.getJSONObject(0);
 //                        String coordinates = coordinatesObject.getString("coordinates");
-                            for (int j = 0; j < geometriesArray.length(); j++) {
-                                JSONObject temp = geometriesArray.getJSONObject(j);
-                                String coordinate = temp.getString("coordinates");
+                            for (int j = 0; j < jsonArray1.length(); j++) {
+                                JSONObject temp = jsonArray1.getJSONObject(j);
+                                String coordinate = temp.getString("geometries");
                                 System.out.println(coordinate);
                                 coordinates.add(coordinate);
                             }
+                            System.out.println(coordinates);
                         } catch (JSONException e) {
                             throw new RuntimeException(e);
                         }
