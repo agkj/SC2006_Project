@@ -105,7 +105,7 @@
                     android:layout_height="match_parent"
                     android:gravity="left"
                     android:hint="@string/email"
-                    android:inputType="text"
+                    android:inputType="textEmailAddress"
                     android:maxLines="1"
                     android:textColorHint="@color/lightGrey"
                     android:background="@drawable/rounded_corner"

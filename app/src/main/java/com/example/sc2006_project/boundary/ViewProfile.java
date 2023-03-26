@@ -20,20 +20,17 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
 
 public class ViewProfile extends AppCompatActivity {
 
-
-    FirebaseAuth auth, fAuth;
-    Button button;
-    TextView userEmail, userName, userPhone;
-    FirebaseUser user;
-
-    FirebaseFirestore fStore;
-
-    String userID;
+    private FirebaseAuth auth, fAuth;
+    private Button button;
+    private TextView userEmail, userName, userPhone;
+    private FirebaseUser user;
+    private FirebaseFirestore fStore;
+    private String userID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_account);
+        setContentView(R.layout.activity_view_profile);
 
         //old
         auth = FirebaseAuth.getInstance();
@@ -53,7 +50,7 @@ public class ViewProfile extends AppCompatActivity {
         //new
 
         if (user == null) {
-            Intent intent = new Intent(getApplicationContext(), Login.class);
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -76,7 +73,7 @@ public class ViewProfile extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), Login.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
             }

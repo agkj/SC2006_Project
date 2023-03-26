@@ -20,24 +20,23 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
-
-    TextInputEditText editTextEmail, editTextPassword;
-    Button btnLogin;
-    FirebaseAuth mAuth;
-    TextView registerNow;
+    private TextInputEditText editTextEmail, editTextPassword;
+    private Button btnLogin;
+    private FirebaseAuth mAuth;
+    private TextView registerNow;
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in, if signed in, go into main page
         FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if(currentUser != null){
-//            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
+        if(currentUser != null){
+            Intent intent = new Intent(getApplicationContext(), Homepage.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
     @Override
@@ -49,10 +48,10 @@ public class Login extends AppCompatActivity {
         editTextEmail = findViewById(R.id.emailLogin);
         editTextPassword = findViewById(R.id.passwordLogin);
         btnLogin = findViewById(R.id.login_button);
-
         registerNow = findViewById(R.id.registerNow);
 
 
+        //registration
         registerNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -63,8 +62,11 @@ public class Login extends AppCompatActivity {
         });
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
+
+
             @Override
             public void onClick(View view) {
+
                 String email, password;
 
                 email = String.valueOf(editTextEmail.getText());
@@ -72,7 +74,7 @@ public class Login extends AppCompatActivity {
 
                 if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
 
-                    Toast.makeText(Login.this, "Invalid Credentials", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Empty fields", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -86,7 +88,7 @@ public class Login extends AppCompatActivity {
                                     //FirebaseUser user = mAuth.getCurrentUser();
                                     // updateUI(user);
                                     if(mAuth.getCurrentUser().isEmailVerified()){
-                                        Toast.makeText(Login.this, "Welcome",
+                                        Toast.makeText(LoginActivity.this, "Welcome",
                                                 Toast.LENGTH_SHORT).show();
                                         Intent intent = new Intent(getApplicationContext(), Homepage.class);
                                         startActivity(intent);
@@ -94,15 +96,14 @@ public class Login extends AppCompatActivity {
 
                                     }
                                     else{
-                                        Toast.makeText(Login.this, "Please verify your account",
+                                        Toast.makeText(LoginActivity.this, "Please verify your account",
                                                 Toast.LENGTH_SHORT).show();
                                     }
-
 
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     // Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(Login.this, "Account does not exist.",
+                                    Toast.makeText(LoginActivity.this, "Account does not exist.",
                                             Toast.LENGTH_SHORT).show();
                                     // updateUI(null);
                                 }

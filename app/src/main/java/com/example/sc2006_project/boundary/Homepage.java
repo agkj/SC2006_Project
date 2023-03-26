@@ -16,7 +16,6 @@ public class Homepage extends AppCompatActivity {
 
     private TextView btnViewCarPark;
     private TextView btnEditProfile;
-
     private TextView btnLogout;
 
     @Override
@@ -48,16 +47,11 @@ public class Homepage extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), Login.class);
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 finish();
             }
         });
-
-
-
-
-
 
 
     }

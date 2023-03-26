@@ -11,7 +11,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sc2006_project.boundary.Login;
+import com.example.sc2006_project.boundary.LoginActivity;
 import com.example.sc2006_project.boundary.ViewProfile;
 import com.example.sc2006_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,7 +40,7 @@ public class AccountRegister extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in, if signed in, go into main page
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
+        if (currentUser != null) {
             Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
             startActivity(intent);
             finish();
@@ -82,29 +82,40 @@ public class AccountRegister extends AppCompatActivity {
                 phone = String.valueOf(editTextPhone.getText());
                 carPlate = String.valueOf(editTextCarPlate.getText());
 
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(carPlate)){
+                //check empty fields
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(carPlate)) {
                     Toast.makeText(AccountRegister.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                if(!(email.contains("@gmail.com") || email.contains("@yahoo.com")|| email.contains("@outlook.com")) ){
+                //check email validity
+                if (!(email.contains("@gmail.com") || email.contains("@yahoo.com") || email.contains("@outlook.com"))) {
                     Toast.makeText(AccountRegister.this, "Invalid email format", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
-                if(phone.length() != 8){
-                    Toast.makeText(AccountRegister.this, "Phone number be 8 digits", Toast.LENGTH_SHORT).show();
+                //check phone length
+                if (phone.length() != 8) {
+                    Toast.makeText(AccountRegister.this, "Phone number must be 8 digits", Toast.LENGTH_SHORT).show();
                     return;
                 }
+                //check carplate format eg: SAB1234D
+                if (    !(carPlate.startsWith("S"))
+                        || !(Character.isLetter(carPlate.charAt(1)))
+                        || !(Character.isLetter(carPlate.charAt(2)))
+                        || !(Character.isLetter(carPlate.charAt(7)))
 
-                if(!(carPlate.startsWith("S")) && (carPlate.length() !=7)){
+                        || Character.isLetter(carPlate.charAt(3))
+                        || Character.isLetter(carPlate.charAt(4))
+                        || Character.isLetter(carPlate.charAt(5))
+                        || Character.isLetter(carPlate.charAt(6))
+                        || carPlate.length() !=8 ) {
                     Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-
-
-
+                if (password.length() < 5) {
+                    Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -118,52 +129,46 @@ public class AccountRegister extends AppCompatActivity {
                             mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-
-                                        Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();
-
+                                    if (task.isSuccessful()) {
                                         userID = mAuth.getCurrentUser().getUid();
 
                                         //user object to record and store data into firestore
                                         DocumentReference documentReference = fStore.collection("users").document(userID);
-                                        Map<String,Object> user = new HashMap<>();
-                                        user.put("name",name);
-                                        user.put("email",email);
-                                        user.put("phone",phone);
-                                        user.put("carPlate",carPlate);
-                                        user.put("password",password);
+                                        Map<String, Object> user = new HashMap<>();
+                                        user.put("email", email);
+                                        user.put("name", name);
+                                        user.put("phone", phone);
+                                        user.put("carPlate", carPlate);
+                                        user.put("password", password);
                                         documentReference.set(user);
 
+                                        Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();
 
-
-                                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                         startActivity(intent);
                                         finish();
 
-                                            }
-                                            else{
-                                                Toast.makeText(AccountRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(AccountRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
 
-                                            }
-                                        }
-                                    });
-
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    //Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(AccountRegister.this, "Account creation failed. Try again",
-                                            Toast.LENGTH_SHORT).show();
-
+                                    }
                                 }
-                            }
-                        });
+                            });
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            //Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(AccountRegister.this, "Account creation failed. Try again", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
 
             }
         });
 
-                                        //go back to login page after creating account
-
+        //go back to login page after creating account
 
 
     }
