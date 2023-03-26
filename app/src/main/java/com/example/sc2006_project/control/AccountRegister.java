@@ -111,7 +111,7 @@ public class AccountRegister extends AppCompatActivity {
                     Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
+                //check password length
                 if (password.length() < 5) {
                     Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
                     return;
