@@ -6,11 +6,10 @@
 
     <TextView
         android:layout_marginTop="10dp"
-        android:gravity="center"
+        android:padding="30dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/txtName"
-        android:background="@drawable/border"
+        android:id="@+id/text"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

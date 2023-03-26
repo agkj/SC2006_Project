@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.sc2006_project.CarparkLotDisplay;
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkLotRecViewAdapter;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
@@ -81,6 +80,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         res = getResources();
         if(!blank_check){
             temp = res.getIdentifier(asset_files.get(0), "raw", getPackageName());
+            System.out.println("OK");
         }
         SupportMapFragment mapfragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
         if(mapfragment != null){
@@ -99,7 +99,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         level_select.setAdapter(adapter);
         level_select.setSelection(0,false);
         if(levels.size() > 1){
-            wrapper.setVisibility(View.INVISIBLE);
+            wrapper.setVisibility(View.VISIBLE);
         }
         level_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

@@ -2,17 +2,19 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey"
+    android:background="@color/white"
     android:orientation="vertical">
     <LinearLayout
         android:layout_weight="0.2"
         android:layout_height="0dip"
         android:layout_width="match_parent"
+        android:layout_marginTop="100px"
         android:gravity="center">
         <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@drawable/ic_launcher_background"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/profile_icon"
+            />
     </LinearLayout>
     <LinearLayout
         android:layout_weight="0.8"
@@ -35,16 +37,38 @@
                 android:layout_weight="0.12"
                 android:orientation="horizontal"
                 android:weightSum="1"
+                android:layout_marginBottom="20px"
+                android:layout_marginTop="10px">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
+                    android:fontFamily="@font/barlow_semi_condensed_extrabold"
+                    android:lines="1"
+                    android:textSize="32sp"
+                    android:gravity="center"
+                    android:background="@drawable/rounded_corner"
+                    android:text="View profile"
+                    android:id="@+id/edit_profile"
+                    android:clickable="true"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="0.12"
+                android:orientation="horizontal"
+                android:weightSum="1"
                 android:layout_marginBottom="20px">
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.9"
                     android:fontFamily="@font/barlow_semi_condensed_extrabold"
                     android:lines="1"
                     android:textSize="32sp"
                     android:text="View Carpark"
-                    android:textColor="@color/grey"
                     android:gravity="center"
                     android:background="@drawable/rounded_corner"
                     android:id="@+id/view_car_park"
@@ -63,60 +87,14 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
-                    android:layout_weight="0.7"
+                    android:layout_weight="0.9"
                     android:fontFamily="@font/barlow_semi_condensed_extrabold"
                     android:lines="1"
                     android:textSize="32sp"
                     android:gravity="center"
                     android:background="@drawable/rounded_corner"
-                    android:text="View Reservation"
-                    android:id="@+id/view_reservation"
-                    android:clickable="true"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="0dip"
-                android:layout_weight="0.12"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                android:layout_marginBottom="20px"
-                android:layout_marginTop="10px">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7"
-                    android:fontFamily="@font/barlow_semi_condensed_extrabold"
-                    android:lines="1"
-                    android:textSize="32sp"
-                    android:gravity="center"
-                    android:background="@drawable/rounded_corner"
-                    android:text="Navigation"
-                    android:id="@+id/navigation"
-                    android:clickable="true"
-                    />
-            </LinearLayout>
-            <LinearLayout
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="0dip"
-                android:layout_weight="0.12"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                android:layout_marginBottom="20px"
-                android:layout_marginTop="10px">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.7"
-                    android:fontFamily="@font/barlow_semi_condensed_extrabold"
-                    android:lines="1"
-                    android:textSize="32sp"
-                    android:gravity="center"
-                    android:background="@drawable/rounded_corner"
-                    android:text="Payment"
-                    android:id="@+id/view_payment"
+                    android:text="Logout"
+                    android:id="@+id/logout"
                     android:clickable="true"
                     />
             </LinearLayout>
