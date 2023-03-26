@@ -9,7 +9,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sc2006_project.CarparkLotDisplay;
+import com.example.sc2006_project.boundary.CarparkLotDisplay;
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
 import com.google.android.gms.common.ConnectionResult;
@@ -100,8 +100,8 @@ public class TempCarparkView extends AppCompatActivity{
 
 
             //changes daily, generate own accessKey and token
-            String accessKey = "ed2ed5ec-8a5e-47ab-ae19-a14d963c707c";
-            String token = "@a59dPSRcb943dg2evykDepcaewY9tCqeb8Bad-Wu1t5C8BmS76dnd183ZQ4321R7kBe2euT@1ZZ-xXe9c2E3Rexas-ar7J4bFd4";
+            String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
+            String token = "4dM1-PuTdf99U5nh0479H09-@K78cp+aM1qCcq9y096z@549A87b1KBX9N904v7j44B8F4bp0ds4QQDSE5-5RBh08u9eG4D9WWu9";
 
             Request request = new Request.Builder()
                     .url(url)
