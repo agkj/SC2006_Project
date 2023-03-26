@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.sc2006_project.CarparkLotDisplay;
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkLotRecViewAdapter;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
@@ -75,12 +74,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         carpark_map_bounds = intent.getParcelableExtra(CarparkRecViewAdapter.BOUND);
         asset_files = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.ASSET_NAMES);
         levels = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.LEVELS);
-        if(asset_files.size() == 0){
+        if(asset_files == null){
             blank_check = true;
         }
         res = getResources();
         if(!blank_check){
             temp = res.getIdentifier(asset_files.get(0), "raw", getPackageName());
+            System.out.println("OK");
         }
         SupportMapFragment mapfragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
         if(mapfragment != null){
@@ -99,7 +99,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         level_select.setAdapter(adapter);
         level_select.setSelection(0,false);
         if(levels.size() > 1){
-            wrapper.setElevation(2);
+            wrapper.setVisibility(View.INVISIBLE);
         }
         level_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

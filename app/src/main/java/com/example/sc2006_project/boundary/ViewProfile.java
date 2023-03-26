@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -18,8 +17,7 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
-public class ManageAccount extends AppCompatActivity {
-
+public class ViewProfile extends AppCompatActivity {
 
 
     FirebaseAuth auth, fAuth;
@@ -30,10 +28,11 @@ public class ManageAccount extends AppCompatActivity {
     FirebaseFirestore fStore;
 
     String userID;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manage_account) ;
+        setContentView(R.layout.activity_manage_account);
 
         //old
         auth = FirebaseAuth.getInstance();
@@ -52,37 +51,26 @@ public class ManageAccount extends AppCompatActivity {
 
         //new
 
-//        if(user ==null){
-//            Intent intent = new Intent(getApplicationContext(), Login.class);
-//            startActivity(intent);
-//            finish();
-//        }else{
-        documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
+        if (user == null) {
+            Intent intent = new Intent(getApplicationContext(), Login.class);
+            startActivity(intent);
+            finish();
+        } else {
+            documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
 
-            @Override
-            public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
-                // userName.setText(documentSnapshot.getString("name"));
-                userName.setText(documentSnapshot.getString("name"));
-                userEmail.setText(documentSnapshot.getString("email"));
-                userPhone.setText(documentSnapshot.getString("phone"));
+                @Override
+                public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
+                    // userName.setText(documentSnapshot.getString("name"));
+                    userName.setText(documentSnapshot.getString("name"));
+                    userEmail.setText(documentSnapshot.getString("email"));
+                    userPhone.setText(documentSnapshot.getString("phone"));
 
-            }
-        });
-
-
-        //    }
+                }
+            });
 
 
-        //signs user out
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
-                Intent intent = new Intent(getApplicationContext(), Login.class);
-                startActivity(intent);
-                finish();
-            }
-        });
+        }
+
 
     }
 }
