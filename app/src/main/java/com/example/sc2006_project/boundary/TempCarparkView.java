@@ -21,6 +21,8 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.example.sc2006_project.entity.Carpark;
@@ -140,8 +142,10 @@ public class TempCarparkView extends AppCompatActivity{
                             for (int i = 0; i < jsonArray.length(); i++) {
                                 JSONObject temp = jsonArray.getJSONObject(i);
                                 if(temp.getString("vehCat").equals("Car")){
-                                    String ppName = temp.getString("ppName");
-                                    names.add(ppName);
+                                    if(!names.contains(temp.getString("ppName"))){
+                                        String ppName = temp.getString("ppName");
+                                        names.add(ppName);
+                                    }
                                 }
                             }
                             //String[] ppNameArray = names.toArray(new String[0]);
@@ -151,23 +155,25 @@ public class TempCarparkView extends AppCompatActivity{
 //                            JSONObject result1 = jsonArray1.getJSONObject(0);
 //                            JSONArray geometriesArray = result1.getJSONArray("geometries");
 //                            JSONObject coordinatesObject = geometriesArray.getJSONObject(0);
-//                        String coordinates = coordinatesObject.getString("coordinates");
-                            List<Integer> to_remove = new ArrayList<>();
+//                            String coordinates = coordinatesObject.getString("coordinates");
+                            List<String> to_remove = new ArrayList<>();
                             for (int j = 0; j < jsonArray1.length(); j++) {
                                 JSONObject temp = jsonArray1.getJSONObject(j);
                                 if(temp.getString("vehCat").equals("Car")){
                                     JSONArray geometries = temp.getJSONArray("geometries");
                                     if(geometries.length() == 0){
-                                        to_remove.add(j);
+                                        to_remove.add(temp.getString("ppName"));
                                         continue;
                                     }
                                     JSONObject first_coords = geometries.getJSONObject(0);
                                     String str_coordinates = first_coords.getString("coordinates");
-                                    coordinates.add(str_coordinates);
+                                    if(names.contains(temp.getString("ppName")) && !coordinates.contains(str_coordinates)){
+                                        coordinates.add(str_coordinates);
+                                    }
                                 }
                             }
-                            for(int i = to_remove.size()-1; i > 0; i--){
-                                names.remove(to_remove.get(i).intValue());
+                            for(int i = 0; i < to_remove.size() ; i++){
+                                names.remove(to_remove.get(i));
                             }
                             for(int i = 0; i < 50;i++){
                                 System.out.println(names.get(i));
