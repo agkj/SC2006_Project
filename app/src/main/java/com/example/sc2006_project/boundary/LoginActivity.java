@@ -45,7 +45,6 @@ public class LoginActivity extends AppCompatActivity {
      * @author Goh Kai Jun, Alger
      *  */
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
