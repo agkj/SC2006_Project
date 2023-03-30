@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -83,17 +84,23 @@ public class AccountRegister extends AppCompatActivity {
 
                 //check empty fields
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(carPlate)) {
+
                     Toast.makeText(AccountRegister.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 //check email validity
-                if (!(email.contains("@gmail.com") || email.contains("@yahoo.com") || email.contains("@outlook.com"))) {
-                    Toast.makeText(AccountRegister.this, "Invalid email format", Toast.LENGTH_SHORT).show();
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    editTextEmail.setError("Invalid email format");
+                    editTextEmail.requestFocus();
+                    //Toast.makeText(AccountRegister.this, "Invalid email format", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 //check phone length
                 if (phone.length() != 8) {
-                    Toast.makeText(AccountRegister.this, "Phone number must be 8 digits", Toast.LENGTH_SHORT).show();
+                    editTextPhone.setError("Phone number must be 8 digits");
+                    editTextPhone.requestFocus();
+                    //Toast.makeText(AccountRegister.this, "Phone number must be 8 digits", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 //check carplate format eg: SAB1234D
@@ -107,12 +114,17 @@ public class AccountRegister extends AppCompatActivity {
                         || Character.isLetter(carPlate.charAt(5))
                         || Character.isLetter(carPlate.charAt(6))
                         || carPlate.length() !=8 ) {
-                    Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
+
+                    editTextCarPlate.setError("Invalid car plate number");
+                    editTextCarPlate.requestFocus();
+                   // Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 //check password length
                 if (password.length() < 5) {
-                    Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
+                    editTextPassword.setError("Password must contain at least 6 characters");
+                    editTextPassword.requestFocus();
+                   // Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
