@@ -27,6 +27,13 @@ public class ViewProfile extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private String userID;
 
+
+    /**
+     * This function implements view profile information display
+     *
+     * @author Goh Kai Jun, Alger
+     *  */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +63,9 @@ public class ViewProfile extends AppCompatActivity {
         } else {
             documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
 
+
+
+
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                     // userName.setText(documentSnapshot.getString("name"));
@@ -69,7 +79,15 @@ public class ViewProfile extends AppCompatActivity {
 
         }
 
+
+        /**
+         * This function implements the go to login page display
+         *
+         * @author Goh Kai Jun, Alger
+         *  */
+
         button.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 FirebaseAuth.getInstance().signOut();

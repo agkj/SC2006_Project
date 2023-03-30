@@ -36,6 +36,13 @@ public class AccountRegister extends AppCompatActivity {
     private String userID;
     TextView textView;
 
+
+    /**
+     * This function checks if a user is already logged in and signs the user in to the application
+     *
+     * @author Goh Kai Jun, Alger
+     *  */
+
     @Override
     public void onStart() {
         super.onStart();
@@ -48,6 +55,13 @@ public class AccountRegister extends AppCompatActivity {
 
         }
     }
+
+    /**
+     * This function implements the account registration functionality
+     *
+     * @author Goh Kai Jun, Alger
+     *  */
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
