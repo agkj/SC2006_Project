@@ -45,7 +45,6 @@ public class AccountRegister extends AppCompatActivity {
             startActivity(intent);
             finish();
 
-
         }
     }
 
