@@ -30,6 +30,11 @@ import okhttp3.Response;
 public class CarparkLotDisplay extends AppCompatActivity {
     private RecyclerView carparklotrecview;
     private ArrayList<CarparkLot> lots = new ArrayList<>();
+
+    /**
+     * This function implements the individual carpark lot display.
+     * @author Chin Han Wen
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

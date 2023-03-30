@@ -40,10 +40,14 @@ import okhttp3.Response;
 public class UraDBController {
     Context context;
     URACallback Uracallback;
-
     public UraDBController() {
     }
 
+    /**
+     * This function sets the callback to the given callback instance used in a different class.
+     * @param callback The callback instance referenced.
+     * @author Chin Han Wen
+     */
     public void setUracallback(URACallback callback){
         this.Uracallback = callback;
     }
@@ -123,7 +127,10 @@ public class UraDBController {
         });
     }
 
-
+    /**
+     * This is the interface defining the callback from the URA database.
+     * @author Chin Han Wen
+     */
     public interface URACallback{
         void returnParking(List<String> names, List<String> coordinates);
     }

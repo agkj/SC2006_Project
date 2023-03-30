@@ -49,6 +49,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private boolean blank_check = false;
     public int temp;
 
+    /**
+     * This function listens for an activity result from CarparkLotDisplay, then moves the map camera based on the response coordinates.
+     */
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -65,6 +68,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
     );
 
+    /**
+     * This function initialises the Google Map interface.
+     * @author Chin Han Wen
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -136,6 +143,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
+    /**
+     * This function implements the movement of the map to the selected carpark coordinates, and sets the appropriate carpark lot overlay.
+     * @param googleMap The google map to be updated.
+     * @author Chin Han Wen
+     */
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;

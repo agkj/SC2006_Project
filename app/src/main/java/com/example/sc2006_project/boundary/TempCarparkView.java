@@ -2,6 +2,7 @@ package com.example.sc2006_project.boundary;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -9,7 +10,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.sc2006_project.boundary.CarparkLotDisplay;
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
 import com.example.sc2006_project.control.UraDBController;
@@ -22,8 +22,6 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 
 import com.example.sc2006_project.entity.Carpark;
@@ -41,17 +39,36 @@ import okhttp3.Response;
 
 
 public class TempCarparkView extends AppCompatActivity implements UraDBController.URACallback {
-
-    @Override
-    public void returnParking(List<String> names, List<String> coordinates) {
-        for(int a  = 0; a < 50; a++){
-            String[] non_converted = coordinates.get(a).split(",");
-            converter(non_converted[0], non_converted[1], names.get(a));
-        }
-    }
-
+   /**
+    * This is the interface defining the callback from the coordinate converter
+    * @author Chin Han Wen
+    */
     interface ConversionCallbacks{
         public void getConverted(double[] result, String name);
+    }
+
+    /**
+     * This is the implementation of the returnParking function from the callback interface URACallback
+     * It sends in each individual name-coordinate pair to the coordinate converter function.
+     * @param names The list of all carpark names
+     * @param coordinates The list of all carpark coordinates
+     * @author Chin Han Wen
+     */
+    @Override
+    public void returnParking(List<String> names, List<String> coordinates) {
+        int b = 0;
+        while(b < names.size()){
+            Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                public void run() {
+                    // Actions to do after 10 seconds
+                }
+            }, 10000);
+            for(int a  = 0; a < 50; a++){
+                String[] non_converted = coordinates.get(b).split(",");
+                converter(non_converted[0], non_converted[1], names.get(b));
+            }
+        }
     }
 
     private RecyclerView carparkRecView;
@@ -61,7 +78,12 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
     private ConversionCallbacks conversion_callback;
 
     private UraDBController ura_db_controller;
-    private double[] test;
+
+    /**
+     * This function implements the carpark list user interface.
+     *
+     * @author Chin Han Wen
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,6 +143,15 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
             System.exit(0);
         }
     }
+
+    /**
+     * This function converts coordinates from SVY21 format to WGS84 format via a HTML request.
+     * The return is sent to a ConversionCallback.
+     * @param latitude The SVY21 latitude of the carpark.
+     * @param longitude The SVY21 longitude of the carpark.
+     * @param name The name of the corresponding carpark.
+     * @author Chin Han Wen
+     */
     private void converter(String latitude, String longitude, String name) {
         double[] converted = {0, 0};
         String url = "https://developers.onemap.sg/commonapi/convert/3414to4326";

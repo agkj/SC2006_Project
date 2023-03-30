@@ -25,6 +25,12 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
     public static final String LEVELS = "com.example.application.carparkmapinterface.LEVELS";
     public static final String BOUND = "com.example.application.carparkmapinterface.BOUND";
 
+    /**
+     * Class constructor.
+     * @param context Context of the calling class.
+     * @author Chin Han Wen
+     */
+
 
     public CarparkRecViewAdapter(Context context){
         this.context = context;

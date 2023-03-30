@@ -22,6 +22,13 @@ public class CarparkLotRecViewAdapter extends RecyclerView.Adapter<CarparkLotRec
     private Activity mactivity;
     public static final String GET_LOT_COORDS = "com.example.carparkmapinterface.GET_LOT_COORDS";
 
+    /**
+     * Class constructor
+     * @param context Context of the caller class.
+     * @param mactivity Activity that called this constructor
+     * @author Chin Han Wen
+     */
+
     public CarparkLotRecViewAdapter(Context context, Activity mactivity){
         this.context = context;
         this.mactivity = mactivity;
@@ -34,6 +41,13 @@ public class CarparkLotRecViewAdapter extends RecyclerView.Adapter<CarparkLotRec
         return holder;
     }
 
+    /**
+     * This function sends a result to be used in MapControl
+     * @param holder The ViewHolder which should be updated to represent the contents of the
+     *        item at the given position in the data set.
+     * @param position The position of the item within the adapter's data set.
+     * @author Chin Han Wen
+     */
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.text.setText(lots.get(position).getName());
@@ -53,6 +67,11 @@ public class CarparkLotRecViewAdapter extends RecyclerView.Adapter<CarparkLotRec
         return lots.size();
     }
 
+    /**
+     * This function sets the carpark lots array list, then updates the display based on the new list.
+     * @param intake The carpark lot array list.
+     * @author Chin Han Wen
+     */
     public void setLots(ArrayList<CarparkLot> intake){
         lots = intake;
         notifyDataSetChanged();
