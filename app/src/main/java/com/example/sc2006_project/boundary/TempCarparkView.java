@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.sc2006_project.boundary.CarparkLotDisplay;
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
+import com.example.sc2006_project.control.UraDBController;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.maps.GoogleMap;
@@ -39,22 +40,27 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 
-public class TempCarparkView extends AppCompatActivity{
+public class TempCarparkView extends AppCompatActivity implements UraDBController.URACallback {
+
+    @Override
+    public void returnParking(List<String> names, List<String> coordinates) {
+        for(int a  = 0; a < 50; a++){
+            String[] non_converted = coordinates.get(a).split(",");
+            converter(non_converted[0], non_converted[1], names.get(a));
+        }
+    }
 
     interface ConversionCallbacks{
         public void getConverted(double[] result, String name);
     }
-    interface URACallbacks{
-        public void getCarparks(List<String> parking_lots, List<String> ura_coordinates);
-    }
+
     private RecyclerView carparkRecView;
     private CarparkRecViewAdapter adapter;
-    private List<String> ppNames = new ArrayList<>();
-    private List<String> coords = new ArrayList<>();
     private ArrayList<Carpark> carparks = new ArrayList<>();
     private Context current = this;
     private ConversionCallbacks conversion_callback;
-    private URACallbacks ura_callback;
+
+    private UraDBController ura_db_controller;
     private double[] test;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,103 +103,13 @@ public class TempCarparkView extends AppCompatActivity{
                 });
             }
         };
-        this.ura_callback = new URACallbacks() {
-            @Override
-            public void getCarparks(List<String> parking_lots, List<String> ura_coordinates) {
-                for(int a  = 0; a < 50; a++){
-                    String[] non_converted = ura_coordinates.get(a).split(",");
-                    converter(non_converted[0], non_converted[1], parking_lots.get(a));
-                }
-            }
-        };
+
         if(checker.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS){
-            // get the string array from the URA database
-            OkHttpClient client = new OkHttpClient();
-
-            String url = "https://www.ura.gov.sg/uraDataService/invokeUraDS?service=Car_Park_Details";
-
-
-            //changes daily, generate own accessKey and token
+            ura_db_controller = new UraDBController();
+            ura_db_controller.setUracallback(this);
             String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
-            String token = "fr4D090VYf9JXX1-69H4R14wamcAv8j5K9KcknFF8mF9k18bhQy@09yc710yG78fcbU-1+0fJ0b9tz89GuruSf85um9J-b9312th";
-
-            Request request = new Request.Builder()
-                    .url(url)
-                    .addHeader("AccessKey", accessKey).addHeader("Token",token)
-                    .build();
-
-            client.newCall(request).enqueue(new Callback() {
-                List<String> names = new ArrayList<>();
-                List<String> coordinates = new ArrayList<>();
-                @Override
-                public void onFailure(@NonNull Call call, @NonNull IOException e) {e.printStackTrace();}
-
-                @Override
-                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                    if (response.isSuccessful()) {
-                        String myResponse = response.body().string();
-                        try {
-                            JSONObject jsonObject = new JSONObject(myResponse);
-
-                            // extract the name of the parking lots
-                            String result = jsonObject.getString("Result");
-                            JSONArray jsonArray = new JSONArray(result);
-
-                            for (int i = 0; i < jsonArray.length(); i++) {
-                                JSONObject temp = jsonArray.getJSONObject(i);
-                                if(temp.getString("vehCat").equals("Car")){
-                                    if(!names.contains(temp.getString("ppName"))){
-                                        String ppName = temp.getString("ppName");
-                                        names.add(ppName);
-                                    }
-                                }
-                            }
-                            //String[] ppNameArray = names.toArray(new String[0]);
-
-                            // extract the coordinates of parking lot
-                            JSONArray jsonArray1 = new JSONArray(result);
-//                            JSONObject result1 = jsonArray1.getJSONObject(0);
-//                            JSONArray geometriesArray = result1.getJSONArray("geometries");
-//                            JSONObject coordinatesObject = geometriesArray.getJSONObject(0);
-//                            String coordinates = coordinatesObject.getString("coordinates");
-                            List<String> to_remove = new ArrayList<>();
-                            for (int j = 0; j < jsonArray1.length(); j++) {
-                                JSONObject temp = jsonArray1.getJSONObject(j);
-                                if(temp.getString("vehCat").equals("Car")){
-                                    JSONArray geometries = temp.getJSONArray("geometries");
-                                    if(geometries.length() == 0){
-                                        to_remove.add(temp.getString("ppName"));
-                                        continue;
-                                    }
-                                    JSONObject first_coords = geometries.getJSONObject(0);
-                                    String str_coordinates = first_coords.getString("coordinates");
-                                    if(names.contains(temp.getString("ppName")) && !coordinates.contains(str_coordinates)){
-                                        coordinates.add(str_coordinates);
-                                    }
-                                }
-                            }
-                            for(int i = 0; i < to_remove.size() ; i++){
-                                names.remove(to_remove.get(i));
-                            }
-                            for(int i = 0; i < 50;i++){
-                                System.out.println(names.get(i));
-                                System.out.println(coordinates.get(i));
-                            }
-                            System.out.println(names.size());
-                            System.out.println(coordinates.size());
-                            ura_callback.getCarparks(names, coordinates);
-                        } catch (JSONException e) {
-                            throw new RuntimeException(e);
-                        }
-                    }
-                }
-            });
-//            for (int i = 0; i < coordinates.size(); i++){
-//                String[] str_cur_coords = coordinates.get(i).split(",");
-//                double[] cur_coords = converter(str_cur_coords[0], str_cur_coords[1]);
-//                carparks.add(new Carpark(new LatLng(cur_coords[0], cur_coords[1]), ppNames.get(i)));
-//            }
-            //converter(Double.toString(31063.017),Double.toString(31665.0933));
+            String token = "0s+105U1ZvfSdz2n1F443180Jc13V-49S1+VGq-Wds9dk95fZU36a89BWc81ugZ87wh-0N3-@e7exPRcb5-tkuQ-9Mc9-Z98QQ-9";
+            ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);
             carparkRecView.setAdapter(adapter);
@@ -231,8 +147,6 @@ public class TempCarparkView extends AppCompatActivity{
                         String longitude = jsonObject.getString("longitude");
                         converted[0] = Double.parseDouble(latitude);
                         converted[1] = Double.parseDouble(longitude);
-                        System.out.println(converted[0]);
-                        System.out.println(converted[1]);
                         conversion_callback.getConverted(converted, name);
                     }catch(JSONException e){
                         throw new RuntimeException(e);
