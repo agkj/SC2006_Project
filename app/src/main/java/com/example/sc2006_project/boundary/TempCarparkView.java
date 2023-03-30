@@ -56,18 +56,9 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
      */
     @Override
     public void returnParking(List<String> names, List<String> coordinates) {
-        int b = 0;
-        while(b < names.size()){
-            Handler handler = new Handler();
-            handler.postDelayed(new Runnable() {
-                public void run() {
-                    // Actions to do after 10 seconds
-                }
-            }, 10000);
-            for(int a  = 0; a < 50; a++){
-                String[] non_converted = coordinates.get(b).split(",");
-                converter(non_converted[0], non_converted[1], names.get(b));
-            }
+        for(int a  = 0; a < 50; a++){
+            String[] non_converted = coordinates.get(a).split(",");
+            converter(non_converted[0], non_converted[1], names.get(a));
         }
     }
 
