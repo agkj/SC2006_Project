@@ -52,6 +52,13 @@ public class UraDBController {
         this.Uracallback = callback;
     }
 
+    /**
+     * This function requests the URA database with Access Key and Token and store the json data into
+     * a string variable, and extract the name and coordination of car park lots into two string arrays.
+     * @param accessKey
+     * @param token
+     * @author He Haoshen
+     */
     public void accessUraDB(String accessKey, String token){
         OkHttpClient client = new OkHttpClient();
 
