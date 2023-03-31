@@ -120,8 +120,8 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
         if(checker.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS){
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
-            String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
-            String token = "0s+105U1ZvfSdz2n1F443180Jc13V-49S1+VGq-Wds9dk95fZU36a89BWc81ugZ87wh-0N3-@e7exPRcb5-tkuQ-9Mc9-Z98QQ-9";
+            String accessKey = "ed2ed5ec-8a5e-47ab-ae19-a14d963c707c";
+            String token = "77T47aRv47-34qe472-e0FdbZc-ra3e7e4ax8ENG-N3T6yxwPQ@j56gAh15d7VedmjQ3RkeYS9AbSv-zesAwfu8-2p-dcub3Cb5S";
             ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);
