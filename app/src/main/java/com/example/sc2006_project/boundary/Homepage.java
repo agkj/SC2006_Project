@@ -16,6 +16,7 @@ public class Homepage extends AppCompatActivity {
 
     private TextView btnViewCarPark;
     private TextView btnEditProfile;
+    private TextView btnViewReservation;
     private TextView btnLogout;
 
     @Override
@@ -25,12 +26,21 @@ public class Homepage extends AppCompatActivity {
 
         btnViewCarPark = findViewById(R.id.view_car_park);
         btnEditProfile = findViewById(R.id.edit_profile);
+        btnViewReservation = findViewById(R.id.view_reservation);
         btnLogout = findViewById(R.id.logout);
 
         btnViewCarPark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), TempCarparkView.class);
+                startActivity(intent);
+            }
+        });
+
+        btnViewReservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ViewReservation.class);
                 startActivity(intent);
             }
         });
