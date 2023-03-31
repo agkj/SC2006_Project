@@ -3,12 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/parent">
-
     <TextView
         android:layout_marginTop="10dp"
-        android:layout_width="wrap_content"
+        android:gravity="left"
+        android:paddingLeft="100px"
+        android:layout_width="match_parent"
+        android:padding="30px"
         android:layout_height="wrap_content"
-        android:id="@+id/text"
+        android:textColor="@color/black"
+        android:id="@+id/txtName"
+        android:background="@drawable/rounded_corner"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>

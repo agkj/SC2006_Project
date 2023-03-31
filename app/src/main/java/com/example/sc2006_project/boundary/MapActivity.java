@@ -18,7 +18,6 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.sc2006_project.CarparkLotDisplay;
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkLotRecViewAdapter;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
@@ -50,6 +49,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private boolean blank_check = false;
     public int temp;
 
+    /**
+     * This function listens for an activity result from CarparkLotDisplay, then moves the map camera based on the response coordinates.
+     */
     ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(),
             new ActivityResultCallback<ActivityResult>() {
@@ -66,6 +68,10 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
     );
 
+    /**
+     * This function initialises the Google Map interface.
+     * @author Chin Han Wen
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,6 +87,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         res = getResources();
         if(!blank_check){
             temp = res.getIdentifier(asset_files.get(0), "raw", getPackageName());
+            System.out.println("OK");
         }
         SupportMapFragment mapfragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.mapView);
         if(mapfragment != null){
@@ -99,7 +106,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         level_select.setAdapter(adapter);
         level_select.setSelection(0,false);
         if(levels.size() > 1){
-            wrapper.setVisibility(View.INVISIBLE);
+            wrapper.setVisibility(View.VISIBLE);
         }
         level_select.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -136,6 +143,11 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         });
     }
 
+    /**
+     * This function implements the movement of the map to the selected carpark coordinates, and sets the appropriate carpark lot overlay.
+     * @param googleMap The google map to be updated.
+     * @author Chin Han Wen
+     */
     @Override
     public void onMapReady(@NonNull GoogleMap googleMap) {
         this.googleMap = googleMap;

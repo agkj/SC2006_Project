@@ -5,42 +5,51 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/grey">
+    android:background="@color/white">
 
     <LinearLayout
-        android:gravity="center"
+        android:gravity="left"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="1"
-        android:orientation="horizontal"
-        android:weightSum="1">
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:paddingLeft="35px">
 
         <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="50px"
-            android:layout_weight="1"
-            android:fontFamily="More Fonts..."
-            android:gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="200px"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="left"
             android:lines="2"
-            android:shadowColor="#000000"
-            android:shadowDx="5"
-            android:shadowDy="20"
-            android:shadowRadius="2"
-            android:text="Create Account"
-            android:textColor="@color/white"
+            android:text="Create your"
+            android:textColor="@color/black"
             android:textFontWeight="950"
-            android:textSize="40sp"
-            android:textStyle="bold" />
+            android:textSize="42sp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginTop="-20dp"
+            android:layout_weight="0.5"
+            android:fontFamily="@font/roboto_bold"
+            android:gravity="left"
+            android:lines="2"
+            android:text="Account"
+            android:textColor="@color/purple"
+            android:textFontWeight="950"
+            android:textSize="42sp"/>
     </LinearLayout>
 
     <LinearLayout
-        android:gravity="center"
+        android:gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="0dip"
         android:layout_weight="4"
         android:orientation="vertical"
-        android:weightSum="1">
+        android:paddingBottom="50px"
+        android:weightSum="0.8">
         <LinearLayout
             android:gravity="center"
             android:layout_width="match_parent"
@@ -52,12 +61,12 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
                 android:gravity="left"
                 android:lines="1"
                 android:text="E-mail Address"
-                android:textColor="@color/lightGrey"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -71,15 +80,18 @@
                 android:id="@+id/emailRegister"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:layout_marginTop="10px"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
-                android:inputType="text"
+                android:inputType="textEmailAddress"
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:textColorHint="@color/lightGrey"
-                android:background="@color/white"
+                android:background="@color/lightGrey"
+                android:drawableLeft="@drawable/email_icon"
+                android:padding="20px"
+                android:drawablePadding="10px"
                 />
         </LinearLayout>
 
@@ -94,12 +106,12 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
                 android:gravity="left"
                 android:lines="1"
                 android:text="Name"
-                android:textColor="@color/lightGrey"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -113,15 +125,18 @@
                 android:id="@+id/nameRegister"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:layout_marginTop="10px"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:textColorHint="@color/lightGrey"
-                android:background="@color/white"
+                android:background="@color/lightGrey"
+                android:drawableLeft="@drawable/profile_icon"
+                android:padding="20px"
+                android:drawablePadding="10px"
                 />
         </LinearLayout>
 
@@ -136,12 +151,12 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
                 android:gravity="left"
                 android:lines="1"
                 android:text="Phone"
-                android:textColor="@color/lightGrey"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -155,15 +170,18 @@
                 android:id="@+id/phoneRegister"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:layout_marginTop="10px"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
-                android:inputType="text"
+                android:inputType="number"
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:textColorHint="@color/lightGrey"
-                android:background="@color/white"
+                android:background="@color/lightGrey"
+                android:drawableLeft="@drawable/phone_contact_icon"
+                android:padding="20px"
+                android:drawablePadding="10px"
                 />
         </LinearLayout>
 
@@ -178,12 +196,12 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
                 android:gravity="left"
                 android:lines="1"
                 android:text="Car Plate"
-                android:textColor="@color/lightGrey"
+                android:textColor="@color/black"
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -197,15 +215,18 @@
                 android:id="@+id/carplateRegister"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:layout_marginTop="10px"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
-                android:inputType="text"
+                android:inputType="textCapCharacters"
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:textColorHint="@color/lightGrey"
-                android:background="@color/white"
+                android:background="@color/lightGrey"
+                android:drawableLeft="@drawable/car_icon"
+                android:padding="20px"
+                android:drawablePadding="10px"
                 />
         </LinearLayout>
         <!--<LinearLayout
@@ -258,12 +279,13 @@
             <TextView
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
                 android:maxLines="1"
                 android:textSize="20sp"
+
                 android:text="Password"
-                android:textColor="@color/lightGrey"
+                android:textColor="@color/black"
                 android:gravity="left"
                 />
         </LinearLayout>
@@ -276,17 +298,21 @@
             android:weightSum="1">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/passwordRegister"
+
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_weight="0.7"
+                android:layout_weight="0.9"
                 android:layout_marginTop="10px"
                 android:fontFamily="@font/barlow_semi_condensed_extrabold"
-                android:inputType="text"
+                android:inputType="textPassword"
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:gravity="center"
                 android:textColorHint="@color/lightGrey"
-                android:background="@color/white"
+                android:background="@color/lightGrey"
+                android:drawableLeft="@drawable/lock_icon"
+                android:padding="20px"
+                android:drawablePadding="10px"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -298,11 +324,13 @@
         android:layout_weight="1"
         android:orientation="horizontal"
         android:weightSum="1">
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id = "@+id/btn_register"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Confirm"
+            android:layout_weight="0.9"
+            android:background="@drawable/gradient_color_button"
+            android:text="Register"
             />
     </LinearLayout>
 

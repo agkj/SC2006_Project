@@ -1,4 +1,4 @@
-package com.example.sc2006_project;
+package com.example.sc2006_project.boundary;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.os.Bundle;
 import android.widget.TextView;
 
+import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkLotRecViewAdapter;
 import com.example.sc2006_project.entity.CarparkLot;
 import com.google.android.gms.maps.model.LatLng;
@@ -29,6 +30,11 @@ import okhttp3.Response;
 public class CarparkLotDisplay extends AppCompatActivity {
     private RecyclerView carparklotrecview;
     private ArrayList<CarparkLot> lots = new ArrayList<>();
+
+    /**
+     * This function implements the individual carpark lot display.
+     * @author Chin Han Wen
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

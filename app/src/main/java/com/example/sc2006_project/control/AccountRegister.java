@@ -6,13 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sc2006_project.Login;
-import com.example.sc2006_project.MainActivity;
+import com.example.sc2006_project.boundary.LoginActivity;
+import com.example.sc2006_project.boundary.ViewProfile;
 import com.example.sc2006_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -28,30 +29,45 @@ import java.util.Map;
 
 public class AccountRegister extends AppCompatActivity {
 
-    TextInputEditText editTextEmail, editTextPassword, editTextPhone, editTextName, editTextCarPlate;
-    Button btnReg;
-    FirebaseAuth mAuth;
-    FirebaseFirestore fStore;
-    String userID;
+    private TextInputEditText editTextEmail, editTextPassword, editTextPhone, editTextName, editTextCarPlate;
+    private Button btnReg;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore fStore;
+    private String userID;
     TextView textView;
+
+
+    /**
+     * This function checks if a user is already logged in and signs the user in to the application
+     *
+     * @author Goh Kai Jun, Alger
+     *  */
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in, if signed in, go into main page
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+        if (currentUser != null) {
+            Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
             startActivity(intent);
             finish();
+
         }
     }
 
+    /**
+     * This function implements the account registration functionality
+     *
+     * @author Goh Kai Jun, Alger
+     *  */
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.create_account);
 
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_create_account);
 
         fStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
@@ -72,6 +88,7 @@ public class AccountRegister extends AppCompatActivity {
                 String name, phone, carPlate;
 
                 email = String.valueOf(editTextEmail.getText());
+
                 password = String.valueOf(editTextPassword.getText());
 
                 //register additional user details
@@ -79,14 +96,52 @@ public class AccountRegister extends AppCompatActivity {
                 phone = String.valueOf(editTextPhone.getText());
                 carPlate = String.valueOf(editTextCarPlate.getText());
 
-
-
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                //check empty fields
+                if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(carPlate)) {
 
                     Toast.makeText(AccountRegister.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
-
                 }
+                //check email validity
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    editTextEmail.setError("Invalid email format");
+                    editTextEmail.requestFocus();
+                    //Toast.makeText(AccountRegister.this, "Invalid email format", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                //check phone length
+                if (phone.length() != 8) {
+                    editTextPhone.setError("Phone number must be 8 digits");
+                    editTextPhone.requestFocus();
+                    //Toast.makeText(AccountRegister.this, "Phone number must be 8 digits", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //check carplate format eg: SAB1234D
+                if (    !(carPlate.startsWith("S"))
+                        || !(Character.isLetter(carPlate.charAt(1)))
+                        || !(Character.isLetter(carPlate.charAt(2)))
+                        || !(Character.isLetter(carPlate.charAt(7)))
+
+                        || Character.isLetter(carPlate.charAt(3))
+                        || Character.isLetter(carPlate.charAt(4))
+                        || Character.isLetter(carPlate.charAt(5))
+                        || Character.isLetter(carPlate.charAt(6))
+                        || carPlate.length() !=8 ) {
+
+                    editTextCarPlate.setError("Invalid car plate number");
+                    editTextCarPlate.requestFocus();
+                   // Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                //check password length
+                if (password.length() < 5) {
+                    editTextPassword.setError("Password must contain at least 6 characters");
+                    editTextPassword.requestFocus();
+                   // Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -95,58 +150,50 @@ public class AccountRegister extends AppCompatActivity {
                             //Log.d(TAG, "createUserWithEmail:success");
 
 
-                            //email verification
+                            //send email verification
                             mAuth.getCurrentUser().sendEmailVerification().addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
-                                    if(task.isSuccessful()){
-
-                                        Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();
-
+                                    if (task.isSuccessful()) {
                                         userID = mAuth.getCurrentUser().getUid();
 
                                         //user object to record and store data into firestore
                                         DocumentReference documentReference = fStore.collection("users").document(userID);
-                                        Map<String,Object> user = new HashMap<>();
-                                        user.put("email",email);
-                                        user.put("password",password);
-                                        user.put("name",name);
-                                        user.put("phone",phone);
-                                        user.put("carPlate",carPlate);
+                                        Map<String, Object> user = new HashMap<>();
+                                        user.put("email", email);
+                                        user.put("name", name);
+                                        user.put("phone", phone);
+                                        user.put("carPlate", carPlate);
+                                        user.put("password", password);
                                         documentReference.set(user);
 
+                                        Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();
 
-
-                                        Intent intent = new Intent(getApplicationContext(), Login.class);
+                                        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                         startActivity(intent);
                                         finish();
 
-
-                                            }
-                                            else{
-                                                Toast.makeText(AccountRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        Toast.makeText(AccountRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
 
-                                            }
-                                        }
-                                    });
-
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    //Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(AccountRegister.this, "Account creation failed. Try again",
-                                            Toast.LENGTH_SHORT).show();
-
+                                    }
                                 }
-                            }
-                        });
+                            });
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            //Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                            Toast.makeText(AccountRegister.this, "Account creation failed. Try again", Toast.LENGTH_SHORT).show();
+
+                        }
+                    }
+                });
 
             }
         });
 
-
-
-
+        //go back to login page after creating account
 
 
     }

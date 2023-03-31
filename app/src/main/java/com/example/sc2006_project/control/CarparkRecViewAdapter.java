@@ -25,6 +25,12 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
     public static final String LEVELS = "com.example.application.carparkmapinterface.LEVELS";
     public static final String BOUND = "com.example.application.carparkmapinterface.BOUND";
 
+    /**
+     * Class constructor.
+     * @param context Context of the calling class.
+     * @author Chin Han Wen
+     */
+
 
     public CarparkRecViewAdapter(Context context){
         this.context = context;
@@ -32,7 +38,7 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.carpark_list_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_carpark_list_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
