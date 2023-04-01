@@ -10,12 +10,76 @@
         android:layout_height="0dip"
         android:layout_width="match_parent"
         android:layout_marginTop="100px"
-        android:gravity="center">
-        <ImageView
+        android:gravity="center"
+        android:orientation="vertical"
+        android:weightSum="1"
+        android:paddingLeft="200px">
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/profile_icon"
-            />
+            android:layout_height="0dp"
+            android:layout_weight="0.33"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:text="Name"
+
+                android:layout_gravity="right"/>
+            <TextView
+                android:id="@+id/user_name"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Your Name"
+                android:textStyle="bold"
+                android:textAlignment="viewEnd"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.33"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:text="Email"
+                android:layout_gravity="right"/>
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Your Email"
+                android:textStyle="bold"
+                android:textAlignment="viewEnd"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.33"
+            android:weightSum="1"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="0dp"
+                android:layout_weight="0.3"
+                android:layout_height="wrap_content"
+                android:text="Phone"
+                android:layout_gravity="right"/>
+            <TextView
+                android:id="@+id/user_phone"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Your Phone"
+                android:textStyle="bold"
+                android:textAlignment="viewEnd"/>
+        </LinearLayout>
     </LinearLayout>
     <LinearLayout
         android:layout_weight="0.8"
@@ -31,29 +95,7 @@
             android:layout_weight="4"
             android:orientation="vertical"
             android:weightSum="1">
-            <LinearLayout
-                android:gravity="center"
-                android:layout_width="match_parent"
-                android:layout_height="0dip"
-                android:layout_weight="0.12"
-                android:orientation="horizontal"
-                android:weightSum="1"
-                android:layout_marginBottom="20px"
-                android:layout_marginTop="10px">
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="0.9"
-                    android:fontFamily="@font/barlow_semi_condensed_extrabold"
-                    android:lines="1"
-                    android:textSize="32sp"
-                    android:gravity="center"
-                    android:background="@drawable/rounded_corner"
-                    android:text="View profile"
-                    android:id="@+id/edit_profile"
-                    android:clickable="true"
-                    />
-            </LinearLayout>
+
             <LinearLayout
                 android:gravity="center"
                 android:layout_width="match_parent"

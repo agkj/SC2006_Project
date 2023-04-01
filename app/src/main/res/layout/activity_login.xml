@@ -7,28 +7,6 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@color/white">
-
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.7"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:layout_weight="0.5"
-            android:fontFamily="@font/barlow_semi_condensed_extrabold"
-            android:gravity="center"
-            android:lines="2"
-            android:text="PARKER"
-            android:textColor="@color/black"
-            android:textFontWeight="800"
-            android:textSize="32sp" />
-    </LinearLayout>
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
@@ -36,6 +14,7 @@
         android:layout_weight="0.8"
         android:orientation="vertical"
         android:layout_marginLeft="35px"
+        android:layout_marginTop="100px"
         android:weightSum="2">
         <LinearLayout
             android:gravity="center"
@@ -72,7 +51,7 @@
                 android:fontFamily="@font/roboto_bold"
                 android:gravity="left"
                 android:lines="2"
-                android:text="Account"
+                android:text="PARKER"
                 android:textColor="@color/purple"
                 android:textFontWeight="950"
                 android:textSize="42sp" />
