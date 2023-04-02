@@ -107,8 +107,8 @@ public class Homepage extends AppCompatActivity {
 
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
-                FirebaseAuth.getInstance().signOut();
-//                finish();
+                //FirebaseAuth.getInstance().signOut();
+                finish();
             }
         });
 
