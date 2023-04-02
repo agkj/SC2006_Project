@@ -23,12 +23,26 @@ public class Carpark implements Serializable {
         this.asset_name = asset_name;
     }
 
-
+    /**
+     * Class constructor with simplified parameters of only coordinates and name of carpark.
+     * @param location_coord LatLng coordinates of carpark.
+     * @param location_name Name of carpark.
+     * @author Chin Han Wen
+     */
     public Carpark(LatLng location_coord, String location_name) {
         this.location_coord = location_coord;
         this.location_name = location_name;
     }
 
+    /**
+     * Class constructor with more parameters, defining a carpark as well as the map overlays to be shown.
+     * @param location_coord LatLng coordinates of carpark.
+     * @param asset_bound LatLngBound of map overlay.
+     * @param location_name Name of carpark.
+     * @param asset_list String array list of the file names of the map overlay image files.
+     * @param level_list String array list of the level list in a multi-floor carpark.
+     * @author Chin Han Wen
+     */
     public Carpark(LatLng location_coord, LatLngBounds asset_bound, String location_name, ArrayList<String> asset_list, ArrayList<String> level_list) {
         this.location_coord = location_coord;
         this.asset_bound = asset_bound;
