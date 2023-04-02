@@ -39,10 +39,6 @@
             android:name=".boundary.TempCarparkView"
             android:exported="false" />
         <activity
-            android:name=".boundary.ViewProfile"
-            android:exported="false"
-            android:theme="@style/Theme.Material3.Light.NoActionBar" />
-        <activity
             android:name=".boundary.Homepage"
             android:exported="false"
             android:theme="@style/Theme.Material3.Light.NoActionBar" />

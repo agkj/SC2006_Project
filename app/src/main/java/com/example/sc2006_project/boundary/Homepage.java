@@ -55,6 +55,9 @@ public class Homepage extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = fAuth.getCurrentUser().getUid();
+
+
+
         DocumentReference documentReference = fStore.collection("users").document(userID);
 
         /**

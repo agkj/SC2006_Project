@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sc2006_project.boundary.LoginActivity;
-import com.example.sc2006_project.boundary.ViewProfile;
 import com.example.sc2006_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -47,13 +46,13 @@ public class AccountRegister extends AppCompatActivity {
     public void onStart() {
         super.onStart();
         // Check if user is signed in, if signed in, go into main page
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
-            startActivity(intent);
-            finish();
-
-        }
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if (currentUser != null) {
+//            Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
+//            startActivity(intent);
+//            finish();
+//
+//        }
     }
 
     /**
@@ -111,12 +110,13 @@ public class AccountRegister extends AppCompatActivity {
                 }
 
                 //check phone length
-                if (phone.length() != 8) {
-                    editTextPhone.setError("Phone number must be 8 digits");
+                if (phone.length() != 8 ) {
+                    editTextPhone.setError("Invalid Singapore phone number format");
                     editTextPhone.requestFocus();
                     //Toast.makeText(AccountRegister.this, "Phone number must be 8 digits", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
                 //check carplate format eg: SAB1234D
                 if (    !(carPlate.startsWith("S"))
                         || !(Character.isLetter(carPlate.charAt(1)))
@@ -141,6 +141,7 @@ public class AccountRegister extends AppCompatActivity {
                    // Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
 
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
