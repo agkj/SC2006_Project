@@ -36,19 +36,12 @@ public class Homepage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_home_page);
 
         btnViewCarPark = findViewById(R.id.view_car_park);
         btnViewReservation = findViewById(R.id.view_reservation);
         btnLogout = findViewById(R.id.logout);
-
-
-
-        /**
-         * This function implements view profile information display
-         *
-         * @author Goh Kai Jun, Alger
-         *  */
 
         //old
         auth = FirebaseAuth.getInstance();
@@ -58,23 +51,25 @@ public class Homepage extends AppCompatActivity {
         user = auth.getCurrentUser();
         //old
 
-            //new
+        //new
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = fAuth.getCurrentUser().getUid();
         DocumentReference documentReference = fStore.collection("users").document(userID);
 
-            //new
+        /**
+         * This function implements view profile information display
+         *
+         * @author Goh Kai Jun, Alger
+         *  */
 
         if (user == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
             startActivity(intent);
             finish();
         } else {
+
             documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-
-
-
 
                 @Override
                 public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
@@ -108,10 +103,12 @@ public class Homepage extends AppCompatActivity {
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                FirebaseAuth.getInstance().signOut();
+
+
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
-                finish();
+                FirebaseAuth.getInstance().signOut();
+//                finish();
             }
         });
 

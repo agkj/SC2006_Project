@@ -164,7 +164,7 @@ public class AccountRegister extends AppCompatActivity {
                                         user.put("name", name);
                                         user.put("phone", phone);
                                         user.put("carPlate", carPlate);
-                                        user.put("password", password);
+                                       // user.put("password", password);
                                         documentReference.set(user);
 
                                         Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();
