@@ -7,35 +7,14 @@
     android:gravity="center"
     android:orientation="vertical"
     android:background="@color/white">
-
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="0dip"
-        android:layout_weight="0.7"
-        android:orientation="horizontal"
-        android:weightSum="1">
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="10px"
-            android:layout_weight="0.5"
-            android:fontFamily="@font/barlow_semi_condensed_extrabold"
-            android:gravity="center"
-            android:lines="2"
-            android:text="PARKER"
-            android:textColor="@color/black"
-            android:textFontWeight="800"
-            android:textSize="32sp" />
-    </LinearLayout>
-    <LinearLayout
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="0dip"
-        android:layout_weight="0.8"
+        android:layout_weight="1"
         android:orientation="vertical"
         android:layout_marginLeft="35px"
+        android:layout_marginTop="100px"
         android:weightSum="2">
         <LinearLayout
             android:gravity="center"
@@ -48,13 +27,13 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="sans-serif-black"
                 android:gravity="left"
                 android:lines="1"
-                android:text="Login to your"
+                android:text="Welcome to "
                 android:textColor="@color/black"
                 android:textFontWeight="950"
-                android:textSize="42sp" />
+                android:textSize="44sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -69,10 +48,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="-10px"
                 android:layout_weight="1"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="sans-serif-black"
                 android:gravity="left"
                 android:lines="2"
-                android:text="Account"
+                android:text="PARKER"
                 android:textColor="@color/purple"
                 android:textFontWeight="950"
                 android:textSize="42sp" />
@@ -109,7 +88,7 @@
                     android:maxLines="1"
                     android:textColorHint="@color/lightGrey"
                     android:background="@drawable/rounded_corner"
-                    android:fontFamily="@font/barlow_semi_condensed_extrabold"
+                    android:fontFamily="sans-serif-black"
                     android:textSize="20sp"
                     android:drawableStart="@drawable/email_icon"
                     android:padding="16dp"
@@ -123,8 +102,7 @@
             android:layout_height="0dip"
             android:layout_weight="0.3"
             android:orientation="horizontal"
-            android:weightSum="1"
-            >
+            android:weightSum="1">
             <com.google.android.material.textfield.TextInputLayout
                 app:passwordToggleEnabled="true"
                 android:layout_height="wrap_content"
@@ -138,7 +116,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="0.5"
                     android:inputType="textPassword"
-                    android:fontFamily="@font/barlow_semi_condensed_extrabold"
+                    android:fontFamily="sans-serif-black"
                     android:maxLines="1"
                     android:hint="Password"
                     android:textSize="20sp"
@@ -163,7 +141,7 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.9"
                 android:layout_marginTop="10px"
-                android:fontFamily="@font/roboto_bold"
+                android:fontFamily="sans-serif-black"
                 android:lines="1"
                 android:text="Log in"
                 android:textSize="18sp"

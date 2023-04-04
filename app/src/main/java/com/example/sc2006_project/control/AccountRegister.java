@@ -129,7 +129,7 @@ public class AccountRegister extends AppCompatActivity {
                         || Character.isLetter(carPlate.charAt(6))
                         || carPlate.length() !=8 ) {
 
-                    editTextCarPlate.setError("Invalid car plate number");
+                    editTextCarPlate.setError("Car plate format should be SAB1234D");
                     editTextCarPlate.requestFocus();
                    // Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
                     return;
@@ -164,7 +164,7 @@ public class AccountRegister extends AppCompatActivity {
                                         user.put("name", name);
                                         user.put("phone", phone);
                                         user.put("carPlate", carPlate);
-                                        user.put("password", password);
+                                       // user.put("password", password);
                                         documentReference.set(user);
 
                                         Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();

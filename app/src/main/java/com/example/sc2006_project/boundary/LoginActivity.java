@@ -30,13 +30,15 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in, if signed in, go into main page
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(getApplicationContext(), Homepage.class);
-            startActivity(intent);
-            finish();
-        }
+
+//
+//        // Check if user is signed in, if signed in, go into main page
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if(currentUser != null){
+//            Intent intent = new Intent(getApplicationContext(), Homepage.class);
+//            startActivity(intent);
+//            finish();
+//        }
     }
 
     /**
@@ -44,7 +46,6 @@ public class LoginActivity extends AppCompatActivity {
      *
      * @author Goh Kai Jun, Alger
      *  */
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,11 +93,19 @@ public class LoginActivity extends AppCompatActivity {
                 email = String.valueOf(editTextEmail.getText());
                 password = String.valueOf(editTextPassword.getText());
 
-                if(TextUtils.isEmpty(email) || TextUtils.isEmpty(password)){
+                if(TextUtils.isEmpty(email)){
 
-                    Toast.makeText(LoginActivity.this, "Empty fields", Toast.LENGTH_SHORT).show();
+                    editTextEmail.setError("Empty fields");
+                    editTextEmail.requestFocus();
                     return;
                 }
+                if(TextUtils.isEmpty(password))
+                {
+                    editTextPassword.setError("Empty fields");
+                    editTextPassword.requestFocus();
+                    return;
+                }
+
 
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
