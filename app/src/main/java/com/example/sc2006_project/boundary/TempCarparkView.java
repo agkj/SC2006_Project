@@ -23,6 +23,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import com.example.sc2006_project.entity.Carpark;
 
@@ -56,7 +57,8 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
      */
     @Override
     public void returnParking(List<String> names, List<String> coordinates) {
-        for(int a  = 0; a < 50; a++){
+        size = names.size();
+        for(int a  = 0; a < size; a++){
             String[] non_converted = coordinates.get(a).split(",");
             converter(non_converted[0], non_converted[1], names.get(a));
         }
@@ -69,6 +71,8 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
     private ConversionCallbacks conversion_callback;
 
     private UraDBController ura_db_controller;
+    private OkHttpClient http_client;
+    private int size;
 
     /**
      * This function implements the carpark list user interface.
@@ -108,20 +112,26 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
 //                        "Carpark C/Some Rando",
 //                        asset_list,
 //                        level_list));
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        adapter.setCarparks(carparks);
-                    }
-                });
+                //This method may or may not cause a ConcurrentModificationException.
+                //Probabily not currently, but if the size of carparks is close to a multiple of 100,
+                //The chance of occurring probably goes up.
+                if(carparks.size() == size || carparks.size() % 100 == 0){
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            adapter.setCarparks(carparks);
+                        }
+                    });
+                }
             }
         };
 
         if(checker.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS){
+            http_client = new OkHttpClient.Builder().callTimeout(120, TimeUnit.SECONDS).build();
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
-            String accessKey = "ed2ed5ec-8a5e-47ab-ae19-a14d963c707c";
-            String token = "77T47aRv47-34qe472-e0FdbZc-ra3e7e4ax8ENG-N3T6yxwPQ@j56gAh15d7VedmjQ3RkeYS9AbSv-zesAwfu8-2p-dcub3Cb5S";
+            String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
+            String token = "5rRMC@4azep45X0GvX9d43U4b3g9KQAqdss9@JcK4ye8c3K5Xd3nku@0+9-TWeVP7Pf1jE53d9f6t7B71d9u1F1-g5AbT-7J7m1w";
             ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);
@@ -153,8 +163,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
         Request request = new Request.Builder()
                 .url(built_url)
                 .build();
-        OkHttpClient client = new OkHttpClient();
-        client.newCall(request).enqueue(new Callback() {
+        http_client.newCall(request).enqueue(new Callback() {
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {e.printStackTrace();}
 
