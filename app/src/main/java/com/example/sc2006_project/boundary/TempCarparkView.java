@@ -131,6 +131,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                 // The 'query' parameter contains the user's input
                 String userInput = query;
 //                        System.out.println(carparkList);
+                if(query.isEmpty()) adapter.setCarparks(carparks);
                 int i = 0;
                 for(i=0; i<carparkList.size(); i++)
                 {
@@ -142,15 +143,21 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                         break;
                     }
                 }
-                ArrayList<Carpark> searchResult = new ArrayList<>();
-                searchResult.add(carparkList.get(i));
+                if(i!=50){
+                    ArrayList<Carpark> searchResult = new ArrayList<>();
+                    searchResult.add(carparkList.get(i));
 //                        System.out.println(i);
-                adapter.setCarparks(searchResult);
+                    adapter.setCarparks(searchResult);
+                }else{
+                    ArrayList<Carpark> blank = new ArrayList<>();
+                    adapter.setCarparks(blank);
+                }
                 return true;
             }
 
             @Override
             public boolean onQueryTextChange(String newText) {
+                if(newText.isEmpty()) adapter.setCarparks(carparks);
                 // This method will be called when the user changes the search query text
                 // You can use this to update search suggestions or dynamically filter results
                 return true;
