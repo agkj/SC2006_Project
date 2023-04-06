@@ -121,7 +121,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
             String accessKey = "ed2ed5ec-8a5e-47ab-ae19-a14d963c707c";
-            String token = "77T47aRv47-34qe472-e0FdbZc-ra3e7e4ax8ENG-N3T6yxwPQ@j56gAh15d7VedmjQ3RkeYS9AbSv-zesAwfu8-2p-dcub3Cb5S";
+            String token = "HeS4S-e4E3J32PSZU+9JcuW-wVbvBURv721k1mWcaK1aj8867dYG819yks7wNe8-MF8Ke5X3Ra45wa3BC99d43q47G5aqd8Y5BSx";
             ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);
