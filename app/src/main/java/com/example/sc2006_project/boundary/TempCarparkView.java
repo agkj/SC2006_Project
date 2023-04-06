@@ -3,6 +3,7 @@ package com.example.sc2006_project.boundary;
 import android.content.Context;
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 
 import com.example.sc2006_project.entity.Carpark;
 
@@ -36,6 +38,8 @@ import okhttp3.HttpUrl;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
+
+import android.widget.SearchView;
 
 
 public class TempCarparkView extends AppCompatActivity implements UraDBController.URACallback {
@@ -108,6 +112,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
 //                        "Carpark C/Some Rando",
 //                        asset_list,
 //                        level_list));
+
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -117,11 +122,53 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
             }
         };
 
+        SearchView simpleSearchView = (SearchView) findViewById(R.id.simpleSearchView);
+        ArrayList<Carpark> carparkList = carparks;
+        simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                // This method will be called when the user submits their search query
+                // The 'query' parameter contains the user's input
+                String userInput = query;
+//                        System.out.println(carparkList);
+                if(query.isEmpty()) adapter.setCarparks(carparks);
+                int i = 0;
+                for(i=0; i<carparkList.size(); i++)
+                {
+                    Carpark c = carparkList.get(i);
+                    String name = c.getLocation_name().trim();
+                    System.out.println(name);
+                    String upper = userInput.toUpperCase();
+                    if(name.equals(upper)) {
+                        break;
+                    }
+                }
+                if(i!=50){
+                    ArrayList<Carpark> searchResult = new ArrayList<>();
+                    searchResult.add(carparkList.get(i));
+//                        System.out.println(i);
+                    adapter.setCarparks(searchResult);
+                }else{
+                    ArrayList<Carpark> blank = new ArrayList<>();
+                    adapter.setCarparks(blank);
+                }
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                if(newText.isEmpty()) adapter.setCarparks(carparks);
+                // This method will be called when the user changes the search query text
+                // You can use this to update search suggestions or dynamically filter results
+                return true;
+            }
+        });
+
         if(checker.isGooglePlayServicesAvailable(this) == ConnectionResult.SUCCESS){
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
             String accessKey = "ed2ed5ec-8a5e-47ab-ae19-a14d963c707c";
-            String token = "77T47aRv47-34qe472-e0FdbZc-ra3e7e4ax8ENG-N3T6yxwPQ@j56gAh15d7VedmjQ3RkeYS9AbSv-zesAwfu8-2p-dcub3Cb5S";
+            String token = "HeS4S-e4E3J32PSZU+9JcuW-wVbvBURv721k1mWcaK1aj8867dYG819yks7wNe8-MF8Ke5X3Ra45wa3BC99d43q47G5aqd8Y5BSx";
             ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);
