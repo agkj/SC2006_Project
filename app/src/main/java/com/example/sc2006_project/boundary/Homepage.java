@@ -1,5 +1,6 @@
 package com.example.sc2006_project.boundary;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -25,6 +26,7 @@ public class Homepage extends AppCompatActivity {
     private TextView btnViewCarPark;
     private TextView btnEditProfile;
     private TextView btnViewReservation;
+    private TextView btnCurrentReservation;
     private TextView btnLogout;
     private FirebaseAuth auth, fAuth;
     private Button button;
@@ -33,6 +35,7 @@ public class Homepage extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private String userID;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,7 +43,9 @@ public class Homepage extends AppCompatActivity {
 
         btnViewCarPark = findViewById(R.id.view_car_park);
         btnViewReservation = findViewById(R.id.view_reservation);
+        btnCurrentReservation = findViewById(R.id.current_reservation);
         btnLogout = findViewById(R.id.logout);
+
 
         //old
         auth = FirebaseAuth.getInstance();
@@ -91,10 +96,18 @@ public class Homepage extends AppCompatActivity {
             }
         });
 
+        btnCurrentReservation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), CurrentReservation.class);
+                startActivity(intent);
+            }
+        });
+
         btnViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewReservation.class);
+                Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
                 startActivity(intent);
             }
         });
