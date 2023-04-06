@@ -43,6 +43,14 @@
             android:exported="false"
             android:theme="@style/Theme.Material3.Light.NoActionBar" />
         <activity
+            android:name=".boundary.ReservationActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+        <activity
+            android:name=".boundary.ViewReservation"
+            android:exported="false"
+            android:theme="@style/Theme.Material3.Light.NoActionBar" />
+        <activity
             android:name=".boundary.Homepage"
             android:exported="false"
             android:theme="@style/Theme.Material3.Light.NoActionBar" />

@@ -36,7 +36,6 @@ public class Homepage extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_home_page);
 
         btnViewCarPark = findViewById(R.id.view_car_park);
@@ -95,16 +94,14 @@ public class Homepage extends AppCompatActivity {
         btnViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Intent intent = new Intent(getApplicationContext(), ViewReservation.class);
-                //startActivity(intent);
+                Intent intent = new Intent(getApplicationContext(), ViewReservation.class);
+                startActivity(intent);
             }
         });
 
         btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
                 FirebaseAuth.getInstance().signOut();
