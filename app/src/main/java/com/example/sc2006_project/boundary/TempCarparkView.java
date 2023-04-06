@@ -123,14 +123,13 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
         };
 
         SearchView simpleSearchView = (SearchView) findViewById(R.id.simpleSearchView);
+        ArrayList<Carpark> carparkList = carparks;
         simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // This method will be called when the user submits their search query
                 // The 'query' parameter contains the user's input
                 String userInput = query;
-
-                ArrayList<Carpark> carparkList = carparks;
 //                        System.out.println(carparkList);
                 int i = 0;
                 for(i=0; i<carparkList.size(); i++)
@@ -143,7 +142,10 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                         break;
                     }
                 }
+                ArrayList<Carpark> searchResult = new ArrayList<>();
+                searchResult.add(carparkList.get(i));
 //                        System.out.println(i);
+                adapter.setCarparks(searchResult);
                 return true;
             }
 
