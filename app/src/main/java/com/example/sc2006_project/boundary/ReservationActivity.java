@@ -35,6 +35,13 @@ public class ReservationActivity extends AppCompatActivity {
     private RadioGroup timeModeSelector;
     private RadioButton startTimeButton;
     private RadioButton endTimeButton;
+    private int startHour;
+    private int startMinute;
+    private int endHour;
+    private int endMinute;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,8 +79,12 @@ public class ReservationActivity extends AppCompatActivity {
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 if (startTimeButton.isChecked()) {
                     getTimeString(hourOfDay, minute, startTimeTextView);
+                    int startHour = timePicker.getHour();
+                    int startMinute = timePicker.getMinute();
                 } else if (endTimeButton.isChecked()) {
                     getTimeString(hourOfDay, minute, endTimeTextView);
+                    int endHour = timePicker.getHour();
+                    int endMinute = timePicker.getMinute();
                 }
             }
         });
@@ -89,10 +100,21 @@ public class ReservationActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(startTimeTextView.getText().toString().equals("Selected Start Time") || endTimeTextView.getText().toString().equals("Selected End Time")) {
+                    Toast.makeText(ReservationActivity.this, "Please select both start and end time", Toast.LENGTH_SHORT).show();
+                    return; // Exit the method to prevent saving invalid reservation data
+                }
                 // Get the selected start and end times from the TextView elements and the user ID from firestore; parking lot passed from previous activity
                 String startTime = startTimeTextView.getText().toString();
                 String endTime = endTimeTextView.getText().toString();
                 String userID = documentReference.getId();
+
+                // Check if the end time is after the start time
+                if (endHour < startHour || (endHour == startHour && endMinute <= startMinute)) {
+                    // End time is earlier than start time, so display an error message and return
+                    Toast.makeText(ReservationActivity.this, "End time must be after start time", Toast.LENGTH_SHORT).show();
+                    return;
+                }
                 //parking lot variable needs to be passed on from previous activity, which is view map
                 String parkingLot = "parkingLot";
 
