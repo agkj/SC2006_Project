@@ -112,10 +112,9 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
 //                        "Carpark C/Some Rando",
 //                        asset_list,
 //                        level_list));
-                //This method may or may not cause a ConcurrentModificationException.
-                //Probabily not currently, but if the size of carparks is close to a multiple of 100,
-                //The chance of occurring probably goes up.
-                if(carparks.size() == size || carparks.size() % 100 == 0){
+                //This method, if I want to update it every X carparks, causes a fatal exception.
+                //Its inconsistent, but seems to occur more frequently on slower phones.
+                if(carparks.size() == size){
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -131,7 +130,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
             String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
-            String token = "5rRMC@4azep45X0GvX9d43U4b3g9KQAqdss9@JcK4ye8c3K5Xd3nku@0+9-TWeVP7Pf1jE53d9f6t7B71d9u1F1-g5AbT-7J7m1w";
+            String token = "0fz4nf03vX0kdBh@F4u317DBj0GCTM-90a7dX-7pdgBY75RBF2SU46e49Ca9d9d8xXC7037FdfZx93S7-8-5z412u11nS7FC@A28";
             ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);

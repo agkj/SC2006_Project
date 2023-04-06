@@ -35,22 +35,34 @@
             />
     </RelativeLayout>
     <RelativeLayout
-        android:id="@+id/buttonlayout"
+        android:id="@+id/navigatebuttonlayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:elevation="2dp"
         android:visibility="visible"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
         app:layout_constraintBottom_toBottomOf="@+id/mapView"
         app:layout_constraintLeft_toLeftOf="@id/mapView"
         app:layout_constraintRight_toRightOf="@id/mapView">
         <Button
-            android:id="@+id/button"
+            android:id="@+id/navigatebutton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="32dp"
             android:elevation="2dp"
-            android:text="View car park lots"/>
+            android:layout_alignParentStart="true"
+            android:text="Navigate"/>
+        <Button
+            android:id="@+id/reservebutton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
+            android:elevation="2dp"
+            android:layout_alignParentEnd="true"
+            android:text="Reserve"/>
     </RelativeLayout>
+
 
 
 
