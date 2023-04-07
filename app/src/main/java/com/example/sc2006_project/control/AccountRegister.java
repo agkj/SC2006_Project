@@ -61,7 +61,6 @@ public class AccountRegister extends AppCompatActivity {
      * @author Goh Kai Jun, Alger
      *  */
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 

@@ -30,13 +30,6 @@ public class ForgetPassword extends AppCompatActivity {
     private FirebaseAuth fAuth;
 
 
-    /**
-     * This function implements the forget password display
-     *
-     * @author Goh Kai Jun, Alger
-     *  */
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

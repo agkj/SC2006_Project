@@ -17,7 +17,7 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="0.7"
-            android:weightSum="3"
+            android:weightSum="4"
             android:background="@drawable/rounded_corner"
             android:orientation="vertical"
             android:paddingLeft="20dp"
@@ -67,6 +67,10 @@
                     android:textAlignment="viewEnd"/>
             </LinearLayout>
 
+
+
+
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -88,6 +92,41 @@
                     android:textStyle="bold"
                     android:textAlignment="viewEnd"/>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:text="Car Plate"
+                    android:layout_gravity="right"/>
+                <TextView
+                    android:id="@+id/user_carplate"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:text="Your Car Plate"
+                    android:textStyle="bold"
+                    android:textAlignment="viewEnd"/>
+            </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -104,6 +143,33 @@
             android:layout_weight="4"
             android:orientation="vertical"
             android:weightSum="1">
+
+            <LinearLayout
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="0dip"
+                android:layout_weight="0.2"
+                android:orientation="horizontal"
+                android:weightSum="1"
+                android:layout_marginBottom="20px"
+                android:layout_marginTop="10px">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.9"
+                    android:fontFamily="sans-serif-black"
+                    android:lines="1"
+                    android:textSize="28sp"
+                    android:gravity="center"
+                    android:text="Edit Profile"
+                    android:background="@color/lightGrey"
+                    android:id="@+id/edit_profile"
+                    android:clickable="true"
+                    />
+            </LinearLayout>
+
+
+
 
             <LinearLayout
                 android:gravity="center"
