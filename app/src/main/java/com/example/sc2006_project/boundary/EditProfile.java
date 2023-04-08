@@ -98,7 +98,7 @@ public class EditProfile extends AppCompatActivity {
                     Toast.makeText(EditProfile.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                if (newPhone.length() != 8 ) {
+                if (!(newPhone.replaceAll("\\s", "").matches("^[89]\\d{7}$"))) {
                     phoneNumberEditText.setError("Invalid Singapore phone number format");
                     phoneNumberEditText.requestFocus();
                     //Toast.makeText(AccountRegister.this, "Phone number must be 8 digits", Toast.LENGTH_SHORT).show();
@@ -121,7 +121,6 @@ public class EditProfile extends AppCompatActivity {
                     // Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
                     return;
                 }
-
 
 
                 Map<String, Object> newUser = new HashMap<>();
