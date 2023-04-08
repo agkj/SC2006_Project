@@ -48,7 +48,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
     * @author Chin Han Wen
     */
     interface ConversionCallbacks{
-        public void getConverted(double[] result, String name);
+        public void getConverted(double[] result, String name, String lot);
     }
 
     /**
@@ -59,10 +59,10 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
      * @author Chin Han Wen
      */
     @Override
-    public void returnParking(List<String> names, List<String> coordinates) {
+    public void returnParking(List<String> names, List<String> coordinates, List<String> numbers) {
         for(int a  = 0; a < 50; a++){
             String[] non_converted = coordinates.get(a).split(",");
-            converter(non_converted[0], non_converted[1], names.get(a));
+            converter(non_converted[0], non_converted[1], names.get(a), numbers.get(a));
         }
     }
 
@@ -86,8 +86,8 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
         GoogleApiAvailability checker = new GoogleApiAvailability();
         this.conversion_callback = new ConversionCallbacks(){
             @Override
-            public void getConverted(double[] result, String name){
-                carparks.add(new Carpark(new LatLng(result[0], result[1]), name));
+            public void getConverted(double[] result, String name, String lot){
+                carparks.add(new Carpark(new LatLng(result[0], result[1]), name, lot));
 //                ArrayList<String> asset_list = new ArrayList<>();
 //                asset_list.add("carpark_ntu_c");
 //                asset_list.add("bonk");
@@ -124,6 +124,10 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
 
         SearchView simpleSearchView = (SearchView) findViewById(R.id.simpleSearchView);
         ArrayList<Carpark> carparkList = carparks;
+        /**
+         * This function implements the searching in car park list
+         * @author He Haoshen
+         */
         simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
@@ -168,7 +172,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
             String accessKey = "ed2ed5ec-8a5e-47ab-ae19-a14d963c707c";
-            String token = "HeS4S-e4E3J32PSZU+9JcuW-wVbvBURv721k1mWcaK1aj8867dYG819yks7wNe8-MF8Ke5X3Ra45wa3BC99d43q47G5aqd8Y5BSx";
+            String token = "-bQAvyQdQeyvem8XVbK4192fea7qc7mj54a-Wm35Dv+qadNePbQNueazAY8Cdc2eXeN4rcb8dea4-Ha@7x9X4tGAqefXnqf8-e9c";
             ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);
@@ -190,7 +194,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
      * @param name The name of the corresponding carpark.
      * @author Chin Han Wen
      */
-    private void converter(String latitude, String longitude, String name) {
+    private void converter(String latitude, String longitude, String name, String lot) {
         double[] converted = {0, 0};
         String url = "https://developers.onemap.sg/commonapi/convert/3414to4326";
         HttpUrl.Builder urlbuilder = HttpUrl.parse(url).newBuilder();
@@ -216,7 +220,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                         String longitude = jsonObject.getString("longitude");
                         converted[0] = Double.parseDouble(latitude);
                         converted[1] = Double.parseDouble(longitude);
-                        conversion_callback.getConverted(converted, name);
+                        conversion_callback.getConverted(converted, name, lot);
                     }catch(JSONException e){
                         throw new RuntimeException(e);
                     }

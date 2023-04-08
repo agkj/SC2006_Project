@@ -61,9 +61,10 @@ public class UraDBController {
      */
     public void accessUraDB(String accessKey, String token){
         OkHttpClient client = new OkHttpClient();
+        OkHttpClient client2 = new OkHttpClient();
 
         String url = "https://www.ura.gov.sg/uraDataService/invokeUraDS?service=Car_Park_Details";
-        String detailURL = "https://www.ura.gov.sg/uraDataService/invokeUraDS?service=Car_Park_Availability";
+        String lotsURL = "https://www.ura.gov.sg/uraDataService/invokeUraDS?service=Car_Park_Availability";
 
         Request request = new Request.Builder()
                 .url(url)
@@ -71,13 +72,17 @@ public class UraDBController {
                 .build();
 
         Request request1 = new Request.Builder()
-                .url(detailURL)
+                .url(lotsURL)
                 .addHeader("AccessKey", accessKey).addHeader("Token",token)
                 .build();
         System.out.println(request1);
+
+        List<String> names = new ArrayList<>();
+        List<String> coordinates = new ArrayList<>();
+        List<String> numbers = new ArrayList<>();
+        List<String> lots = new ArrayList<>();
+
         client.newCall(request).enqueue(new Callback() {
-            List<String> names = new ArrayList<>();
-            List<String> coordinates = new ArrayList<>();
             @Override
             public void onFailure(@NonNull Call call, @NonNull IOException e) {e.printStackTrace();}
 
@@ -101,14 +106,10 @@ public class UraDBController {
                                 }
                             }
                         }
-                        //String[] ppNameArray = names.toArray(new String[0]);
 
                         // extract the coordinates of parking lot
                         JSONArray jsonArray1 = new JSONArray(result);
-//                            JSONObject result1 = jsonArray1.getJSONObject(0);
-//                            JSONArray geometriesArray = result1.getJSONArray("geometries");
-//                            JSONObject coordinatesObject = geometriesArray.getJSONObject(0);
-//                            String coordinates = coordinatesObject.getString("coordinates");
+
                         List<String> to_remove = new ArrayList<>();
                         for (int j = 0; j < jsonArray1.length(); j++) {
                             JSONObject temp = jsonArray1.getJSONObject(j);
@@ -129,15 +130,77 @@ public class UraDBController {
                             names.remove(to_remove.get(i));
                         }
 
+                        JSONArray jsonArray2 = new JSONArray(result);
+                        List<String> to_remove1 = new ArrayList<>();
+                        for (int k = 0; k < jsonArray2.length(); k++) {
+                            JSONObject temp = jsonArray2.getJSONObject(k);
+                            if(temp.getString("vehCat").equals("Car")){
+//                                JSONArray ppCode = temp.getJSONArray("ppCode");
+//                                if(ppCode.length() == 0){
+//                                    to_remove1.add(temp.getString("ppName"));
+//                                    continue;
+//                                }
+                                String ppCodes = temp.getString("ppCode");
+//                                JSONObject first_coords = geometries.getJSONObject(0);
+//                                String str_coordinates = first_coords.getString("coordinates");
+                                if(names.contains(temp.getString("ppName")) && !numbers.contains(ppCodes)){
+                                    numbers.add(ppCodes);
+                                }
+
+                            }
+                        }
+                        System.out.println(numbers);
                         System.out.println(names.size());
                         System.out.println(coordinates.size());
-                        Uracallback.returnParking(names, coordinates);
+//                        Uracallback.returnParking(names, coordinates);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
                 }
+                client2.newCall(request1).enqueue(new Callback() {
+                    @Override
+                    public void onFailure(@NonNull Call call, @NonNull IOException e) {e.printStackTrace();}
+
+                    @Override
+                    public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                        if (response.isSuccessful()) {
+                            String myResponse = response.body().string();
+                            try {
+                                JSONObject jsonObject = new JSONObject(myResponse);
+                                String result = jsonObject.getString("Result");
+                                JSONArray jsonArray = new JSONArray(result);
+
+                                System.out.println(jsonArray);
+                                for (int i = 0; i < numbers.size(); i++) {
+                                    int j=0;
+                                    for(j = 0; j < jsonArray.length(); j++){
+                                        JSONObject temp = jsonArray.getJSONObject(j);
+                                        if(numbers.get(i).equals(temp.getString("carparkNo"))){
+                                            lots.add(temp.getString("lotsAvailable"));
+                                            break;
+                                        }
+                                    }
+                                    if(j>129){
+                                        lots.add("NotAvailable");
+                                    }
+//                                    if(temp.getString("vehCat").equals("Car")){
+//                                        if(!names.contains(temp.getString("ppName"))){
+//                                            String ppName = temp.getString("ppName");
+//                                            names.add(ppName);
+//                                        }
+//                                    }
+                                }
+                            } catch (JSONException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+                        System.out.println(lots);
+                        Uracallback.returnParking(names, coordinates, lots);
+                    }
+                });
             }
         });
+        System.out.println(names);
     }
 
     /**
@@ -145,7 +208,7 @@ public class UraDBController {
      * @author Chin Han Wen
      */
     public interface URACallback{
-        void returnParking(List<String> names, List<String> coordinates);
+        void returnParking(List<String> names, List<String> coordinates, List<String> lots);
     }
 
 }
