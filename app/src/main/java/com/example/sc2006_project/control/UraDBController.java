@@ -63,12 +63,18 @@ public class UraDBController {
         OkHttpClient client = new OkHttpClient();
 
         String url = "https://www.ura.gov.sg/uraDataService/invokeUraDS?service=Car_Park_Details";
+        String detailURL = "https://www.ura.gov.sg/uraDataService/invokeUraDS?service=Car_Park_Availability";
 
         Request request = new Request.Builder()
                 .url(url)
                 .addHeader("AccessKey", accessKey).addHeader("Token",token)
                 .build();
 
+        Request request1 = new Request.Builder()
+                .url(detailURL)
+                .addHeader("AccessKey", accessKey).addHeader("Token",token)
+                .build();
+        System.out.println(request1);
         client.newCall(request).enqueue(new Callback() {
             List<String> names = new ArrayList<>();
             List<String> coordinates = new ArrayList<>();
