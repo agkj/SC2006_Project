@@ -22,8 +22,11 @@ import com.google.android.gms.maps.model.LatLngBounds;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.ReentrantLock;
 
 import com.example.sc2006_project.entity.Carpark;
 
@@ -38,7 +41,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-
+//TD: Add a wait thingy while waiting for responses.
 public class TempCarparkView extends AppCompatActivity implements UraDBController.URACallback {
    /**
     * This is the interface defining the callback from the coordinate converter
@@ -69,10 +72,12 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
     private ArrayList<Carpark> carparks = new ArrayList<>();
     private Context current = this;
     private ConversionCallbacks conversion_callback;
+    private ArrayList<Carpark> copy;
 
     private UraDBController ura_db_controller;
     private OkHttpClient http_client;
     private int size;
+    private ReentrantLock lock = new ReentrantLock();
 
     /**
      * This function implements the carpark list user interface.
@@ -84,43 +89,26 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
         super.onCreate(savedInstanceState);
         setContentView(R.layout.temp_carpark_view);
         GoogleApiAvailability checker = new GoogleApiAvailability();
+        //Defines the method called when a converted carparks coordinate is received from converter().
+        //Uses a simple lock to guarantee that only 1 thread can modify the list at any point.
         this.conversion_callback = new ConversionCallbacks(){
             @Override
             public void getConverted(double[] result, String name){
-                carparks.add(new Carpark(new LatLng(result[0], result[1]), name));
-//                ArrayList<String> asset_list = new ArrayList<>();
-//                asset_list.add("carpark_ntu_c");
-//                asset_list.add("bonk");
-//                ArrayList<String> level_list = new ArrayList<>();
-//                level_list.add("L1");
-//                level_list.add("L2");
-//                level_list.add("L3");
-//                ArrayList<String> test1 = new ArrayList<>();
-//                test1.add("carpark_ntu_f");
-//                ArrayList<String> test2 = new ArrayList<>();
-//                //test2.add("L1");
-//                carparks.add(new Carpark(new LatLng(1.345275,103.683411),"Carpark Q/Student Services Centre"));
-//                carparks.add(new Carpark(
-//                        new LatLng(1.346776,103.683368),
-//                        new LatLngBounds(new LatLng(1.34635, 103.68311), new LatLng(1.34787, 103.6837)),
-//                        "Carpark F/Mat Sci Carpark",
-//                        test1,
-//                        test2));
-//                carparks.add(new Carpark(
-//                        new LatLng(1.345720,103.681330),
-//                        new LatLngBounds(new LatLng(1.3455,103.68096),new LatLng(1.346,103.68234)),
-//                        "Carpark C/Some Rando",
-//                        asset_list,
-//                        level_list));
-                //This method, if I want to update it every X carparks, causes a fatal exception.
-                //Its inconsistent, but seems to occur more frequently on slower phones.
-                if(carparks.size() == size){
+                lock.lock();
+                try{
+                    carparks.add(new Carpark(new LatLng(result[0], result[1]), name));
+                    System.out.println(carparks.size());
+                    Collections.sort(carparks);
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
                             adapter.setCarparks(carparks);
                         }
                     });
+
+                }
+                finally{
+                    lock.unlock();
                 }
             }
         };
@@ -130,7 +118,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
             String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
-            String token = "0fz4nf03vX0kdBh@F4u317DBj0GCTM-90a7dX-7pdgBY75RBF2SU46e49Ca9d9d8xXC7037FdfZx93S7-8-5z412u11nS7FC@A28";
+            String token = "ye-7R-NGSzE+69yN3wB185x-883QU3Z4eVqK9RXn1hte08mKT5w+17uT09G7mfd7Y9hy+TGy7B34e7-d7ghXfR8b56WaWf817U10";
             ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);

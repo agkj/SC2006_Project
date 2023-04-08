@@ -66,7 +66,6 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
 
     public void setCarparks(ArrayList<Carpark> carparks) {
         this.carparks = carparks;
-        Collections.sort(carparks);
         notifyDataSetChanged();
     }
 
