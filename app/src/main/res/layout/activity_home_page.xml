@@ -6,79 +6,119 @@
     android:background="@color/white"
     android:orientation="vertical">
     <LinearLayout
-        android:layout_weight="0.2"
+        android:layout_weight="0.25"
         android:layout_height="0dip"
         android:layout_width="match_parent"
-        android:layout_marginTop="300px"
-        android:gravity="center"
+        android:gravity="left"
         android:orientation="vertical"
-        android:weightSum="1"
-        android:paddingLeft="200px">
+        android:layout_marginLeft="45px"
+        android:layout_marginTop="100px"
+        android:weightSum="2">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:gravity="left"
+            android:lines="1"
+            android:textColor="@color/black"
+            android:textFontWeight="950"
+            android:textSize="44sp"
+            android:text="Welcome to ">
+        </TextView>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:gravity="left"
+            android:lines="1"
+            android:textColor="@color/purple"
+            android:textFontWeight="950"
+            android:textSize="44sp"
+            android:text="PARKER">
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_weight="0.3"
+        android:layout_height="0dip"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:weightSum="1">
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.33"
-            android:weightSum="1"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.3"
-                android:layout_height="wrap_content"
-                android:text="Name"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="0.8"
+            android:weightSum="3"
+            android:background="@drawable/rounded_corner"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingTop="28dp">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:text="Name"
 
-                android:layout_gravity="right"/>
-            <TextView
-                android:id="@+id/user_name"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="wrap_content"
-                android:text="Your Name"
-                android:textStyle="bold"
-                android:textAlignment="viewEnd"/>
-        </LinearLayout>
+                    android:layout_gravity="right"/>
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:text="Your Name"
+                    android:textStyle="bold"
+                    android:textAlignment="viewEnd"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.33"
-            android:weightSum="1"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.3"
-                android:layout_height="wrap_content"
-                android:text="Email"
-                android:layout_gravity="right"/>
-            <TextView
-                android:id="@+id/user_email"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="wrap_content"
-                android:text="Your Email"
-                android:textStyle="bold"
-                android:textAlignment="viewEnd"/>
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:text="Email"
+                    android:layout_gravity="right"/>
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:text="Your Email"
+                    android:textStyle="bold"
+                    android:textAlignment="viewEnd"/>
+            </LinearLayout>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="0.33"
-            android:weightSum="1"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="0.3"
-                android:layout_height="wrap_content"
-                android:text="Phone"
-                android:layout_gravity="right"/>
-            <TextView
-                android:id="@+id/user_phone"
-                android:layout_width="0dp"
-                android:layout_weight="0.5"
-                android:layout_height="wrap_content"
-                android:text="Your Phone"
-                android:textStyle="bold"
-                android:textAlignment="viewEnd"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:weightSum="1"
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="0.3"
+                    android:layout_height="wrap_content"
+                    android:text="Phone"
+                    android:layout_gravity="right"/>
+                <TextView
+                    android:id="@+id/user_phone"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.6"
+                    android:layout_height="wrap_content"
+                    android:text="Your Phone"
+                    android:textStyle="bold"
+                    android:textAlignment="viewEnd"/>
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -89,7 +129,7 @@
         android:orientation="vertical">
         <LinearLayout
             android:gravity="top"
-            android:layout_marginTop="100dp"
+            android:layout_marginTop="50dp"
             android:layout_width="match_parent"
             android:layout_height="0dip"
             android:layout_weight="4"
@@ -100,21 +140,21 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
-                android:layout_weight="0.12"
+                android:layout_weight="0.2"
                 android:orientation="horizontal"
                 android:weightSum="1"
                 android:layout_marginBottom="20px"
                 android:layout_marginTop="10px">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="150px"
                     android:layout_weight="0.9"
                     android:fontFamily="sans-serif-black"
                     android:lines="1"
-                    android:textSize="32sp"
+                    android:textSize="18sp"
                     android:gravity="center"
-                    android:background="@drawable/rounded_corner"
                     android:text="View reservation"
+                    android:background="@color/lightGrey"
                     android:id="@+id/view_reservation"
                     android:clickable="true"
                     />
@@ -123,20 +163,20 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
-                android:layout_weight="0.12"
+                android:layout_weight="0.2"
                 android:orientation="horizontal"
                 android:weightSum="1"
                 android:layout_marginBottom="20px">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="150px"
                     android:layout_weight="0.9"
                     android:fontFamily="sans-serif-black"
                     android:lines="1"
-                    android:textSize="32sp"
+                    android:textSize="18sp"
                     android:text="View Carpark"
+                    android:background="@color/lightGrey"
                     android:gravity="center"
-                    android:background="@drawable/rounded_corner"
                     android:id="@+id/view_car_park"
                     android:clickable="true"
                     />
@@ -145,21 +185,21 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
-                android:layout_weight="0.12"
+                android:layout_weight="0.2"
                 android:orientation="horizontal"
                 android:weightSum="1"
                 android:layout_marginBottom="20px">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="150px"
                     android:layout_weight="0.9"
                     android:fontFamily="sans-serif-black"
                     android:lines="1"
-                    android:textSize="32sp"
+                    android:textSize="18sp"
                     android:text="Current Reservation"
                     android:gravity="center"
-                    android:background="@drawable/rounded_corner"
                     android:id="@+id/current_reservation"
+                    android:background="@color/lightGrey"
                     android:clickable="true"
                     />
             </LinearLayout>
@@ -167,21 +207,21 @@
                 android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="0dip"
-                android:layout_weight="0.12"
+                android:layout_weight="0.2"
                 android:orientation="horizontal"
                 android:weightSum="1"
                 android:layout_marginBottom="20px"
                 android:layout_marginTop="10px">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:layout_height="150px"
                     android:layout_weight="0.9"
                     android:fontFamily="sans-serif-black"
                     android:lines="1"
-                    android:textSize="32sp"
+                    android:textSize="18sp"
                     android:gravity="center"
-                    android:background="@drawable/rounded_corner"
                     android:text="Logout"
+                    android:background="@color/lightGrey"
                     android:id="@+id/logout"
                     android:clickable="true"
                     />

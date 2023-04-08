@@ -138,7 +138,7 @@
             android:weightSum="1">
             <androidx.appcompat.widget.AppCompatButton
                 android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:layout_height="150px"
                 android:layout_weight="0.9"
                 android:layout_marginTop="10px"
                 android:fontFamily="sans-serif-black"
