@@ -29,6 +29,11 @@ public class ForgetPassword extends AppCompatActivity {
 
     private FirebaseAuth fAuth;
 
+    /**
+     * This function initializes the forget password activity
+     *
+     * @author Goh Kai Jun, Alger
+     *  */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,9 +60,9 @@ public class ForgetPassword extends AppCompatActivity {
     /**
      * This function implements the reset password functionality
      *
+     *
      * @author Goh Kai Jun, Alger
      *  */
-
 
     private void resetPassword() {
 
@@ -72,11 +77,9 @@ public class ForgetPassword extends AppCompatActivity {
 
         if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 
-
             emailEditText.setError("Please provide a valid email");
             emailEditText.requestFocus();
             return;
-
 
         }
 

@@ -39,6 +39,14 @@ public class Homepage extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private String userID;
 
+
+    /**
+     * This function initializes the homepage activity.
+     *
+     * @author Goh Kai Jun, Alger
+     *  */
+
+
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,12 +73,6 @@ public class Homepage extends AppCompatActivity {
         userID = fAuth.getCurrentUser().getUid();
 
         DocumentReference documentReference = fStore.collection("users").document(userID);
-
-        /**
-         * This function implements the display of the user details
-         *
-         * @author Goh Kai Jun, Alger
-         *  */
 
         if (user == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

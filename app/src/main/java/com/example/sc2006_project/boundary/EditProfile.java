@@ -40,6 +40,11 @@ public class EditProfile extends AppCompatActivity {
     private FirebaseUser user;
     private String userID;
 
+    /**
+     * This function initializes the edit profile page activity
+     *
+     * @author Goh Kai Jun, Alger
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +71,15 @@ public class EditProfile extends AppCompatActivity {
 
         DocumentReference documentReference = fStore.collection("users").document(userID);
         documentReference.addSnapshotListener(this, new EventListener<DocumentSnapshot>() {
-
+            /**
+             * This function reads the current user details stored on firebase and display as
+             * a editable text for users to edit their profile.
+             *
+             * @param documentSnapshot The value of the event. {@code null} if there was an error.
+             * @param error The error if there was error. {@code null} otherwise.
+             *
+             * @author Goh Kai Jun, Alger
+             */
             @Override
             public void onEvent(@Nullable DocumentSnapshot documentSnapshot, @Nullable FirebaseFirestoreException error) {
                 if (documentSnapshot != null && documentSnapshot.exists()) {
@@ -84,6 +97,13 @@ public class EditProfile extends AppCompatActivity {
                 }
             }
         });
+
+        /**
+         * This function checks for correct user inputs and updates the info upon successful credentials
+         * are entered after user clicks the save button.
+         *
+         * @author Goh Kai Jun, Alger
+         */
 
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override

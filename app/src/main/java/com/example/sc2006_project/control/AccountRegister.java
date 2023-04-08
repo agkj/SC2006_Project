@@ -57,7 +57,7 @@ public class AccountRegister extends AppCompatActivity {
     }
 
     /**
-     * This function implements the account registration functionality
+     * This function initializes the account register activity
      *
      * @author Goh Kai Jun, Alger
      */
@@ -80,6 +80,14 @@ public class AccountRegister extends AppCompatActivity {
         editTextPhone = findViewById(R.id.phoneRegister);
         editTextName = findViewById(R.id.nameRegister);
         editTextCarPlate = findViewById(R.id.carplateRegister);
+
+        /**
+         * This function allows user to enter their account details to register their
+         * Parker account after pressing the register button.
+         *
+         * @author Goh Kai Jun, Alger
+         *
+         */
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,6 +152,7 @@ public class AccountRegister extends AppCompatActivity {
 
 
                 //upon successful checks
+
 
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
