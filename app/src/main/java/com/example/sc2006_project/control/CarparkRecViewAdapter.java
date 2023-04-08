@@ -28,7 +28,7 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
 
     /**
      * Class constructor.
-     * @param context Context of the calling class.
+     * @param context Context of the calling activity.
      * @author Chin Han Wen
      */
 
