@@ -332,8 +332,13 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id = "@+id/btn_register"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="150px"
+            android:textSize="18sp"
+            android:gravity="center"
+            android:textColor="@color/white"
             android:layout_weight="0.9"
+            android:fontFamily="sans-serif-black"
+            android:lines="1"
             android:background="@drawable/gradient_color_button"
             android:text="Register"
             />
