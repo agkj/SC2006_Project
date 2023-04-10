@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/primary_color">
 
     <LinearLayout
         android:gravity="left"
@@ -25,7 +25,7 @@
             android:gravity="left"
             android:lines="2"
             android:text="Create your"
-            android:textColor="@color/black"
+            android:textColor="@color/text_color"
             android:textFontWeight="950"
             android:textSize="42sp"/>
         <TextView
@@ -37,7 +37,7 @@
             android:gravity="left"
             android:lines="2"
             android:text="Account"
-            android:textColor="@color/purple"
+            android:textColor="@color/text_color"
             android:textFontWeight="950"
             android:textSize="42sp"/>
     </LinearLayout>
@@ -66,7 +66,7 @@
                 android:gravity="left"
                 android:lines="1"
                 android:text="E-mail Address:"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -88,8 +88,8 @@
                 android:textSize="20sp"
                 android:gravity="center"
                 android:hint="parker@gmail.com"
-                android:textColorHint="@color/blackGrey"
-                android:background="@color/lightGrey"
+                android:textColorHint="@color/search_color"
+                android:background="@color/text_color"
                 android:drawableLeft="@drawable/email_icon"
                 android:padding="20px"
                 android:drawablePadding="10px"
@@ -134,8 +134,8 @@
                 android:textSize="20sp"
                 android:gravity="center"
                 android:hint="Benjamin Kai"
-                android:textColorHint="@color/blackGrey"
-                android:background="@color/lightGrey"
+                android:textColorHint="@color/search_color"
+                android:background="@color/text_color"
                 android:drawableLeft="@drawable/profile_icon"
                 android:padding="20px"
                 android:drawablePadding="10px"
@@ -180,8 +180,8 @@
                 android:textSize="20sp"
                 android:gravity="center"
                 android:hint="93284824"
-                android:textColorHint="@color/blackGrey"
-                android:background="@color/lightGrey"
+                android:textColorHint="@color/search_color"
+                android:background="@color/text_color"
                 android:drawableLeft="@drawable/phone_contact_icon"
                 android:padding="20px"
                 android:drawablePadding="10px"
@@ -227,8 +227,8 @@
                 android:textSize="20sp"
                 android:gravity="center"
                 android:hint="SAB1234D"
-                android:textColorHint="@color/blackGrey"
-                android:background="@color/lightGrey"
+                android:textColorHint="@color/search_color"
+                android:background="@color/text_color"
                 android:drawableLeft="@drawable/car_icon"
                 android:padding="20px"
                 android:drawablePadding="10px"
@@ -313,8 +313,8 @@
                 android:maxLines="1"
                 android:textSize="20sp"
                 android:gravity="center"
-                android:textColorHint="@color/lightGrey"
-                android:background="@color/lightGrey"
+                android:textColorHint="@color/search_color"
+                android:background="@color/text_color"
                 android:drawableLeft="@drawable/lock_icon"
                 android:padding="20px"
                 android:drawablePadding="10px"
@@ -334,7 +334,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="0.9"
-            android:background="@drawable/gradient_color_button"
+            android:textColor="#22272c"
+            android:background="#fbfaf7"
             android:text="Register"
             />
     </LinearLayout>

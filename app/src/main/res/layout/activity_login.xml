@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/primary_color">
     <LinearLayout
         android:gravity="center"
         android:layout_width="match_parent"
@@ -31,7 +31,7 @@
                 android:gravity="left"
                 android:lines="1"
                 android:text="Welcome to "
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:textFontWeight="950"
                 android:textSize="44sp" />
         </LinearLayout>
@@ -52,7 +52,7 @@
                 android:gravity="left"
                 android:lines="2"
                 android:text="PARKER"
-                android:textColor="@color/purple"
+                android:textColor="@color/text_color"
                 android:textFontWeight="950"
                 android:textSize="42sp" />
         </LinearLayout>
@@ -86,8 +86,8 @@
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
                     android:maxLines="1"
-                    android:textColorHint="@color/lightGrey"
-                    android:background="@drawable/rounded_corner"
+                    android:textColorHint="@color/search_color"
+                    android:background="@color/text_color"
                     android:fontFamily="sans-serif-black"
                     android:textSize="20sp"
                     android:drawableStart="@drawable/email_icon"
@@ -121,8 +121,8 @@
                     android:hint="Password"
                     android:textSize="20sp"
                     android:gravity="left"
-                    android:background="@drawable/rounded_corner"
-                    android:textColorHint="@color/lightGrey"
+                    android:textColorHint="@color/search_color"
+                    android:background="@color/text_color"
                     android:drawableStart="@drawable/lock_icon"
                     android:padding="16dp"
                     android:drawablePadding="10dp"
@@ -146,8 +146,8 @@
                 android:text="Log in"
                 android:textSize="18sp"
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:background="@drawable/gradient_color_button"
+                android:textColor="#22272c"
+                android:background="#fbfaf7"
                 android:layout_marginBottom="30px"
                 android:id="@+id/login_button"
                 />
@@ -172,7 +172,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/forget_password"
-                android:textColor="@color/deep_blue"
+                android:textColor="@color/text_color"
                 android:textStyle="bold"
                 android:linksClickable="true"
                 android:textSize="18sp"/>
@@ -189,7 +189,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Don't have an account?  "
-            android:textColor="@color/grey"
+            android:textColor="@color/text_color"
             android:textStyle="bold"
             android:textSize="16sp"/>
         <TextView
@@ -197,7 +197,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sign up"
-            android:textColor="@color/deep_blue"
+            android:textColor="@color/text_color"
             android:textStyle="bold"
             android:linksClickable="true"
             android:textSize="16sp"/>

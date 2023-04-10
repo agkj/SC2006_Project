@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/primary_color"
+
     android:orientation="vertical">
     <LinearLayout
         android:layout_weight="0.2"
@@ -12,6 +12,7 @@
         android:layout_marginTop="300px"
         android:gravity="center"
         android:orientation="horizontal"
+        android:background="@color/primary_color"
         android:weightSum="1">
         <LinearLayout
             android:layout_width="0dp"
@@ -20,6 +21,8 @@
             android:weightSum="4"
             android:background="@drawable/rounded_corner"
             android:orientation="vertical"
+            android:backgroundTint="@color/primary_dark_color"
+
             android:paddingLeft="20dp"
             android:paddingTop="10dp">
             <LinearLayout
@@ -27,8 +30,10 @@
                 android:layout_height="0dp"
                 android:layout_weight="1"
                 android:weightSum="1"
+
                 android:orientation="horizontal">
                 <TextView
+                    android:textColor="@color/text_color"
                     android:layout_width="0dp"
                     android:layout_weight="0.3"
                     android:layout_height="wrap_content"
@@ -36,6 +41,7 @@
 
                     android:layout_gravity="right"/>
                 <TextView
+                    android:textColor="@color/text_color"
                     android:id="@+id/user_name"
                     android:layout_width="0dp"
                     android:layout_weight="0.6"
@@ -52,12 +58,14 @@
                 android:weightSum="1"
                 android:orientation="horizontal">
                 <TextView
+                    android:textColor="@color/text_color"
                     android:layout_width="0dp"
                     android:layout_weight="0.3"
                     android:layout_height="wrap_content"
                     android:text="Email"
                     android:layout_gravity="right"/>
                 <TextView
+                    android:textColor="@color/text_color"
                     android:id="@+id/user_email"
                     android:layout_width="0dp"
                     android:layout_weight="0.6"
@@ -78,12 +86,14 @@
                 android:weightSum="1"
                 android:orientation="horizontal">
                 <TextView
+                    android:textColor="@color/text_color"
                     android:layout_width="0dp"
                     android:layout_weight="0.3"
                     android:layout_height="wrap_content"
                     android:text="Phone"
                     android:layout_gravity="right"/>
                 <TextView
+                    android:textColor="@color/text_color"
                     android:id="@+id/user_phone"
                     android:layout_width="0dp"
                     android:layout_weight="0.6"
@@ -100,12 +110,14 @@
                 android:weightSum="1"
                 android:orientation="horizontal">
                 <TextView
+                    android:textColor="@color/text_color"
                     android:layout_width="0dp"
                     android:layout_weight="0.3"
                     android:layout_height="wrap_content"
                     android:text="Car Plate"
                     android:layout_gravity="right"/>
                 <TextView
+                    android:textColor="@color/text_color"
                     android:id="@+id/user_carplate"
                     android:layout_width="0dp"
                     android:layout_weight="0.6"
@@ -114,18 +126,6 @@
                     android:textStyle="bold"
                     android:textAlignment="viewEnd"/>
             </LinearLayout>
-
-
-
-
-
-
-
-
-
-
-
-
 
         </LinearLayout>
     </LinearLayout>
@@ -154,6 +154,9 @@
                 android:layout_marginBottom="20px"
                 android:layout_marginTop="10px">
                 <TextView
+                    android:textColor="@color/text_color"
+
+                    android:backgroundTint="#383c40"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.9"
@@ -181,6 +184,9 @@
                 android:layout_marginBottom="20px"
                 android:layout_marginTop="10px">
                 <TextView
+                    android:textColor="@color/text_color"
+
+                    android:backgroundTint="#383c40"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.9"
@@ -203,6 +209,9 @@
                 android:weightSum="1"
                 android:layout_marginBottom="20px">
                 <TextView
+                    android:textColor="@color/text_color"
+
+                    android:backgroundTint="#383c40"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.9"
@@ -225,6 +234,9 @@
                 android:weightSum="1"
                 android:layout_marginBottom="20px">
                 <TextView
+                    android:textColor="@color/text_color"
+
+                    android:backgroundTint="#383c40"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.9"
@@ -248,6 +260,9 @@
                 android:layout_marginBottom="20px"
                 android:layout_marginTop="10px">
                 <TextView
+                    android:textColor="@color/text_color"
+
+                    android:backgroundTint="#383c40"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="0.9"
