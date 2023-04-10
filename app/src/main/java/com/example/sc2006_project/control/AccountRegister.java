@@ -130,7 +130,7 @@ public class AccountRegister extends AppCompatActivity {
                 //check carplate format eg: SAB1234D
                 if (!(carPlate.matches("[SKUTRFGMYX]{3}[0-9]{4}[A-Z]"))) {
 
-                    editTextCarPlate.setError("Car plate format should be SAB1234D");
+                    editTextCarPlate.setError("Invalid car plate format ");
                     editTextCarPlate.requestFocus();
                 }
 

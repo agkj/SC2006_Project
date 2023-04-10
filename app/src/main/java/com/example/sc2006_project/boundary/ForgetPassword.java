@@ -91,7 +91,7 @@ public class ForgetPassword extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(ForgetPassword.this, "Try again, something wrong has happened or account does not exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgetPassword.this, "Account does not exist", Toast.LENGTH_SHORT).show();
                 }
             }
         });
