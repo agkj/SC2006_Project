@@ -5,6 +5,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
@@ -153,7 +154,8 @@ public class EditProfile extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 // Display a message indicating that the user information was updated
-                                Toast.makeText(EditProfile.this, "Relogin to update.", Toast.LENGTH_SHORT).show();
+                                Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                                startActivity(intent);
                                 finish();
                             }
                         })

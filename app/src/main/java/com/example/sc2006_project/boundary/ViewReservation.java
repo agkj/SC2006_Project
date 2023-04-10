@@ -69,7 +69,7 @@ public class ViewReservation extends AppCompatActivity {
 
                 String[] from = {"column1", "column2", "column3"};
                 int[] to = {R.id.column1_textview, R.id.column2_textview, R.id.column3_textview};
-                SimpleAdapter adapter = new SimpleAdapter(ViewReservation.this, dataList, R.layout.activity_view_reservation, from, to);
+                SimpleAdapter adapter = new SimpleAdapter(ViewReservation.this, dataList, R.layout.reservation_lot, from, to);
                 listView.setAdapter(adapter);
             }
 

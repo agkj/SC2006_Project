@@ -36,7 +36,7 @@ import java.util.TimeZone;
 
 public class CurrentReservation extends AppCompatActivity {
 
-    private TextView ongoingReservationTextView;
+    private TextView startTimeTextView, endTimeTextView, destinationTextView;
     private Context current = this;
     private double latitude, longitude;
     private String endTime;
@@ -46,7 +46,9 @@ public class CurrentReservation extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_reservation);
 
-        ongoingReservationTextView = findViewById(R.id.ongoingReservation);
+        startTimeTextView = findViewById(R.id.start_time);
+        endTimeTextView = findViewById(R.id.end_time);
+        destinationTextView = findViewById(R.id.destination);
 
         TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
         Calendar calendar = Calendar.getInstance(timeZone);
@@ -70,12 +72,14 @@ public class CurrentReservation extends AppCompatActivity {
                         latitude = snapshot.child("lat").getValue(double.class);
                         longitude = snapshot.child("long").getValue(double.class);
                         // Update the TextView field with the current reservation information
-                        String currentReservationInfo = "Current Reservation: \n" + startTime + " to \n" + endTime + " at \n" + parkingLot;
-                        ongoingReservationTextView.setText(currentReservationInfo);
+                        //String currentReservationInfo = "Current Reservation: \n" + startTime + " to \n" + endTime + " at \n" + parkingLot;
+                        startTimeTextView.setText(startTime);
+                        endTimeTextView.setText(endTime);
+                        destinationTextView.setText(parkingLot);
                         return;
                     }
                 } else {
-                    ongoingReservationTextView.setText("No ongoing reservations");
+                    startTimeTextView.setText("No ongoing reservations");
                 }
             }
 
@@ -87,7 +91,7 @@ public class CurrentReservation extends AppCompatActivity {
         button_navigate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ongoingReservationTextView.getText() != "No ongoing reservations") {
+                if (startTimeTextView.getText() != "No ongoing reservations") {
                     NavigationController nav_controller = new NavigationController(current);
                     boolean gmaps_installed = nav_controller.check_gmaps_install();
                     if (!gmaps_installed) {
@@ -108,7 +112,7 @@ public class CurrentReservation extends AppCompatActivity {
         button_cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (ongoingReservationTextView.getText() != "No ongoing reservations") {
+                if (startTimeTextView.getText() != "No ongoing reservations") {
                     AlertDialog.Builder builder = new AlertDialog.Builder(CurrentReservation.this);
                     builder.setMessage("Are you sure you want to cancel your reservation?");
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {

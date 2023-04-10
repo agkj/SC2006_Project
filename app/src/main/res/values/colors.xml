@@ -11,5 +11,6 @@
     <color name="grey">#808080</color>
     <color name="lightGrey">#E8E7ED</color>
     <color name="blackGrey">#9E9A9A</color>
+    <color name="lightPurple">#F2F1FF</color>
     <color name="deep_blue">#5161FA</color>
 </resources>

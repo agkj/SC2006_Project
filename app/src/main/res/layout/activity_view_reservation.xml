@@ -3,82 +3,64 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/lightPurple">
 
-    <!-- ListView to display data -->
-    <ListView
-        android:id="@+id/listview"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"/>
 
     <!-- Heading row -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#CCCCCC">
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="100px">
 
         <TextView
             android:id="@+id/column1_heading"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Start Time"
-            android:textStyle="bold"
-            android:textAlignment="center"/>
-
-        <TextView
-            android:id="@+id/column2_heading"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="End Time"
-            android:textStyle="bold"
-            android:textAlignment="center"/>
-
-        <TextView
-            android:id="@+id/column3_heading"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Parking Lot"
-            android:textStyle="bold"
-            android:textAlignment="center"/>
+            android:fontFamily="sans-serif-black"
+            android:gravity="left"
+            android:lines="1"
+            android:text="My Reservation"
+            android:textColor="@color/black"
+            android:textFontWeight="950"
+            android:textSize="30sp"/>
 
     </LinearLayout>
 
-    <!-- List item layout for each row in the ListView -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="0dip"
+        android:layout_weight="1.1"
+        android:layout_marginTop="100px">
+        <!-- ListView to display data -->
+        <ListView
+            android:id="@+id/listview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:listSelector="@android:color/transparent"
+            android:cacheColorHint="@android:color/transparent"
+            android:divider="@null"/>
+    </LinearLayout>
+    <!-- Back button -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/column1_textview"
-            android:layout_width="0dp"
+        android:layout_height="0dip"
+        android:layout_weight="0.2"
+        android:gravity="center_horizontal|bottom"
+        android:orientation="horizontal"
+        android:weightSum="1">
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/back_button"
+            android:layout_width="0dip"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/column2_textview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
-        <TextView
-            android:id="@+id/column3_textview"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
-
+            android:layout_weight="0.9"
+            android:layout_marginBottom="30px"
+            android:background="@drawable/round_corner_white"
+            android:text="Back"/>
     </LinearLayout>
-
-    <!-- Back button -->
-    <Button
-        android:id="@+id/back_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Back"/>
 
 </LinearLayout>

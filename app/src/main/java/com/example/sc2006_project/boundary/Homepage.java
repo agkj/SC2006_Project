@@ -101,6 +101,7 @@ public class Homepage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), EditProfile.class);
                 startActivity(intent);
+                finish();
             }
         });
 

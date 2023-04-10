@@ -4,40 +4,176 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center">
-
-    <TextView
-        android:id="@+id/ongoingReservation"
+    android:background="@color/lightPurple"
+    android:weightSum="1">
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:layout_marginBottom="32dp"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:text=" " />
 
-    <Button
-        android:id="@+id/navigate"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="Navigate" />
+        android:orientation="horizontal"
+        android:gravity="top"
+        android:layout_marginLeft="50px"
+        android:layout_marginTop="100px">
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
+            android:gravity="left"
+            android:lines="1"
+            android:text="Current Reservation"
+            android:textColor="@color/black"
+            android:textFontWeight="950"
+            android:textSize="30sp" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:layout_weight="0.3"
+        android:orientation="vertical"
+        android:layout_marginTop="100px"
+        android:weightSum="1"
+        android:gravity="center">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.3"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="Start time:"
+                android:textAlignment="viewStart"/>
+            <TextView
+                android:id="@+id/start_time"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:textAlignment="viewEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="a" />
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/cancel"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="16dp"
-        android:text="Cancel" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.3"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="End time:"
+                android:textAlignment="viewStart"/>
+            <TextView
+                android:id="@+id/end_time"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="c"
+                android:textAlignment="viewEnd"/>
+        </LinearLayout>
 
-    <Button
-        android:id="@+id/back"
-        android:layout_width="200dp"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:text="Back" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dip"
+            android:layout_weight="0.3"
+            android:orientation="horizontal"
+            android:weightSum="1"
+            android:gravity="center">
+            <TextView
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.25"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="Carpark:"
+                android:textAlignment="viewStart"/>
+            <TextView
+                android:id="@+id/destination"
+                android:layout_width="0dip"
+                android:layout_height="match_parent"
+                android:layout_weight="0.6"
+                android:textAlignment="viewEnd"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:text="b" />
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="0dip"
+        android:orientation="vertical"
+        android:paddingBottom="100px"
+        android:layout_weight="0.7"
+        android:gravity="bottom">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:weightSum="1">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/navigate"
+                android:layout_width="0dip"
+                android:layout_height="150px"
+                android:layout_weight="0.9"
+                android:text="Navigate"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:background="@color/white"
+                android:elevation="0dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:weightSum="1">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/cancel"
+                android:layout_width="0dip"
+                android:layout_height="150px"
+                android:layout_weight="0.9"
+                android:text="Cancel"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:background="@color/white"
+                android:elevation="0dp" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:layout_marginBottom="10dp"
+            android:weightSum="1">
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/back"
+                android:layout_width="0dip"
+                android:layout_height="150px"
+                android:layout_weight="0.9"
+                android:text="Back"
+                android:textColor="@color/black"
+                android:textSize="20sp"
+                android:background="@color/white"
+                android:elevation="0dp" />
+        </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/lightPurple"
     android:orientation="vertical"
     tools:context=".boundary.EditProfile">
 
@@ -21,42 +21,71 @@
       android:layout_height="wrap_content"
       android:orientation="vertical"
       android:padding="24dp">
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="left"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="Name">
+    </TextView>
     <EditText
         android:id="@+id/nameEditText"
+        android:layout_marginTop="10px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="120px"
+        android:paddingLeft="50px"
         android:hint="Name"
         android:inputType="textCapCharacters"
-
+        android:background="@color/white"
         android:maxLines="1"
         android:textColor="@color/black"
-
         android:textSize="18sp" />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="left"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="Phone Number">
+    </TextView>
     <EditText
         android:id="@+id/phoneNumberEditText"
+        android:layout_marginTop="10px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Phone Number"
-        android:inputType="phone"
+        android:layout_height="120px"
+        android:paddingLeft="50px"
+        android:hint="Name"
+        android:inputType="textCapCharacters"
+        android:background="@color/white"
         android:maxLines="1"
         android:textColor="@color/black"
-
         android:textSize="18sp" />
-
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:gravity="left"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:text="Car Plate">
+    </TextView>
     <EditText
         android:id="@+id/carPlateEditText"
+        android:layout_marginTop="10px"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Car Plate"
+        android:layout_height="120px"
+        android:paddingLeft="50px"
+        android:hint="Name"
         android:inputType="textCapCharacters"
+        android:background="@color/white"
         android:maxLines="1"
         android:textColor="@color/black"
-
         android:textSize="18sp" />
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/saveButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -65,7 +94,7 @@
         android:text="Save"
         android:textColor="@color/white"
         android:textSize="18sp"
-        android:background="@color/black"
+        android:background="@drawable/gradient_color_button"
         android:elevation="0dp" />
 
   </LinearLayout>

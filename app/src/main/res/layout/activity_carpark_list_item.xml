@@ -6,13 +6,17 @@
     <TextView
         android:layout_marginTop="10dp"
         android:gravity="left"
-        android:paddingLeft="100px"
+        android:drawablePadding="50px"
+        android:paddingLeft="200px"
         android:layout_width="match_parent"
+        android:fontFamily="sans-serif-black"
+        android:textSize="15sp"
         android:padding="30px"
         android:layout_height="wrap_content"
         android:textColor="@color/black"
+        android:text="abc"
         android:id="@+id/txtName"
-        android:background="@drawable/rounded_corner"
+        android:drawableLeft="@drawable/baseline_local_parking_24"
         android:layout_centerHorizontal="true"/>
 
 </RelativeLayout>
