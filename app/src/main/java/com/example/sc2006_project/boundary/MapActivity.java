@@ -16,11 +16,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkLotRecViewAdapter;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
+import com.example.sc2006_project.control.NavigationController;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -40,7 +42,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private LatLngBounds carpark_map_bounds;
     private ArrayList<String> asset_files = new ArrayList<>();
     private ArrayList<String> levels = new ArrayList<>();
-    private Button button_carpparklot;
     private Context current = this;
     private GoogleMap googleMap;
     private RelativeLayout wrapper;
@@ -48,6 +49,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Resources res;
     private boolean blank_check = false;
     public int temp;
+    public static LatLng carpark_loc_pub;
 
     /**
      * This function listens for an activity result from CarparkLotDisplay, then moves the map camera based on the response coordinates.
@@ -78,6 +80,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_map);
         Intent intent = getIntent();
         carpark_loc = intent.getParcelableExtra(CarparkRecViewAdapter.COORDS);
+        //to pass coordinates to reservation activity
+        carpark_loc_pub = carpark_loc;
         carpark_map_bounds = intent.getParcelableExtra(CarparkRecViewAdapter.BOUND);
         asset_files = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.ASSET_NAMES);
         levels = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.LEVELS);
@@ -133,12 +137,29 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             }
         });
 
-        button_carpparklot = findViewById(R.id.button);
-        button_carpparklot.setOnClickListener(new View.OnClickListener() {
+        Button button_navigate = findViewById(R.id.navigatebutton);
+        button_navigate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent loadlist = new Intent(current, CarparkLotDisplay.class);
-                activityLauncher.launch(loadlist);
+                NavigationController nav_controller = new NavigationController(current);
+                boolean gmaps_installed = nav_controller.check_gmaps_install();
+                if (!gmaps_installed) {
+                    Toast.makeText(current,"Please install Google Maps to utilise this function", Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    String location = nav_controller.location_to_string(carpark_loc.latitude, carpark_loc.longitude);
+                    System.out.println(location);
+                    nav_controller.navigate(location);
+                }
+            }
+        });
+
+        Button button_reserve = findViewById(R.id.reservebutton);
+        button_reserve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
+                startActivity(intent);
             }
         });
     }
@@ -161,5 +182,4 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
             overlay = googleMap.addGroundOverlay(opts);
         }
     }
-
 }

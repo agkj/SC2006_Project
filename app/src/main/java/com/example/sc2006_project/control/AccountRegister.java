@@ -13,7 +13,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sc2006_project.boundary.LoginActivity;
-import com.example.sc2006_project.boundary.ViewProfile;
 import com.example.sc2006_project.R;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -21,6 +20,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
@@ -41,27 +41,26 @@ public class AccountRegister extends AppCompatActivity {
      * This function checks if a user is already logged in and signs the user in to the application
      *
      * @author Goh Kai Jun, Alger
-     *  */
+     */
 
     @Override
     public void onStart() {
         super.onStart();
         // Check if user is signed in, if signed in, go into main page
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if (currentUser != null) {
-            Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
-            startActivity(intent);
-            finish();
-
-        }
+//        FirebaseUser currentUser = mAuth.getCurrentUser();
+//        if (currentUser != null) {
+//            Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
+//            startActivity(intent);
+//            finish();
+//
+//        }
     }
 
     /**
-     * This function implements the account registration functionality
+     * This function initializes the account register activity
      *
      * @author Goh Kai Jun, Alger
-     *  */
-
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,17 +68,26 @@ public class AccountRegister extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_account);
 
+
         fStore = FirebaseFirestore.getInstance();
         mAuth = FirebaseAuth.getInstance();
         editTextEmail = findViewById(R.id.emailRegister);
         editTextPassword = findViewById(R.id.passwordRegister);
         btnReg = findViewById(R.id.btn_register);
-        //textView = findViewById(R.id.loginNow);
+
 
         //register additional user details
         editTextPhone = findViewById(R.id.phoneRegister);
         editTextName = findViewById(R.id.nameRegister);
         editTextCarPlate = findViewById(R.id.carplateRegister);
+
+        /**
+         * This function allows user to enter their account details to register their
+         * Parker account after pressing the register button.
+         *
+         * @author Goh Kai Jun, Alger
+         *
+         */
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +110,15 @@ public class AccountRegister extends AppCompatActivity {
                     Toast.makeText(AccountRegister.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+                //check name validity must have no numbers
+                if (name.matches(".*\\d+.*")) {
+                    editTextName.setError("Name must not contain numbers.");
+                    editTextName.requestFocus();
+                    return;
+                }
+
+
                 //check email validity
                 if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
                     editTextEmail.setError("Invalid email format");
@@ -110,37 +127,32 @@ public class AccountRegister extends AppCompatActivity {
                     return;
                 }
 
-                //check phone length
-                if (phone.length() != 8) {
-                    editTextPhone.setError("Phone number must be 8 digits");
+                //check singapore phone
+                if (!(phone.replaceAll("\\s", "").matches("^[89]\\d{7}$"))) {
+                    editTextPhone.setError("Invalid Singapore phone number format");
                     editTextPhone.requestFocus();
                     //Toast.makeText(AccountRegister.this, "Phone number must be 8 digits", Toast.LENGTH_SHORT).show();
                     return;
                 }
-                //check carplate format eg: SAB1234D
-                if (    !(carPlate.startsWith("S"))
-                        || !(Character.isLetter(carPlate.charAt(1)))
-                        || !(Character.isLetter(carPlate.charAt(2)))
-                        || !(Character.isLetter(carPlate.charAt(7)))
 
-                        || Character.isLetter(carPlate.charAt(3))
-                        || Character.isLetter(carPlate.charAt(4))
-                        || Character.isLetter(carPlate.charAt(5))
-                        || Character.isLetter(carPlate.charAt(6))
-                        || carPlate.length() !=8 ) {
+                //check carplate format eg: SAB1234D
+                if (!(carPlate.matches("[SKUTRFGMYX]{3}[0-9]{4}[A-Z]"))) {
 
                     editTextCarPlate.setError("Car plate format should be SAB1234D");
                     editTextCarPlate.requestFocus();
-                   // Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
-                    return;
                 }
+
                 //check password length
-                if (password.length() < 5) {
-                    editTextPassword.setError("Password must contain at least 6 characters");
+                if (!(password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.{8,}).+$"))) {
+                    editTextPassword.setError("Password must contain at least 8 characters, one upper and lowercase and one number");
                     editTextPassword.requestFocus();
-                   // Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
+                    // Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
                     return;
                 }
+
+
+                //upon successful checks
+
 
                 mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
@@ -164,7 +176,7 @@ public class AccountRegister extends AppCompatActivity {
                                         user.put("name", name);
                                         user.put("phone", phone);
                                         user.put("carPlate", carPlate);
-                                       // user.put("password", password);
+                                        // user.put("password", password);
                                         documentReference.set(user);
 
                                         Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();

@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * This function implements the application login functionality
+     * This function initializes the login page activity
      *
      * @author Goh Kai Jun, Alger
      *  */

@@ -6,7 +6,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Carpark implements Serializable {
+public class Carpark implements Comparable<Carpark>{
     private LatLng location_coord;
     private LatLngBounds asset_bound;
     private String location_name;
@@ -103,8 +103,9 @@ public class Carpark implements Serializable {
         this.asset_bound = asset_bound;
     }
 
-    public void carpark_import(){
-        //Something
+    @Override
+    public int compareTo(Carpark a) {
+        return this.location_name.compareTo(a.location_name);
     }
 }
 

@@ -21,19 +21,31 @@ import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 
+/**
+ *
+ * This class implements the homepage interface, it displays other functions such as editing of profile
+ * viewing reservations, making reservations, view a list of carparks and logging out.
+ *
+ * @author Goh Kai Jun, Alger
+ *
+ */
 public class Homepage extends AppCompatActivity {
 
-    private TextView btnViewCarPark;
-    private TextView btnEditProfile;
-    private TextView btnViewReservation;
-    private TextView btnCurrentReservation;
-    private TextView btnLogout;
+    private TextView btnEditProfile, btnViewReservation,btnViewCarPark, btnCurrentReservation,btnLogout;
+
     private FirebaseAuth auth, fAuth;
-    private Button button;
-    private TextView userEmail, userName, userPhone;
+    private TextView userEmail, userName, userPhone, userCarPlate;
     private FirebaseUser user;
     private FirebaseFirestore fStore;
     private String userID;
+
+
+    /**
+     * This function initializes the homepage activity.
+     *
+     * @author Goh Kai Jun, Alger
+     *  */
+
 
     @SuppressLint("MissingInflatedId")
     @Override
@@ -41,31 +53,26 @@ public class Homepage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
 
+        btnEditProfile = findViewById(R.id.edit_profile);
         btnViewCarPark = findViewById(R.id.view_car_park);
         btnViewReservation = findViewById(R.id.view_reservation);
         btnCurrentReservation = findViewById(R.id.current_reservation);
         btnLogout = findViewById(R.id.logout);
 
-
-        //old
         auth = FirebaseAuth.getInstance();
         userEmail = findViewById(R.id.user_email);
         userName = findViewById(R.id.user_name);
         userPhone = findViewById(R.id.user_phone);
+        userCarPlate = findViewById(R.id.user_carplate);
+
         user = auth.getCurrentUser();
-        //old
 
         //new
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = fAuth.getCurrentUser().getUid();
-        DocumentReference documentReference = fStore.collection("users").document(userID);
 
-        /**
-         * This function implements view profile information display
-         *
-         * @author Goh Kai Jun, Alger
-         *  */
+        DocumentReference documentReference = fStore.collection("users").document(userID);
 
         if (user == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
@@ -81,12 +88,22 @@ public class Homepage extends AppCompatActivity {
                     userName.setText(documentSnapshot.getString("name"));
                     userEmail.setText(documentSnapshot.getString("email"));
                     userPhone.setText(documentSnapshot.getString("phone"));
+                    userCarPlate.setText(documentSnapshot.getString("carPlate"));
 
                 }
             });
 
 
         }
+
+        btnEditProfile.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), EditProfile.class);
+                startActivity(intent);
+            }
+        });
+
 
         btnViewCarPark.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,7 +124,7 @@ public class Homepage extends AppCompatActivity {
         btnViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewReservation.class);
                 startActivity(intent);
             }
         });
@@ -117,8 +134,8 @@ public class Homepage extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivity(intent);
-                FirebaseAuth.getInstance().signOut();
-//                finish();
+                //FirebaseAuth.getInstance().signOut();
+                finish();
             }
         });
 

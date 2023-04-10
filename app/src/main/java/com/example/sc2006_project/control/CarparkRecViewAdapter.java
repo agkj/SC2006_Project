@@ -16,6 +16,7 @@ import com.google.android.gms.maps.model.LatLngBounds;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAdapter.ViewHolder>{
     private ArrayList<Carpark> carparks = new ArrayList<>();

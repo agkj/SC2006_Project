@@ -27,54 +27,76 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.Locale;
+import java.util.TimeZone;
 
 public class ReservationActivity extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseFirestore fStore;
     private String userID;
-    private TimePicker timePicker;
-    private RadioGroup timeModeSelector;
-    private RadioButton startTimeButton;
-    private RadioButton endTimeButton;
-    private int startHour, startMinute, endHour, endMinute;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_make_reservation);
 
         FirebaseApp.initializeApp(getApplicationContext());
-        timePicker = findViewById(R.id.time_picker);
-        timePicker.setIs24HourView(true);
-        timeModeSelector = findViewById(R.id.time_mode_selector);
-        startTimeButton = findViewById(R.id.start_time_button);
-        endTimeButton = findViewById(R.id.end_time_button);
-        Button saveButton = findViewById(R.id.make_reservation);
-
-        RadioButton startTimeButton = findViewById(R.id.start_time_button);
-        TextView startTimeTextView = findViewById(R.id.start_time_text_view);
-        RadioButton endTimeButton = findViewById(R.id.end_time_button);
-        TextView endTimeTextView = findViewById(R.id.end_time_text_view);
         TimePicker timePicker = findViewById(R.id.time_picker);
+        timePicker.setIs24HourView(true);
+
+        RadioButton oneHour = findViewById(R.id.one_button);
+        RadioButton twoHour = findViewById(R.id.two_button);
+        RadioButton threeHour = findViewById(R.id.three_button);
+
+        TextView startTimeTextView = findViewById(R.id.start_time_text_view);
+        TextView endTimeTextView = findViewById(R.id.end_time_text_view);
 
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
-                if (startTimeButton.isChecked()) {
-                    getTimeString(hourOfDay, minute, startTimeTextView);
-                    startHour = timePicker.getHour();
-                    startMinute = timePicker.getMinute();
-                } else if (endTimeButton.isChecked()) {
-                    getTimeString(hourOfDay, minute, endTimeTextView);
-                    endHour = timePicker.getHour();
-                    endMinute = timePicker.getMinute();
+                getTimeString(hourOfDay, minute, startTimeTextView);
+            }
+        });
+
+        RadioGroup radioGroup = findViewById(R.id.time_selector);
+        radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                RadioButton radioButton = findViewById(checkedId);
+                Calendar cal = Calendar.getInstance();
+                Calendar clone = Calendar.getInstance();
+                if (radioButton != null && radioButton.isChecked()) {
+                    SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                    String startTime = startTimeTextView.getText().toString();
+                    try {
+                        Date restime = time.parse(startTime);
+                        cal.setTime(restime);
+                    } catch (ParseException e) {
+                        throw new RuntimeException(e);
+                    }
+                    if(oneHour.isChecked()){
+                        clone = cal;
+                        clone.add(Calendar.HOUR_OF_DAY, 1);
+                        endTimeTextView.setText(time.format(clone.getTime()));
+                    }else if(twoHour.isChecked()){
+                        clone = cal;
+                        clone.add(Calendar.HOUR_OF_DAY, 2);
+                        endTimeTextView.setText(time.format(clone.getTime()));
+                    }else if(threeHour.isChecked()){
+                        clone = cal;
+                        clone.add(Calendar.HOUR_OF_DAY, 3);
+                        endTimeTextView.setText(time.format(clone.getTime()));
+                    }
                 }
             }
         });
+
 
         auth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
@@ -84,40 +106,43 @@ public class ReservationActivity extends AppCompatActivity {
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://parkersc2006-default-rtdb.asia-southeast1.firebasedatabase.app");
         DatabaseReference reservationsRef = database.getReference("reservations");
 
-        saveButton.setOnClickListener(new View.OnClickListener() {
+        Button reserveButton = findViewById(R.id.reserve_button);
+        reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                long currentTimeMillis = System.currentTimeMillis();
-                Query ongoingReservationQuery = reservationsRef.orderByChild("startTimeMillis").endAt(currentTimeMillis);
-
-                ongoingReservationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        if (dataSnapshot.exists()) {
-                            // if ongoing reservation exists
-                            Toast.makeText(ReservationActivity.this, "There is an ongoing reservation", Toast.LENGTH_SHORT).show();
-                            return;
-                        } else {
-                            if (startTimeTextView.getText().toString().equals("Selected Start Time") || endTimeTextView.getText().toString().equals("Selected End Time")) {
-                                Toast.makeText(ReservationActivity.this, "Please select both start and end time", Toast.LENGTH_SHORT).show();
-                                return; // Exit the method to prevent saving invalid reservation data
+                if (startTimeTextView.getText().toString().equals("Selected Start Time")) {
+                    Toast.makeText(ReservationActivity.this, "Please select start time", Toast.LENGTH_SHORT).show();
+                    return; // Exit the method to prevent saving invalid reservation data
+                } if (!oneHour.isChecked() && !twoHour.isChecked() && !threeHour.isChecked()) {
+                    Toast.makeText(ReservationActivity.this, "Please select reservation duration", Toast.LENGTH_SHORT).show();
+                    return;
+                } else {
+                    TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
+                    Calendar calendar = Calendar.getInstance(timeZone);
+                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+                    dateFormat.setTimeZone(timeZone);
+                    String currentDate = dateFormat.format(calendar.getTime());
+                    Query ongoingReservationQuery = reservationsRef.orderByChild("endTime").startAt(currentDate);
+                    // Query the reservations node in the database for ongoing reservations
+                    ongoingReservationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.exists()) {
+                                // if ongoing reservation exists
+                                Toast.makeText(ReservationActivity.this, "There is an ongoing reservation", Toast.LENGTH_SHORT).show();
+                                return;
                             }
                             // Get the selected start and end times from the TextView elements and the user ID from firestore; parking lot passed from previous activity
                             String startTime = startTimeTextView.getText().toString();
                             String endTime = endTimeTextView.getText().toString();
                             String userID = documentReference.getId();
+                            double latitude = MapActivity.carpark_loc_pub.latitude;
+                            double longitude = MapActivity.carpark_loc_pub.longitude;
 
-                            // Check if the end time is after the start time
-                            if (endHour < startHour || (endHour == startHour && endMinute <= startMinute)) {
-                                // End time is earlier than start time, so display an error message and return
-                                Toast.makeText(ReservationActivity.this, "End time must be after start time", Toast.LENGTH_SHORT).show();
-                                return;
-                            }
-                            //parking lot variable needs to be passed on from previous activity, which is view map
-                            String parkingLot = "parkingLot";
+                            String parkingLot = TempCarparkView.lotName;
 
                             // Create a Reservation object to store the start and end times
-                            Reservation reservation = new Reservation(startTime, endTime, userID, parkingLot);
+                            Reservation reservation = new Reservation(startTime, endTime, userID, parkingLot, latitude, longitude);
 
                             // Write the Reservation object to the database
                             reservationsRef.push().setValue(reservation);
@@ -125,28 +150,33 @@ public class ReservationActivity extends AppCompatActivity {
                             // Show a Toast message to indicate that the reservation has been saved
                             Toast.makeText(ReservationActivity.this, "Reservation saved successfully!", Toast.LENGTH_SHORT).show();
 
-                            //opens navigation page
-                            //Intent intent = new Intent(getApplicationContext(), MapActivity.class);
-                            //startActivity(intent);
+                            Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                            startActivity(intent);
                         }
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-                        // Handle the error
-                    }
-                });
+                        @Override
+                        public void onCancelled(DatabaseError databaseError) {
+                            // Handle the error
+                        }
+                    });
+                }
+            }
+        });
+        Button backButton = findViewById(R.id.back_button);
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TempCarparkView.class);
+                startActivity(intent);
             }
         });
     }
-
-
-    private void getTimeString(int hourOfDay, int minute, TextView textView) {
-        Calendar calendar = Calendar.getInstance();
+    private void getTimeString ( int hourOfDay, int minute, TextView textView){
+        TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
+        Calendar calendar = Calendar.getInstance(timeZone);
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
-        Locale singaporeLocale = new Locale("en", "SG");
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm", singaporeLocale);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
         String timeString = format.format(calendar.getTime());
         textView.setText(timeString);
     }
