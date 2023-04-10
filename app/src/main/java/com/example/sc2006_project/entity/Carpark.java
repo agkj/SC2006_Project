@@ -107,5 +107,9 @@ public class Carpark implements Comparable<Carpark>{
     public int compareTo(Carpark a) {
         return this.location_name.compareTo(a.location_name);
     }
+
+    public String getLocation_lot() {
+        return location_lot;
+    }
 }
 

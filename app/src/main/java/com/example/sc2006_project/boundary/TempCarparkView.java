@@ -92,10 +92,10 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
         //Uses a simple lock to guarantee that only 1 thread can modify the list at any point.
         this.conversion_callback = new ConversionCallbacks(){
             @Override
-            public void getConverted(double[] result, String name){
+            public void getConverted(double[] result, String name, String lot){
                 lock.lock();
                 try{
-                    carparks.add(new Carpark(new LatLng(result[0], result[1]), name));
+                    carparks.add(new Carpark(new LatLng(result[0], result[1]), name, lot));
                     Collections.sort(carparks);
                     runOnUiThread(new Runnable() {
                         @Override
@@ -123,7 +123,6 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                 // This method will be called when the user submits their search query
                 // The 'query' parameter contains the user's input
                 String userInput = query;
-//                        System.out.println(carparkList);
                 if(query.isEmpty()) adapter.setCarparks(carparks);
                 int i = 0;
                 for(i=0; i<carparkList.size(); i++)
@@ -139,7 +138,6 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                 if(i<114){
                     ArrayList<Carpark> searchResult = new ArrayList<>();
                     searchResult.add(carparkList.get(i));
-//                        System.out.println(i);
                     adapter.setCarparks(searchResult);
                 }else{
                     ArrayList<Carpark> blank = new ArrayList<>();
@@ -209,9 +207,8 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                         String longitude = jsonObject.getString("longitude");
                         converted[0] = Double.parseDouble(latitude);
                         converted[1] = Double.parseDouble(longitude);
-                        conversion_callback.getConverted(converted, name, lot);
                         lotName = name;
-                        conversion_callback.getConverted(converted, name);
+                        conversion_callback.getConverted(converted, name, lot);
                     }catch(JSONException e){
                         throw new RuntimeException(e);
                     }

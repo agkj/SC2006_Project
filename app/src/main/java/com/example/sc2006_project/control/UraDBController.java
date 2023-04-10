@@ -131,28 +131,17 @@ public class UraDBController {
                         }
 
                         JSONArray jsonArray2 = new JSONArray(result);
-                        List<String> to_remove1 = new ArrayList<>();
                         for (int k = 0; k < jsonArray2.length(); k++) {
                             JSONObject temp = jsonArray2.getJSONObject(k);
                             if(temp.getString("vehCat").equals("Car")){
-//                                JSONArray ppCode = temp.getJSONArray("ppCode");
-//                                if(ppCode.length() == 0){
-//                                    to_remove1.add(temp.getString("ppName"));
-//                                    continue;
 //                                }
                                 String ppCodes = temp.getString("ppCode");
-//                                JSONObject first_coords = geometries.getJSONObject(0);
-//                                String str_coordinates = first_coords.getString("coordinates");
                                 if(names.contains(temp.getString("ppName")) && !numbers.contains(ppCodes)){
                                     numbers.add(ppCodes);
                                 }
 
                             }
                         }
-                        System.out.println(numbers);
-                        System.out.println(names.size());
-                        System.out.println(coordinates.size());
-//                        Uracallback.returnParking(names, coordinates);
                     } catch (JSONException e) {
                         throw new RuntimeException(e);
                     }
@@ -169,10 +158,8 @@ public class UraDBController {
                                 JSONObject jsonObject = new JSONObject(myResponse);
                                 String result = jsonObject.getString("Result");
                                 JSONArray jsonArray = new JSONArray(result);
-
-                                System.out.println(jsonArray);
                                 for (int i = 0; i < numbers.size(); i++) {
-                                    int j=0;
+                                    int j;
                                     for(j = 0; j < jsonArray.length(); j++){
                                         JSONObject temp = jsonArray.getJSONObject(j);
                                         if(numbers.get(i).equals(temp.getString("carparkNo"))){
@@ -180,15 +167,9 @@ public class UraDBController {
                                             break;
                                         }
                                     }
-                                    if(j>129){
-                                        lots.add("NotAvailable");
+                                    if(j>=jsonArray.length()){
+                                        lots.add("Unknown");
                                     }
-//                                    if(temp.getString("vehCat").equals("Car")){
-//                                        if(!names.contains(temp.getString("ppName"))){
-//                                            String ppName = temp.getString("ppName");
-//                                            names.add(ppName);
-//                                        }
-//                                    }
                                 }
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
