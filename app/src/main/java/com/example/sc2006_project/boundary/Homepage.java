@@ -124,7 +124,7 @@ public class Homepage extends AppCompatActivity {
         btnViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
+                Intent intent = new Intent(getApplicationContext(), ViewReservation.class);
                 startActivity(intent);
             }
         });

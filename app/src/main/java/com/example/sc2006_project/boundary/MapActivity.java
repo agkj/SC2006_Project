@@ -16,6 +16,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sc2006_project.R;
@@ -48,6 +49,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Resources res;
     private boolean blank_check = false;
     public int temp;
+    public static LatLng carpark_loc_pub;
 
     /**
      * This function listens for an activity result from CarparkLotDisplay, then moves the map camera based on the response coordinates.
@@ -78,6 +80,8 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         setContentView(R.layout.activity_map);
         Intent intent = getIntent();
         carpark_loc = intent.getParcelableExtra(CarparkRecViewAdapter.COORDS);
+        //to pass coordinates to reservation activity
+        carpark_loc_pub = carpark_loc;
         carpark_map_bounds = intent.getParcelableExtra(CarparkRecViewAdapter.BOUND);
         asset_files = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.ASSET_NAMES);
         levels = (ArrayList<String>) intent.getSerializableExtra(CarparkRecViewAdapter.LEVELS);
@@ -147,6 +151,15 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
                     System.out.println(location);
                     nav_controller.navigate(location);
                 }
+            }
+        });
+
+        Button button_reserve = findViewById(R.id.reservebutton);
+        button_reserve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
+                startActivity(intent);
             }
         });
     }

@@ -67,6 +67,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
         }
     }
 
+    public static String lotName;
     private RecyclerView carparkRecView;
     private CarparkRecViewAdapter adapter;
     private ArrayList<Carpark> carparks = new ArrayList<>();
@@ -157,7 +158,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
             String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
-            String token = "ye-7R-NGSzE+69yN3wB185x-883QU3Z4eVqK9RXn1hte08mKT5w+17uT09G7mfd7Y9hy+TGy7B34e7-d7ghXfR8b56WaWf817U10";
+            String token = "Ph00EB-735t-11--9470hb++d171C7T5b9F19edq34-3HzcNywx51419Pd4gMBvUbf497VnwM59SU0Tedbd9Cz11z-P56G7aE0u9";
             ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);
@@ -204,6 +205,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                         String longitude = jsonObject.getString("longitude");
                         converted[0] = Double.parseDouble(latitude);
                         converted[1] = Double.parseDouble(longitude);
+                        lotName = name;
                         conversion_callback.getConverted(converted, name);
                     }catch(JSONException e){
                         throw new RuntimeException(e);
