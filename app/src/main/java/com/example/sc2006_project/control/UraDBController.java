@@ -2,6 +2,7 @@ package com.example.sc2006_project.control;
 
 import android.content.Context;
 import android.net.ipsec.ike.TunnelModeChildSessionParams;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
@@ -30,6 +31,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -40,7 +42,9 @@ import okhttp3.Response;
 public class UraDBController {
     Context context;
     URACallback Uracallback;
+
     public UraDBController() {
+        getAccessKey();
     }
 
     /**
@@ -190,6 +194,40 @@ public class UraDBController {
      */
     public interface URACallback{
         void returnParking(List<String> names, List<String> coordinates, List<String> lots);
+    }
+
+    //Auto retrieve an access key from URA DB.
+    //Private since my AccessKey's in here.
+    private void getAccessKey(){
+        OkHttpClient client = new OkHttpClient();
+        String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
+        String url = "https://www.ura.gov.sg/uraDataService/insertNewToken.action";
+        Request request = new Request.Builder()
+                .url(url)
+                .addHeader("AccessKey", accessKey)
+                .build();
+        client.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    String myResponse = response.body().string();
+                    try {
+                        JSONObject jsonObject = new JSONObject(myResponse);
+                        // extract the access key
+                        String token = jsonObject.getString("Result");
+                        accessUraDB(accessKey, token);
+                    } catch (JSONException e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                Toast.makeText(context, "Could not reach URA DB", Toast.LENGTH_SHORT).show();
+                e.printStackTrace();
+            }
+        });
     }
 
 }
