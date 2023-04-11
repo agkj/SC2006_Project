@@ -14,7 +14,9 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sc2006_project.R;
+import com.example.sc2006_project.control.CarparkRecViewAdapter;
 import com.example.sc2006_project.entity.Reservation;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -40,6 +42,8 @@ public class ReservationActivity extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private String userID;
 
+    TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -49,6 +53,8 @@ public class ReservationActivity extends AppCompatActivity {
         FirebaseApp.initializeApp(getApplicationContext());
         TimePicker timePicker = findViewById(R.id.time_picker);
         timePicker.setIs24HourView(true);
+
+        RadioGroup radioGroup = findViewById(R.id.time_selector);
 
         RadioButton oneHour = findViewById(R.id.one_button);
         RadioButton twoHour = findViewById(R.id.two_button);
@@ -61,16 +67,26 @@ public class ReservationActivity extends AppCompatActivity {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
                 getTimeString(hourOfDay, minute, startTimeTextView);
+                radioGroup.clearCheck();
+                endTimeTextView.setText("");
             }
         });
 
-        RadioGroup radioGroup = findViewById(R.id.time_selector);
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
+                if (startTimeTextView.getText() == ""){
+                    Toast.makeText(ReservationActivity.this, "Please select time of reservation", Toast.LENGTH_SHORT).show();
+                    if (radioGroup.getCheckedRadioButtonId() != -1) {
+                        radioGroup.clearCheck();
+                    }
+                    return;
+                }
+
                 RadioButton radioButton = findViewById(checkedId);
                 Calendar cal = Calendar.getInstance();
-                Calendar clone = Calendar.getInstance();
+                Calendar clone;
+
                 if (radioButton != null && radioButton.isChecked()) {
                     SimpleDateFormat time = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                     String startTime = startTimeTextView.getText().toString();
@@ -110,10 +126,7 @@ public class ReservationActivity extends AppCompatActivity {
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (startTimeTextView.getText().toString().equals("Selected Start Time")) {
-                    Toast.makeText(ReservationActivity.this, "Please select start time", Toast.LENGTH_SHORT).show();
-                    return; // Exit the method to prevent saving invalid reservation data
-                } if (!oneHour.isChecked() && !twoHour.isChecked() && !threeHour.isChecked()) {
+                if (!oneHour.isChecked() && !twoHour.isChecked() && !threeHour.isChecked()) {
                     Toast.makeText(ReservationActivity.this, "Please select reservation duration", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
@@ -136,13 +149,12 @@ public class ReservationActivity extends AppCompatActivity {
                             String startTime = startTimeTextView.getText().toString();
                             String endTime = endTimeTextView.getText().toString();
                             String userID = documentReference.getId();
+                            String parkName = CarparkRecViewAdapter.carpark_name;
                             double latitude = MapActivity.carpark_loc_pub.latitude;
                             double longitude = MapActivity.carpark_loc_pub.longitude;
 
-                            String parkingLot = TempCarparkView.lotName;
-
                             // Create a Reservation object to store the start and end times
-                            Reservation reservation = new Reservation(startTime, endTime, userID, parkingLot, latitude, longitude);
+                            Reservation reservation = new Reservation(startTime, endTime, userID, parkName, latitude, longitude);
 
                             // Write the Reservation object to the database
                             reservationsRef.push().setValue(reservation);
@@ -171,8 +183,7 @@ public class ReservationActivity extends AppCompatActivity {
             }
         });
     }
-    private void getTimeString ( int hourOfDay, int minute, TextView textView){
-        TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
+    private void getTimeString (int hourOfDay, int minute, TextView textView){
         Calendar calendar = Calendar.getInstance(timeZone);
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);

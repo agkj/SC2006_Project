@@ -62,10 +62,11 @@
         android:id="@+id/start_time_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
         android:textSize="18sp"
         android:textStyle="bold"
         android:layout_marginLeft="12dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginBottom="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/start_time_label"
         app:layout_constraintTop_toBottomOf="@+id/time_selector"/>

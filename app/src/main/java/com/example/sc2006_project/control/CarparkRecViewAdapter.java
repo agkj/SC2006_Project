@@ -21,10 +21,13 @@ import java.util.Collections;
 public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAdapter.ViewHolder>{
     private ArrayList<Carpark> carparks = new ArrayList<>();
     private Context context;
+    public static final String NAME = "com.example.application.carparkmapinterface.NAMES";
     public static final String COORDS = "com.example.application.carparkmapinterface.COORDS";
     public static final String ASSET_NAMES = "com.example.application.carparkmapinterface.ASSET_NAMES";
     public static final String LEVELS = "com.example.application.carparkmapinterface.LEVELS";
     public static final String BOUND = "com.example.application.carparkmapinterface.BOUND";
+
+    public static String carpark_name;
 
     /**
      * Class constructor.
@@ -48,10 +51,12 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
     public void onBindViewHolder(ViewHolder holder, int position) {
         int cur_pos = position;
         holder.txtName.setText(carparks.get(cur_pos).getLocation_name());
-        holder.txtName.setOnClickListener(new View.OnClickListener() {
+        carpark_name = holder.txtName.getText().toString();
+                holder.txtName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                sendInfo(carparks.get(cur_pos).getLocation_coord(),
+                sendInfo(carparks.get(cur_pos).getLocation_name(),
+                        carparks.get(cur_pos).getLocation_coord(),
                         carparks.get(cur_pos).getAsset_bound(),
                         carparks.get(cur_pos).getAsset_list(),
                         carparks.get(cur_pos).getLevel_list());
@@ -80,8 +85,9 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
         }
     }
 
-    public void sendInfo(LatLng position, LatLngBounds bounds, ArrayList<String> asset_names, ArrayList<String> levels){
+    public void sendInfo(String name, LatLng position, LatLngBounds bounds, ArrayList<String> asset_names, ArrayList<String> levels){
         Intent intent = new Intent(context, MapActivity.class);
+        intent.putExtra(NAME, name);
         intent.putExtra(COORDS, position);
         intent.putExtra(BOUND, bounds);
         intent.putExtra(ASSET_NAMES, asset_names);
