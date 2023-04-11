@@ -52,7 +52,7 @@ public class CurrentReservation extends AppCompatActivity {
 
         TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
         Calendar calendar = Calendar.getInstance(timeZone);
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm", Locale.getDefault());
         dateFormat.setTimeZone(timeZone);
         String currentDate = dateFormat.format(calendar.getTime());
 
@@ -69,10 +69,10 @@ public class CurrentReservation extends AppCompatActivity {
                         String startTime = snapshot.child("startTime").getValue(String.class);
                         endTime = snapshot.child("endTime").getValue(String.class);
                         String parkingLot = snapshot.child("parkingLot").getValue(String.class);
+                        // Need for navigation
                         latitude = snapshot.child("lat").getValue(double.class);
                         longitude = snapshot.child("long").getValue(double.class);
                         // Update the TextView field with the current reservation information
-                        //String currentReservationInfo = "Current Reservation: \n" + startTime + " to \n" + endTime + " at \n" + parkingLot;
                         startTimeTextView.setText(startTime);
                         endTimeTextView.setText(endTime);
                         destinationTextView.setText(parkingLot);
@@ -142,6 +142,8 @@ public class CurrentReservation extends AppCompatActivity {
                     });
                     builder.setNegativeButton("No", null);
                     builder.show();
+                    Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(CurrentReservation.this, "You can't cancel a reservation if you don't have one", Toast.LENGTH_SHORT).show();
                 }

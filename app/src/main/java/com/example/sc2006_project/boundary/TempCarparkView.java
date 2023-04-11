@@ -72,7 +72,6 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
     private ArrayList<Carpark> carparks = new ArrayList<>();
     private Context current = this;
     private ConversionCallbacks conversion_callback;
-
     private UraDBController ura_db_controller;
     private OkHttpClient http_client;
     private ReentrantLock lock = new ReentrantLock();

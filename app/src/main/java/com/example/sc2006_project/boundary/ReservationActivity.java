@@ -41,8 +41,7 @@ public class ReservationActivity extends AppCompatActivity {
     private FirebaseAuth auth;
     private FirebaseFirestore fStore;
     private String userID;
-
-    TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
+    private TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,7 +51,10 @@ public class ReservationActivity extends AppCompatActivity {
 
         FirebaseApp.initializeApp(getApplicationContext());
         TimePicker timePicker = findViewById(R.id.time_picker);
+
         timePicker.setIs24HourView(true);
+        timePicker.setHour(0);
+        timePicker.setMinute(0);
 
         RadioGroup radioGroup = findViewById(R.id.time_selector);
 
@@ -126,51 +128,64 @@ public class ReservationActivity extends AppCompatActivity {
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Calendar calendar = Calendar.getInstance(timeZone);
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                dateFormat.setTimeZone(timeZone);
+                String currentDate = dateFormat.format(calendar.getTime());
+                Date time, currentTime = null;
                 if (!oneHour.isChecked() && !twoHour.isChecked() && !threeHour.isChecked()) {
                     Toast.makeText(ReservationActivity.this, "Please select reservation duration", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
-                    TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
-                    Calendar calendar = Calendar.getInstance(timeZone);
-                    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-                    dateFormat.setTimeZone(timeZone);
-                    String currentDate = dateFormat.format(calendar.getTime());
-                    Query ongoingReservationQuery = reservationsRef.orderByChild("endTime").startAt(currentDate);
-                    // Query the reservations node in the database for ongoing reservations
-                    ongoingReservationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(DataSnapshot dataSnapshot) {
-                            if (dataSnapshot.exists()) {
-                                // if ongoing reservation exists
-                                Toast.makeText(ReservationActivity.this, "There is an ongoing reservation", Toast.LENGTH_SHORT).show();
-                                return;
+                    int timeCompare = 0;
+                    try {
+                        time = dateFormat.parse(startTimeTextView.getText().toString());
+                        currentTime = dateFormat.parse(currentDate);
+                        timeCompare = time.compareTo(currentTime);
+                    } catch (ParseException e) {
+                        e.printStackTrace();
+                    }
+                    if (timeCompare <= 0) {
+                        Toast.makeText(ReservationActivity.this, "You can't reserve at the past", Toast.LENGTH_SHORT).show();
+                        return;
+                    } else {
+                        Query ongoingReservationQuery = reservationsRef.orderByChild("endTime").startAt(currentDate);
+                        // Query the reservations node in the database for ongoing reservations
+                        ongoingReservationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                if (dataSnapshot.exists()) {
+                                    // if ongoing reservation exists
+                                    Toast.makeText(ReservationActivity.this, "There is an ongoing reservation", Toast.LENGTH_SHORT).show();
+                                    return;
+                                }
+                                // Get the selected start and end times from the TextView elements and the user ID from firestore; parking lot passed from previous activity
+                                String startTime = startTimeTextView.getText().toString();
+                                String endTime = endTimeTextView.getText().toString();
+                                String userID = documentReference.getId();
+                                String parkName = CarparkRecViewAdapter.carpark_name;
+                                double latitude = MapActivity.carpark_loc_pub.latitude;
+                                double longitude = MapActivity.carpark_loc_pub.longitude;
+
+                                // Create a Reservation object to store the start and end times
+                                Reservation reservation = new Reservation(startTime, endTime, userID, parkName, latitude, longitude);
+
+                                // Write the Reservation object to the database
+                                reservationsRef.push().setValue(reservation);
+
+                                // Show a Toast message to indicate that the reservation has been saved
+                                Toast.makeText(ReservationActivity.this, "Reservation saved successfully!", Toast.LENGTH_SHORT).show();
+
+                                Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                                startActivity(intent);
                             }
-                            // Get the selected start and end times from the TextView elements and the user ID from firestore; parking lot passed from previous activity
-                            String startTime = startTimeTextView.getText().toString();
-                            String endTime = endTimeTextView.getText().toString();
-                            String userID = documentReference.getId();
-                            String parkName = CarparkRecViewAdapter.carpark_name;
-                            double latitude = MapActivity.carpark_loc_pub.latitude;
-                            double longitude = MapActivity.carpark_loc_pub.longitude;
 
-                            // Create a Reservation object to store the start and end times
-                            Reservation reservation = new Reservation(startTime, endTime, userID, parkName, latitude, longitude);
-
-                            // Write the Reservation object to the database
-                            reservationsRef.push().setValue(reservation);
-
-                            // Show a Toast message to indicate that the reservation has been saved
-                            Toast.makeText(ReservationActivity.this, "Reservation saved successfully!", Toast.LENGTH_SHORT).show();
-
-                            Intent intent = new Intent(getApplicationContext(), Homepage.class);
-                            startActivity(intent);
-                        }
-
-                        @Override
-                        public void onCancelled(DatabaseError databaseError) {
-                            // Handle the error
-                        }
-                    });
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+                                // Handle the error
+                            }
+                        });
+                    }
                 }
             }
         });
@@ -187,8 +202,9 @@ public class ReservationActivity extends AppCompatActivity {
         Calendar calendar = Calendar.getInstance(timeZone);
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);
         calendar.set(Calendar.MINUTE, minute);
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        String timeString = format.format(calendar.getTime());
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        dateFormat.setTimeZone(timeZone);
+        String timeString = dateFormat.format(calendar.getTime());
         textView.setText(timeString);
     }
 }
