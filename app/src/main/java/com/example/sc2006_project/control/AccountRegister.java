@@ -24,6 +24,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import org.checkerframework.checker.units.qual.A;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -81,17 +83,13 @@ public class AccountRegister extends AppCompatActivity {
         editTextName = findViewById(R.id.nameRegister);
         editTextCarPlate = findViewById(R.id.carplateRegister);
 
-        /**
-         * This function allows user to enter their account details to register their
-         * Parker account after pressing the register button.
-         *
-         * @author Goh Kai Jun, Alger
-         *
-         */
 
         btnReg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+
+
                 String email, password;
                 String name, phone, carPlate;
 
@@ -176,6 +174,7 @@ public class AccountRegister extends AppCompatActivity {
                                         user.put("name", name);
                                         user.put("phone", phone);
                                         user.put("carPlate", carPlate);
+                                        user.put("password", password);
                                         // user.put("password", password);
                                         documentReference.set(user);
 

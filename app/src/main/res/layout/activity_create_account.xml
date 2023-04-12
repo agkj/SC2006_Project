@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/primary_color">
 
     <LinearLayout
         android:gravity="left"
@@ -22,10 +22,11 @@
             android:layout_marginTop="200px"
             android:layout_weight="0.5"
             android:fontFamily="sans-serif-black"
+            android:textColor="@color/text_color"
             android:gravity="left"
             android:lines="2"
             android:text="Create your"
-            android:textColor="@color/black"
+
             android:textFontWeight="950"
             android:textSize="42sp"/>
         <TextView
@@ -34,10 +35,10 @@
             android:layout_marginTop="-20dp"
             android:layout_weight="0.5"
             android:fontFamily="sans-serif-black"
+            android:textColor="@color/text_color"
             android:gravity="left"
             android:lines="2"
             android:text="Account"
-            android:textColor="@color/purple"
             android:textFontWeight="950"
             android:textSize="42sp"/>
     </LinearLayout>
@@ -63,10 +64,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.9"
                 android:fontFamily="sans-serif-black"
+                android:textColor="@color/text_color"
                 android:gravity="left"
                 android:lines="1"
                 android:text="E-mail Address:"
-                android:textColor="@color/black"
+
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -109,10 +111,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.9"
                 android:fontFamily="sans-serif-black"
+                android:textColor="@color/text_color"
                 android:gravity="left"
                 android:lines="1"
                 android:text="Name"
-                android:textColor="@color/black"
+
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -155,10 +158,11 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.9"
                 android:fontFamily="sans-serif-black"
+                android:textColor="@color/text_color"
                 android:gravity="left"
                 android:lines="1"
                 android:text="Phone +65"
-                android:textColor="@color/black"
+
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -201,11 +205,12 @@
                 android:layout_height="match_parent"
                 android:layout_weight="0.9"
                 android:fontFamily="sans-serif-black"
+                android:textColor="@color/text_color"
                 android:gravity="left"
                 android:lines="1"
                 android:text="Car Plate"
                 android:hint="SAB1234D"
-                android:textColor="@color/black"
+
                 android:textSize="20sp" />
         </LinearLayout>
         <LinearLayout
@@ -290,7 +295,7 @@
                 android:textSize="20sp"
 
                 android:text="Password"
-                android:textColor="@color/black"
+                android:textColor="@color/text_color"
                 android:gravity="left"
                 />
         </LinearLayout>
@@ -335,11 +340,11 @@
             android:layout_height="150px"
             android:textSize="18sp"
             android:gravity="center"
-            android:textColor="@color/white"
             android:layout_weight="0.9"
             android:fontFamily="sans-serif-black"
             android:lines="1"
-            android:background="@drawable/gradient_color_button"
+            android:textColor="#22272c"
+            android:background="#fbfaf7"
             android:text="Register"
             />
     </LinearLayout>

@@ -33,6 +33,8 @@ import java.util.List;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
 
+import android.os.Handler;
+
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -165,12 +167,17 @@ public class UraDBController {
                                 for (int i = 0; i < numbers.size(); i++) {
                                     int j;
                                     for(j = 0; j < jsonArray.length(); j++){
+
+
                                         JSONObject temp = jsonArray.getJSONObject(j);
                                         if(numbers.get(i).equals(temp.getString("carparkNo"))){
                                             lots.add(temp.getString("lotsAvailable"));
                                             break;
                                         }
                                     }
+
+
+
                                     if(j>=jsonArray.length()){
                                         lots.add("Unknown");
                                     }
@@ -178,6 +185,11 @@ public class UraDBController {
                             } catch (JSONException e) {
                                 throw new RuntimeException(e);
                             }
+
+
+
+
+
                         }
                         System.out.println(lots);
                         Uracallback.returnParking(names, coordinates, lots);

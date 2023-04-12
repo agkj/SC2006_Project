@@ -58,9 +58,9 @@ public class ForgetPassword extends AppCompatActivity {
 
 
     /**
-     * This function implements the reset password functionality
+     * This function implements the reset password functionality.
      *
-     *
+     * It takes in the user email input and checks if it exists in Firebase.
      * @author Goh Kai Jun, Alger
      *  */
 

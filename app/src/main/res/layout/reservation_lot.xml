@@ -5,13 +5,15 @@
     android:orientation="horizontal"
     android:weightSum="1"
     android:gravity="center"
-    android:clickable="false">
+    android:clickable="false"
+    android:background="@color/primary_color">
     <!-- List item layout for each row in the ListView -->
     <LinearLayout
         android:layout_width="0dip"
         android:layout_height="wrap_content"
         android:layout_weight="0.9"
-        android:background="@drawable/round_corner_white"
+        android:background="@color/search_color"
+
         android:paddingHorizontal="30px"
         android:paddingTop="50px"
         android:paddingBottom="50px"
@@ -44,6 +46,7 @@
                 <TextView
                     android:id="@+id/column3_textview"
                     android:fontFamily="sans-serif-black"
+                    android:textColor="@color/text_color"
                     android:textSize="15sp"
                     android:layout_width="0dip"
                     android:layout_height="wrap_content"
@@ -56,9 +59,10 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
                     android:text="Reserved"
-                    android:textColor="@color/deep_blue"
+
                     android:layout_marginLeft="50px"
-                    android:background="@drawable/rounded_border"
+                    android:background="@color/primary_color"
+                    android:textColor="@color/text_color"
                     android:paddingLeft="20px"
                     android:paddingRight="20px"
                     android:paddingTop="5px"
@@ -75,6 +79,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="@color/text_color"
                     android:text="Start Time:">
 
                 </TextView>
@@ -82,7 +88,8 @@
                     android:id="@+id/column1_textview"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/grey"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="@color/text_color"
                     android:text="startTime"
                     android:layout_marginLeft="10px"/>
             </LinearLayout>
@@ -96,6 +103,8 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="@color/text_color"
                     android:text="End Time:">
 
                 </TextView>
@@ -104,7 +113,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:textColor="@color/grey"
+                    android:fontFamily="sans-serif-black"
+                    android:textColor="@color/text_color"
                     android:text="endTime"
                     android:layout_marginLeft="10px"/>
             </LinearLayout>

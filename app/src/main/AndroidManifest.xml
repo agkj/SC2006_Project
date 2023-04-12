@@ -23,6 +23,9 @@
             android:name=".control.AccountRegister"
             android:exported="false"
             android:theme="@style/Theme.Material3.Light.NoActionBar" />
+
+
+
         <activity
             android:name=".boundary.CarparkLotDisplay"
             android:exported="false" />

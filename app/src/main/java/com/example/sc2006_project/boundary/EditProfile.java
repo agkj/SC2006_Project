@@ -15,8 +15,10 @@ import android.widget.Toast;
 
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.AccountRegister;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -34,7 +36,7 @@ import java.util.Map;
 public class EditProfile extends AppCompatActivity {
 
     private FirebaseFirestore fStore;
-    private EditText nameEditText, phoneNumberEditText, carplateEditText;
+    private EditText nameEditText, phoneNumberEditText, carplateEditText, passwordEditText;
     private Button saveButton;
 
     private FirebaseAuth auth, fAuth;
@@ -61,6 +63,7 @@ public class EditProfile extends AppCompatActivity {
         nameEditText = findViewById(R.id.nameEditText);
         phoneNumberEditText = findViewById(R.id.phoneNumberEditText);
         carplateEditText = findViewById(R.id.carPlateEditText);
+        passwordEditText = findViewById(R.id.passwordEditText);
 
         saveButton = findViewById(R.id.saveButton);
 
@@ -68,6 +71,8 @@ public class EditProfile extends AppCompatActivity {
         fAuth = FirebaseAuth.getInstance();
         fStore = FirebaseFirestore.getInstance();
         userID = fAuth.getCurrentUser().getUid();
+
+
 
 
         DocumentReference documentReference = fStore.collection("users").document(userID);
@@ -91,10 +96,13 @@ public class EditProfile extends AppCompatActivity {
                     String name = userData.get("name").toString();
                     String phone = userData.get("phone").toString();
                     String carPlate = userData.get("carPlate").toString();
+                    String password = userData.get("password").toString();
 
                     nameEditText.setText(name);
                     phoneNumberEditText.setText(phone);
                     carplateEditText.setText(carPlate);
+                    passwordEditText.setText(password);
+
                 }
             }
         });
@@ -105,7 +113,7 @@ public class EditProfile extends AppCompatActivity {
          *
          * @author Goh Kai Jun, Alger
          */
-
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,7 +122,12 @@ public class EditProfile extends AppCompatActivity {
                 String newPhone = phoneNumberEditText.getText().toString();
                 String newCarPlate = carplateEditText.getText().toString();
 
-                if (TextUtils.isEmpty(newName) || TextUtils.isEmpty(newPhone) || TextUtils.isEmpty(newCarPlate)) {
+                //edit
+                String newPassword = passwordEditText.getText().toString();
+
+
+
+                if (TextUtils.isEmpty(newName) || TextUtils.isEmpty(newPhone) || TextUtils.isEmpty(newCarPlate) || TextUtils.isEmpty(newPassword)) {
 
                     Toast.makeText(EditProfile.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
@@ -143,11 +156,21 @@ public class EditProfile extends AppCompatActivity {
                     return;
                 }
 
+                if (!(newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.{8,}).+$"))) {
+                    passwordEditText.setError("Password must contain at least 8 characters, one upper and lowercase and one number");
+                    passwordEditText.requestFocus();
+                    // Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
+                    return;
+                }
 
                 Map<String, Object> newUser = new HashMap<>();
                 newUser.put("name", newName);
                 newUser.put("phone", newPhone);
                 newUser.put("carPlate", newCarPlate);
+                newUser.put("password",newPassword);
+
+
+                user.updatePassword(newPassword);
 
                 fStore.collection("users").document(userID).set(newUser, SetOptions.merge())
                         .addOnSuccessListener(new OnSuccessListener<Void>() {

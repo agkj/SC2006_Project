@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@color/primary_color">
 
     <TimePicker
         android:id="@+id/time_picker"
@@ -26,18 +27,21 @@
         app:layout_constraintTop_toBottomOf="@+id/time_picker">
 
         <RadioButton
+            android:textColor="@color/text_color"
             android:id="@+id/one_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1 Hour" />
 
         <RadioButton
+            android:textColor="@color/text_color"
             android:id="@+id/two_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="2 Hours" />
 
         <RadioButton
+            android:textColor="@color/text_color"
             android:id="@+id/three_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -45,6 +49,7 @@
     </RadioGroup>
 
     <TextView
+        android:textColor="@color/text_color"
         android:id="@+id/start_time_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -59,6 +64,7 @@
         app:layout_constraintTop_toBottomOf="@+id/time_selector" />
 
     <TextView
+
         android:id="@+id/start_time_text_view"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -72,6 +78,7 @@
         app:layout_constraintTop_toBottomOf="@+id/time_selector"/>
 
     <TextView
+        android:textColor="@color/text_color"
         android:id="@+id/end_time_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -100,6 +107,7 @@
         app:layout_constraintTop_toBottomOf="@+id/start_time_text_view"/>
 
     <Button
+
         android:id="@+id/reserve_button"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
