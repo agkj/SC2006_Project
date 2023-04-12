@@ -28,6 +28,13 @@
 
         <RadioButton
             android:textColor="@color/text_color"
+            android:id="@+id/one_minute_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1 Minute" />
+
+        <RadioButton
+            android:textColor="@color/text_color"
             android:id="@+id/one_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

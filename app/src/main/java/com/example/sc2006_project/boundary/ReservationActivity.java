@@ -59,6 +59,7 @@ public class ReservationActivity extends AppCompatActivity {
 
         RadioGroup radioGroup = findViewById(R.id.time_selector);
 
+        RadioButton oneMinute = findViewById(R.id.one_minute_button);
         RadioButton oneHour = findViewById(R.id.one_button);
         RadioButton twoHour = findViewById(R.id.two_button);
         RadioButton threeHour = findViewById(R.id.three_button);
@@ -99,7 +100,11 @@ public class ReservationActivity extends AppCompatActivity {
                     } catch (ParseException e) {
                         throw new RuntimeException(e);
                     }
-                    if(oneHour.isChecked()){
+                    if (oneMinute.isChecked()){
+                        clone = cal;
+                        clone.add(Calendar.MINUTE, 1);
+                        endTimeTextView.setText(time.format(clone.getTime()));
+                    } else if(oneHour.isChecked()){
                         clone = cal;
                         clone.add(Calendar.HOUR_OF_DAY, 1);
                         endTimeTextView.setText(time.format(clone.getTime()));
@@ -134,7 +139,7 @@ public class ReservationActivity extends AppCompatActivity {
                 dateFormat.setTimeZone(timeZone);
                 String currentDate = dateFormat.format(calendar.getTime());
                 Date time, currentTime = null;
-                if (!oneHour.isChecked() && !twoHour.isChecked() && !threeHour.isChecked()) {
+                if (!oneHour.isChecked() && !twoHour.isChecked() && !threeHour.isChecked() && !oneMinute.isChecked()) {
                     Toast.makeText(ReservationActivity.this, "Please select reservation duration", Toast.LENGTH_SHORT).show();
                     return;
                 } else {
