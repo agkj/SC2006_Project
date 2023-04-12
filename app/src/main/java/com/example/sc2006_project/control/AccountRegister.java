@@ -134,10 +134,20 @@ public class AccountRegister extends AppCompatActivity {
                 }
 
                 //check carplate format eg: SAB1234D
-                if (!(carPlate.matches("[SKUTRFGMYX]{3}[0-9]{4}[A-Z]"))) {
+                if (    !(carPlate.startsWith("S"))
+                        || !(Character.isLetter(carPlate.charAt(1)))
+                        || !(Character.isLetter(carPlate.charAt(2)))
+                        || !(Character.isLetter(carPlate.charAt(7)))
 
-                    editTextCarPlate.setError("Car plate format should be SAB1234D");
+                        || Character.isLetter(carPlate.charAt(3))
+                        || Character.isLetter(carPlate.charAt(4))
+                        || Character.isLetter(carPlate.charAt(5))
+                        || Character.isLetter(carPlate.charAt(6))
+                        || carPlate.length() !=8 ) {
+
+                    editTextCarPlate.setError("Invalid car plate");
                     editTextCarPlate.requestFocus();
+                    // Toast.makeText(AccountRegister.this, "Invalid car plate number", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
