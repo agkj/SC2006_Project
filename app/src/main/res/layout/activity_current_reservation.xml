@@ -82,7 +82,7 @@
                 android:layout_weight="0.6"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="c"
+                android:text=""
                 android:textAlignment="viewEnd"/>
         </LinearLayout>
 
@@ -109,7 +109,7 @@
                 android:textAlignment="viewEnd"
                 android:textSize="20sp"
                 android:textStyle="bold"
-                android:text="b" />
+                android:text="" />
         </LinearLayout>
     </LinearLayout>
     <LinearLayout
@@ -129,7 +129,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/navigate"
                 android:layout_width="0dip"
-                android:layout_height="150px"
+                android:layout_height="130px"
                 android:layout_weight="0.9"
                 android:text="Navigate"
                 android:textColor="@color/black"
@@ -147,7 +147,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/cancel"
                 android:layout_width="0dip"
-                android:layout_height="150px"
+                android:layout_height="130px"
                 android:layout_weight="0.9"
                 android:text="Cancel"
                 android:textColor="@color/black"
@@ -166,7 +166,7 @@
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/back"
                 android:layout_width="0dip"
-                android:layout_height="150px"
+                android:layout_height="130px"
                 android:layout_weight="0.9"
                 android:text="Back"
                 android:textColor="@color/black"

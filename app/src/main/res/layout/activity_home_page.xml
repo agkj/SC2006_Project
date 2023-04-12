@@ -196,7 +196,7 @@
                 android:layout_marginTop="10px">
                 <TextView
                     android:layout_width="0dp"
-                    android:layout_height="150px"
+                    android:layout_height="130px"
                     android:layout_weight="0.9"
                     android:lines="1"
                     android:textSize="20sp"

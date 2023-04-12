@@ -92,6 +92,7 @@
         android:layout_marginTop="12dp"
         android:textSize="18sp"
         android:textStyle="bold"
+        android:text="AC"
         android:layout_marginLeft="12dp"
         android:layout_marginRight="24dp"
         app:layout_constraintEnd_toEndOf="parent"
