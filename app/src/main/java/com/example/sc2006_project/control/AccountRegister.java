@@ -138,6 +138,7 @@ public class AccountRegister extends AppCompatActivity {
 
                     editTextCarPlate.setError("Car plate format should be SAB1234D");
                     editTextCarPlate.requestFocus();
+                    return;
                 }
 
                 //check password length
