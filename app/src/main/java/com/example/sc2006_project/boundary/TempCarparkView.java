@@ -202,7 +202,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                         String longitude = jsonObject.getString("longitude");
                         converted[0] = Double.parseDouble(latitude);
                         converted[1] = Double.parseDouble(longitude);
-                        conversion_callback.getConverted(converted, name);
+                        conversion_callback.getConverted(converted, name, lot);
                     }catch(JSONException e){
                         throw new RuntimeException(e);
                     }

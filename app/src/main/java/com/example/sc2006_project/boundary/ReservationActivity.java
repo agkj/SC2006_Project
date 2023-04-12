@@ -1,6 +1,7 @@
 package com.example.sc2006_project.boundary;
 
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -177,6 +178,7 @@ public class ReservationActivity extends AppCompatActivity {
                                 Toast.makeText(ReservationActivity.this, "Reservation saved successfully!", Toast.LENGTH_SHORT).show();
 
                                 Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                             }
 

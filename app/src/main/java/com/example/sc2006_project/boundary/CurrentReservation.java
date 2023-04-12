@@ -140,6 +140,7 @@ public class CurrentReservation extends AppCompatActivity {
                             });
 
                             Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
                     });
@@ -156,6 +157,7 @@ public class CurrentReservation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }
         });

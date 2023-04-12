@@ -51,10 +51,9 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
         holder.txtName.setText(carparks.get(cur_pos).getLocation_name());
         holder.txtLots.setText(carparks.get(cur_pos).getLocation_lot());
         holder.txtName.setOnClickListener(new View.OnClickListener() {
-        carpark_name = holder.txtName.getText().toString();
-                holder.txtName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                carpark_name = holder.txtName.getText().toString();
                 sendInfo(carparks.get(cur_pos).getLocation_coord(),
                         carparks.get(cur_pos).getAsset_bound(),
                         carparks.get(cur_pos).getAsset_list(),
