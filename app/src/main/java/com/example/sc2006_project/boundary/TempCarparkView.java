@@ -49,7 +49,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
     * @author Chin Han Wen
     */
     interface ConversionCallbacks{
-        public void getConverted(double[] result, String name);
+        public void getConverted(double[] result, String name, String lot);
     }
 
     /**
@@ -60,10 +60,10 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
      * @author Chin Han Wen
      */
     @Override
-    public void returnParking(List<String> names, List<String> coordinates) {
+    public void returnParking(List<String> names, List<String> coordinates,List<String> numbers) {
         for(int a  = 0; a < names.size(); a++){
             String[] non_converted = coordinates.get(a).split(",");
-            converter(non_converted[0], non_converted[1], names.get(a));
+            converter(non_converted[0], non_converted[1], names.get(a), numbers.get(a));
         }
     }
 
@@ -90,10 +90,10 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
         //Uses a simple lock to guarantee that only 1 thread can modify the list at any point.
         this.conversion_callback = new ConversionCallbacks(){
             @Override
-            public void getConverted(double[] result, String name){
+            public void getConverted(double[] result, String name, String lot){
                 lock.lock();
                 try{
-                    carparks.add(new Carpark(new LatLng(result[0], result[1]), name));
+                    carparks.add(new Carpark(new LatLng(result[0], result[1]), name, lot));
                     Collections.sort(carparks);
                     runOnUiThread(new Runnable() {
                         @Override
@@ -111,13 +111,16 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
 
         SearchView simpleSearchView = (SearchView) findViewById(R.id.simpleSearchView);
         ArrayList<Carpark> carparkList = carparks;
-        simpleSearchView.setOnQueryTextListener(new SearchView. OnQueryTextListener() {
+        /**
+         * This function implements the searching in car park list
+         * @author He Haoshen
+         */
+        simpleSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 // This method will be called when the user submits their search query
                 // The 'query' parameter contains the user's input
                 String userInput = query;
-//                        System.out.println(carparkList);
                 if(query.isEmpty()) adapter.setCarparks(carparks);
                 int i = 0;
                 for(i=0; i<carparkList.size(); i++)
@@ -133,7 +136,6 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
                 if(i<114){
                     ArrayList<Carpark> searchResult = new ArrayList<>();
                     searchResult.add(carparkList.get(i));
-//                        System.out.println(i);
                     adapter.setCarparks(searchResult);
                 }else{
                     ArrayList<Carpark> blank = new ArrayList<>();
@@ -155,9 +157,6 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
             http_client = new OkHttpClient.Builder().callTimeout(120, TimeUnit.SECONDS).build();
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
-            String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
-            String token = "W494Acdv9G+08D7GU97@CRaV4GRJbdq+1c17b9f0bjB5xN98ydFfzCa48@+9xch144nJtV37U584-5c4FCj-C89ds79u-XN5A5--";
-            ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);
             carparkRecView.setAdapter(adapter);
@@ -178,7 +177,7 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
      * @param name The name of the corresponding carpark.
      * @author Chin Han Wen
      */
-    private void converter(String latitude, String longitude, String name) {
+    private void converter(String latitude, String longitude, String name, String lot) {
         double[] converted = {0, 0};
         String url = "https://developers.onemap.sg/commonapi/convert/3414to4326";
         HttpUrl.Builder urlbuilder = HttpUrl.parse(url).newBuilder();

@@ -49,6 +49,8 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
     public void onBindViewHolder(ViewHolder holder, int position) {
         int cur_pos = position;
         holder.txtName.setText(carparks.get(cur_pos).getLocation_name());
+        holder.txtLots.setText(carparks.get(cur_pos).getLocation_lot());
+        holder.txtName.setOnClickListener(new View.OnClickListener() {
         carpark_name = holder.txtName.getText().toString();
                 holder.txtName.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,10 +77,12 @@ public class CarparkRecViewAdapter extends RecyclerView.Adapter<CarparkRecViewAd
 
         private TextView txtName;
         private RelativeLayout parent;
+        private TextView txtLots;
         public ViewHolder(View itemView){
             super(itemView);
             txtName = itemView.findViewById(R.id.txtName);
             parent = itemView.findViewById(R.id.parent);
+            txtLots = itemView.findViewById(R.id.txtLots);
         }
     }
 
