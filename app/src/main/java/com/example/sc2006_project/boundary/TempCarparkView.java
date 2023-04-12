@@ -155,8 +155,8 @@ public class TempCarparkView extends AppCompatActivity implements UraDBControlle
             http_client = new OkHttpClient.Builder().callTimeout(120, TimeUnit.SECONDS).build();
             ura_db_controller = new UraDBController();
             ura_db_controller.setUracallback(this);
-            String accessKey = "14977109-00e5-40fc-911d-8979d93db584";
-            String token = "W494Acdv9G+08D7GU97@CRaV4GRJbdq+1c17b9f0bjB5xN98ydFfzCa48@+9xch144nJtV37U584-5c4FCj-C89ds79u-XN5A5--";
+            String accessKey = "ed2ed5ec-8a5e-47ab-ae19-a14d963c707c";
+            String token = "b4Ms9zVeft4w-+bdR@ef1c0358-dp7FbMJpd3595cd9sddjV-c9V0gjveF4jebv-H8d24MSXq--c7f4+Rh93tkwE3T-EaYeaK7Ha";
             ura_db_controller.accessUraDB(accessKey, token);
             carparkRecView = findViewById(R.id.carparkRecView);
             adapter = new CarparkRecViewAdapter(current);

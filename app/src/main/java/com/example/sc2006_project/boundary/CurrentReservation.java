@@ -138,12 +138,13 @@ public class CurrentReservation extends AppCompatActivity {
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) { }
                             });
+
+                            Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                            startActivity(intent);
                         }
                     });
                     builder.setNegativeButton("No", null);
                     builder.show();
-                    Intent intent = new Intent(getApplicationContext(), Homepage.class);
-                    startActivity(intent);
                 } else {
                     Toast.makeText(CurrentReservation.this, "You can't cancel a reservation if you don't have one", Toast.LENGTH_SHORT).show();
                 }
