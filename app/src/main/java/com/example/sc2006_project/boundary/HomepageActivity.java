@@ -46,6 +46,8 @@ public class HomepageActivity extends AppCompatActivity {
     /**
      * This function initializes the homepage activity.
      *
+     * Users can either edit their profile, view carparks, view current reservations, view reservation history.
+     *
      * @author Goh Kai Jun, Alger
      *  */
 
@@ -76,6 +78,14 @@ public class HomepageActivity extends AppCompatActivity {
         userID = fAuth.getCurrentUser().getUid();
 
         DocumentReference documentReference = fStore.collection("users").document(userID);
+
+
+        /**
+         * This function initializes the user profile within the homepage.
+         *
+         * @author Goh Kai Jun, Alger
+         */
+
 
         if (user == null) {
             Intent intent = new Intent(getApplicationContext(), LoginActivity.class);

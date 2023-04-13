@@ -42,7 +42,9 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     /**
-     * This function initializes the login page activity
+     * This function initializes the login page activity.
+     *
+     * Users can either login, create a new account or reset their password
      *
      * @author Goh Kai Jun, Alger
      *  */
@@ -82,6 +84,12 @@ public class LoginActivity extends AppCompatActivity {
                 finish();
             }
         });
+        /**
+         * This function checks for valid user input details such as, Email and password before logging in.
+         * User will not be able to login if they enter invalid account details.
+         *
+         * @author Goh Kai Jun, Alger
+         */
 
         btnLogin.setOnClickListener(new View.OnClickListener() {
 

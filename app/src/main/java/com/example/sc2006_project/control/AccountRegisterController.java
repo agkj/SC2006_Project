@@ -32,11 +32,11 @@ public class AccountRegisterController extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private FirebaseFirestore fStore;
     private String userID;
-    TextView textView;
+
 
 
     /**
-     * This function checks if a user is already logged in and signs the user in to the application
+     * This function initializes the account registration page
      *
      * @author Goh Kai Jun, Alger
      */
@@ -44,18 +44,14 @@ public class AccountRegisterController extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
-        // Check if user is signed in, if signed in, go into main page
-//        FirebaseUser currentUser = mAuth.getCurrentUser();
-//        if (currentUser != null) {
-//            Intent intent = new Intent(getApplicationContext(), ViewProfile.class);
-//            startActivity(intent);
-//            finish();
-//
-//        }
+
     }
 
     /**
      * This function initializes the account register activity
+     *
+     * It checks for valid user input details such as, Email, Name, Password, Phone, Car Plate and Password.
+     * Successful inputs will generate a verification email which will be sent to the user email before logging in.
      *
      * @author Goh Kai Jun, Alger
      */
