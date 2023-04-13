@@ -42,6 +42,11 @@ public class ReservationActivity extends AppCompatActivity {
     private String userID;
     private TimeZone timeZone = TimeZone.getTimeZone("Asia/Singapore");
 
+    /**
+     This is the onCreate method of the MakeReservation activity, responsible for setting up the view and initializing necessary components.
+     @param savedInstanceState
+     @author Chi Seo Hyeon
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -65,6 +70,12 @@ public class ReservationActivity extends AppCompatActivity {
         TextView startTimeTextView = findViewById(R.id.start_time_text_view);
         TextView endTimeTextView = findViewById(R.id.end_time_text_view);
 
+        /**
+         * Sets a listener to be notified when the user changes the time in a TimePicker.
+         * @param timePicker
+         * @param startTimeTextView
+         * @author Chi Seo Hyeon
+         */
         timePicker.setOnTimeChangedListener(new TimePicker.OnTimeChangedListener() {
             @Override
             public void onTimeChanged(TimePicker view, int hourOfDay, int minute) {
@@ -74,6 +85,12 @@ public class ReservationActivity extends AppCompatActivity {
             }
         });
 
+        /**
+         Sets a listener to be notified when the checked radio button changes.
+         @param group the radio group
+         @param checkedId
+         @author Chi Seo Hyeon
+         */
         radioGroup.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
@@ -129,6 +146,12 @@ public class ReservationActivity extends AppCompatActivity {
         DatabaseReference reservationsRef = database.getReference("reservations");
 
         Button reserveButton = findViewById(R.id.reserve_button);
+
+        /**
+         This method sets a click listener for a reservation button, which creates a new reservation object and saves it to the Firebase Realtime Database.
+         @param v A View object.
+         @author Chi Seo Hyeon
+         */
         reserveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -203,6 +226,14 @@ public class ReservationActivity extends AppCompatActivity {
             }
         });
     }
+
+    /**
+     Sets the time on a given {@link TextView} based on the provided hour and minute values.
+     @param hourOfDay
+     @param minute
+     @param textView
+     @author Chi Seo Hyeon
+     */
     private void getTimeString (int hourOfDay, int minute, TextView textView){
         Calendar calendar = Calendar.getInstance(timeZone);
         calendar.set(Calendar.HOUR_OF_DAY, hourOfDay);

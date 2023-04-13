@@ -34,6 +34,12 @@ public class CurrentReservationController extends AppCompatActivity {
     private double latitude, longitude;
     private String endTime;
 
+    /**
+     * Called when the activity is first created. Sets the layout to display the current reservation
+     * information, and initializes some variables related to the reservation.
+     * @param savedInstanceState A Bundle containing the activity's previously saved state, or null if there is no saved state.
+     * @author Chi Seo Hyeon
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,6 +59,12 @@ public class CurrentReservationController extends AppCompatActivity {
         DatabaseReference reservationsRef = FirebaseDatabase.getInstance("https://parkersc2006-default-rtdb.asia-southeast1.firebasedatabase.app").getReference("reservations");
         Query ongoingReservationQuery = reservationsRef.orderByChild("endTime").startAt(currentDate);
 
+        /**
+         Listens for a single value event from the Firebase Realtime Database to retrieve
+         ongoing reservation data for a specific user.
+         @param ongoingReservationQuery The database reference to the ongoing reservation for
+         @author Chi Seo Hyeon
+         */
         ongoingReservationQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

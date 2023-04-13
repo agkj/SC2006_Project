@@ -34,6 +34,11 @@ public class ViewReservationController extends AppCompatActivity {
     private FirebaseFirestore fStore;
     private String userID;
 
+    /**
+     * This function implements the view reservation user interface.
+     *
+     * @author Chi Seo Hyeon
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +56,14 @@ public class ViewReservationController extends AppCompatActivity {
         DatabaseReference databaseReference = FirebaseDatabase.getInstance("https://parkersc2006-default-rtdb.asia-southeast1.firebasedatabase.app").getReference();
 
         Query query = databaseReference.child("reservations").orderByChild("userID").equalTo(userID);
+
+        /**
+         This method sets a ValueEventListener on a Firebase database reference, which retrieves data from the database and populates a list with the retrieved data.
+         @param query The Firebase database reference to retrieve data from
+         @param listView The ListView to populate with retrieved data
+         @author Chi Seo Hyeon
+         */
+
         query.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
