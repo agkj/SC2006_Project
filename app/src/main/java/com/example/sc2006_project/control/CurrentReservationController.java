@@ -1,10 +1,9 @@
-package com.example.sc2006_project.boundary;
+package com.example.sc2006_project.control;
 
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,11 +14,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sc2006_project.R;
-import com.example.sc2006_project.control.NavigationController;
-import com.example.sc2006_project.entity.Reservation;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
+import com.example.sc2006_project.boundary.HomepageActivity;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,14 +22,12 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
 
-public class CurrentReservation extends AppCompatActivity {
+public class CurrentReservationController extends AppCompatActivity {
 
     private TextView startTimeTextView, endTimeTextView, destinationTextView;
     private Context current = this;
@@ -102,7 +95,7 @@ public class CurrentReservation extends AppCompatActivity {
                         nav_controller.navigate(location);
                     }
                 } else {
-                    Toast.makeText(CurrentReservation.this, "You can't navigate without a reservation", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CurrentReservationController.this, "You can't navigate without a reservation", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -113,7 +106,7 @@ public class CurrentReservation extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (startTimeTextView.getText() != "No ongoing reservations") {
-                    AlertDialog.Builder builder = new AlertDialog.Builder(CurrentReservation.this);
+                    AlertDialog.Builder builder = new AlertDialog.Builder(CurrentReservationController.this);
                     builder.setMessage("Are you sure you want to cancel your reservation?");
                     builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                         @Override
@@ -124,12 +117,12 @@ public class CurrentReservation extends AppCompatActivity {
                                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                     for (DataSnapshot reservationSnapshot : dataSnapshot.getChildren()) {
                                         reservationSnapshot.getRef().removeValue(); // Remove the value from the Realtime Database
-                                        AlertDialog.Builder builder = new AlertDialog.Builder(CurrentReservation.this);
+                                        AlertDialog.Builder builder = new AlertDialog.Builder(CurrentReservationController.this);
                                         builder.setMessage("Success!");
                                         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                             @Override
                                             public void onClick(DialogInterface dialogInterface, int i) {
-                                                Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                                                Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                                                 startActivity(intent);
                                             }
                                         });
@@ -139,7 +132,7 @@ public class CurrentReservation extends AppCompatActivity {
                                 public void onCancelled(@NonNull DatabaseError databaseError) { }
                             });
 
-                            Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                            Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(intent);
                         }
@@ -147,7 +140,7 @@ public class CurrentReservation extends AppCompatActivity {
                     builder.setNegativeButton("No", null);
                     builder.show();
                 } else {
-                    Toast.makeText(CurrentReservation.this, "You can't cancel a reservation if you don't have one", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(CurrentReservationController.this, "You can't cancel a reservation if you don't have one", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -156,7 +149,7 @@ public class CurrentReservation extends AppCompatActivity {
         button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

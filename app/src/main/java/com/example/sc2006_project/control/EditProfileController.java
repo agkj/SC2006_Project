@@ -1,4 +1,4 @@
-package com.example.sc2006_project.boundary;
+package com.example.sc2006_project.control;
 
 
 import androidx.annotation.NonNull;
@@ -14,12 +14,9 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.sc2006_project.R;
-import com.example.sc2006_project.control.AccountRegister;
-import com.google.android.gms.tasks.OnCompleteListener;
+import com.example.sc2006_project.boundary.HomepageActivity;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -33,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 
-public class EditProfile extends AppCompatActivity {
+public class EditProfileController extends AppCompatActivity {
 
     private FirebaseFirestore fStore;
     private EditText nameEditText, phoneNumberEditText, carplateEditText, passwordEditText;
@@ -129,7 +126,7 @@ public class EditProfile extends AppCompatActivity {
 
                 if (TextUtils.isEmpty(newName) || TextUtils.isEmpty(newPhone) || TextUtils.isEmpty(newCarPlate) || TextUtils.isEmpty(newPassword)) {
 
-                    Toast.makeText(EditProfile.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EditProfileController.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
                 if (!(newPhone.replaceAll("\\s", "").matches("^[89]\\d{7}$"))) {
@@ -156,8 +153,8 @@ public class EditProfile extends AppCompatActivity {
                     return;
                 }
 
-                if (!(newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.{8,}).+$"))) {
-                    passwordEditText.setError("Password must contain at least 8 characters, one upper and lowercase and one number");
+                if (!(newPassword.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.{6,}).+$"))) {
+                    passwordEditText.setError("Password must contain at least 6 characters, one upper and lowercase and one number");
                     passwordEditText.requestFocus();
                     // Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
                     return;
@@ -177,7 +174,7 @@ public class EditProfile extends AppCompatActivity {
                             @Override
                             public void onSuccess(Void aVoid) {
                                 // Display a message indicating that the user information was updated
-                                Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                                Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                                 startActivity(intent);
                                 finish();
                             }
@@ -186,7 +183,7 @@ public class EditProfile extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 // Display an error message if the update fails
-                                Toast.makeText(EditProfile.this, "Error updating user information", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(EditProfileController.this, "Error updating user information", Toast.LENGTH_SHORT).show();
                             }
                         });
             }

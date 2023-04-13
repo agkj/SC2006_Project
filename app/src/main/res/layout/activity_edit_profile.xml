@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/primary_color"
     android:orientation="vertical"
-    tools:context=".boundary.EditProfile">
+    tools:context=".control.EditProfileController">
 
   <TextView
       android:textColor="@color/text_color"

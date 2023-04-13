@@ -1,4 +1,4 @@
-package com.example.sc2006_project.boundary;
+package com.example.sc2006_project.control;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -11,12 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.sc2006_project.R;
-import com.example.sc2006_project.control.CarparkRecViewAdapter;
-import com.example.sc2006_project.control.UraDBController;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.GoogleApiAvailability;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
 import java.io.IOException;
@@ -25,11 +21,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.locks.ReentrantLock;
-import java.util.Locale;
 
 import com.example.sc2006_project.entity.Carpark;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -40,10 +34,8 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
-import android.widget.SearchView;
 
-
-public class TempCarparkView extends AppCompatActivity implements UraDBController.URACallback {
+public class TempCarparkViewController extends AppCompatActivity implements UraDBController.URACallback {
    /**
     * This is the interface defining the callback from the coordinate converter
     * @author Chin Han Wen

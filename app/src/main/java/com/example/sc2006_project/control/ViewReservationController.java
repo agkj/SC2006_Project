@@ -1,21 +1,17 @@
-package com.example.sc2006_project.boundary;
+package com.example.sc2006_project.control;
 
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sc2006_project.R;
+import com.example.sc2006_project.boundary.HomepageActivity;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -32,7 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ViewReservation extends AppCompatActivity {
+public class ViewReservationController extends AppCompatActivity {
 
     private FirebaseAuth auth;
     private FirebaseFirestore fStore;
@@ -69,7 +65,7 @@ public class ViewReservation extends AppCompatActivity {
 
                 String[] from = {"column1", "column2", "column3"};
                 int[] to = {R.id.column1_textview, R.id.column2_textview, R.id.column3_textview};
-                SimpleAdapter adapter = new SimpleAdapter(ViewReservation.this, dataList, R.layout.reservation_lot, from, to);
+                SimpleAdapter adapter = new SimpleAdapter(ViewReservationController.this, dataList, R.layout.reservation_lot, from, to);
                 listView.setAdapter(adapter);
             }
 
@@ -83,7 +79,7 @@ public class ViewReservation extends AppCompatActivity {
         button_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 startActivity(intent);
             }

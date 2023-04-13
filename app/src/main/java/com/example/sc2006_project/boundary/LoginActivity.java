@@ -13,12 +13,12 @@ import android.widget.Toast;
 
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.AccountRegister;
+import com.example.sc2006_project.control.ForgetPasswordController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -65,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                Intent intent = new Intent(getApplicationContext(),ForgetPassword.class);
+                Intent intent = new Intent(getApplicationContext(), ForgetPasswordController.class);
                 startActivity(intent);
                 finish();
 
@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if(mAuth.getCurrentUser().isEmailVerified()){
                                         Toast.makeText(LoginActivity.this, "Welcome",
                                                 Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                                        Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                                         startActivity(intent);
                                         finish();
 

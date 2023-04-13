@@ -152,8 +152,8 @@ public class AccountRegister extends AppCompatActivity {
                 }
 
                 //check password length
-                if (!(password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.{8,}).+$"))) {
-                    editTextPassword.setError("Password must contain at least 8 characters, one upper and lowercase and one number");
+                if (!(password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.{6,}).+$"))) {
+                    editTextPassword.setError("Password must contain at least 6 characters, one upper and lowercase and one number");
                     editTextPassword.requestFocus();
                     // Toast.makeText(AccountRegister.this, "Password must contain at least 6 characters", Toast.LENGTH_SHORT).show();
                     return;

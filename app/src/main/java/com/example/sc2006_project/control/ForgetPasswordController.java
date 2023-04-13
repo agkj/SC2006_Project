@@ -1,4 +1,4 @@
-package com.example.sc2006_project.boundary;
+package com.example.sc2006_project.control;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +13,12 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.sc2006_project.R;
-import com.example.sc2006_project.control.AccountRegister;
+import com.example.sc2006_project.boundary.LoginActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 
-public class ForgetPassword extends AppCompatActivity {
+public class ForgetPasswordController extends AppCompatActivity {
 
 
     private EditText emailEditText;
@@ -89,12 +89,12 @@ public class ForgetPassword extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(ForgetPassword.this, "Please check your email to reset your password", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgetPasswordController.this, "Please check your email to reset your password", Toast.LENGTH_SHORT).show();
                     Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
-                    Toast.makeText(ForgetPassword.this, "Try again, something wrong has happened or account does not exists", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ForgetPasswordController.this, "Try again, something wrong has happened or account does not exists", Toast.LENGTH_SHORT).show();
                 }
             }
         });

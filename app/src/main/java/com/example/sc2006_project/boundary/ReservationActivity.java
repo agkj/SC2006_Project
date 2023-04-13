@@ -1,7 +1,6 @@
 package com.example.sc2006_project.boundary;
 
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,8 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sc2006_project.R;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
+import com.example.sc2006_project.control.TempCarparkViewController;
 import com.example.sc2006_project.entity.Reservation;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -34,7 +33,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.Locale;
 import java.util.TimeZone;
 
 public class ReservationActivity extends AppCompatActivity {
@@ -182,7 +180,7 @@ public class ReservationActivity extends AppCompatActivity {
                                 // Show a Toast message to indicate that the reservation has been saved
                                 Toast.makeText(ReservationActivity.this, "Reservation saved successfully!", Toast.LENGTH_SHORT).show();
 
-                                Intent intent = new Intent(getApplicationContext(), Homepage.class);
+                                Intent intent = new Intent(getApplicationContext(), HomepageActivity.class);
                                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                                 startActivity(intent);
                             }
@@ -200,7 +198,7 @@ public class ReservationActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TempCarparkView.class);
+                Intent intent = new Intent(getApplicationContext(), TempCarparkViewController.class);
                 startActivity(intent);
             }
         });

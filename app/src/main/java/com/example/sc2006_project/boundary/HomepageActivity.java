@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -13,6 +12,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.sc2006_project.R;
 
+import com.example.sc2006_project.control.CurrentReservationController;
+import com.example.sc2006_project.control.EditProfileController;
+import com.example.sc2006_project.control.TempCarparkViewController;
+import com.example.sc2006_project.control.ViewReservationController;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentReference;
@@ -29,7 +32,7 @@ import com.google.firebase.firestore.FirebaseFirestoreException;
  * @author Goh Kai Jun, Alger
  *
  */
-public class Homepage extends AppCompatActivity {
+public class HomepageActivity extends AppCompatActivity {
 
     private TextView btnEditProfile, btnViewReservation,btnViewCarPark, btnCurrentReservation,btnLogout;
 
@@ -99,7 +102,7 @@ public class Homepage extends AppCompatActivity {
         btnEditProfile.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), EditProfile.class);
+                Intent intent = new Intent(getApplicationContext(), EditProfileController.class);
                 startActivity(intent);
                 finish();
             }
@@ -109,7 +112,7 @@ public class Homepage extends AppCompatActivity {
         btnViewCarPark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TempCarparkView.class);
+                Intent intent = new Intent(getApplicationContext(), TempCarparkViewController.class);
                 startActivity(intent);
             }
         });
@@ -117,7 +120,7 @@ public class Homepage extends AppCompatActivity {
         btnCurrentReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), CurrentReservation.class);
+                Intent intent = new Intent(getApplicationContext(), CurrentReservationController.class);
                 startActivity(intent);
             }
         });
@@ -125,7 +128,7 @@ public class Homepage extends AppCompatActivity {
         btnViewReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ViewReservation.class);
+                Intent intent = new Intent(getApplicationContext(), ViewReservationController.class);
                 startActivity(intent);
             }
         });
