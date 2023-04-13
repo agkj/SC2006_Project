@@ -12,7 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sc2006_project.R;
-import com.example.sc2006_project.control.AccountRegister;
+import com.example.sc2006_project.control.AccountRegisterController;
 import com.example.sc2006_project.control.ForgetPasswordController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         registerNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), AccountRegister.class);
+                Intent intent = new Intent(getApplicationContext(), AccountRegisterController.class);
                 startActivity(intent);
                 finish();
             }

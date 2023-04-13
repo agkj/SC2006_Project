@@ -20,7 +20,7 @@
             android:name=".control.ForgetPasswordController"
             android:exported="false" /> <!-- android:theme="@style/Theme.SC2006_Project" -->
         <activity
-            android:name=".control.AccountRegister"
+            android:name=".control.AccountRegisterController"
             android:exported="false"
             android:theme="@style/Theme.Material3.Light.NoActionBar" />
 

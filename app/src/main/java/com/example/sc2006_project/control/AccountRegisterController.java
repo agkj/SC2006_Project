@@ -19,17 +19,13 @@ import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import org.checkerframework.checker.units.qual.A;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class AccountRegister extends AppCompatActivity {
+public class AccountRegisterController extends AppCompatActivity {
 
     private TextInputEditText editTextEmail, editTextPassword, editTextPhone, editTextName, editTextCarPlate;
     private Button btnReg;
@@ -105,7 +101,7 @@ public class AccountRegister extends AppCompatActivity {
                 //check empty fields
                 if (TextUtils.isEmpty(email) || TextUtils.isEmpty(password) || TextUtils.isEmpty(name) || TextUtils.isEmpty(phone) || TextUtils.isEmpty(carPlate)) {
 
-                    Toast.makeText(AccountRegister.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(AccountRegisterController.this, "Empty fields, try again.", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
@@ -189,14 +185,14 @@ public class AccountRegister extends AppCompatActivity {
                                         // user.put("password", password);
                                         documentReference.set(user);
 
-                                        Toast.makeText(AccountRegister.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountRegisterController.this, "Please verify your email address before logging in.", Toast.LENGTH_SHORT).show();
 
                                         Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                                         startActivity(intent);
                                         finish();
 
                                     } else {
-                                        Toast.makeText(AccountRegister.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(AccountRegisterController.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
 
                                     }
@@ -206,7 +202,7 @@ public class AccountRegister extends AppCompatActivity {
                         } else {
                             // If sign in fails, display a message to the user.
                             //Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                            Toast.makeText(AccountRegister.this, "Account creation failed. Try again", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AccountRegisterController.this, "Account creation failed. Try again", Toast.LENGTH_SHORT).show();
 
                         }
                     }
