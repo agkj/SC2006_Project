@@ -1,8 +1,4 @@
 package com.example.sc2006_project.boundary;
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -16,11 +12,9 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.sc2006_project.R;
-import com.example.sc2006_project.control.CarparkLotRecViewAdapter;
 import com.example.sc2006_project.control.CarparkRecViewAdapter;
 import com.example.sc2006_project.control.NavigationController;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -51,24 +45,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     public int temp;
     public static LatLng carpark_loc_pub;
 
-    /**
-     * This function listens for an activity result from CarparkLotDisplay, then moves the map camera based on the response coordinates.
-     */
-    ActivityResultLauncher<Intent> activityLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == 1){
-                        Intent intent = result.getData();
-                        if(intent != null){
-                            LatLng temp_loc = intent.getParcelableExtra(CarparkLotRecViewAdapter.GET_LOT_COORDS);
-                            googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(temp_loc, 15));
-                        }
-                    }
-                }
-            }
-    );
 
     /**
      * This function initialises the Google Map interface.

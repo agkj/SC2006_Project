@@ -27,9 +27,6 @@
 
 
         <activity
-            android:name=".boundary.CarparkLotDisplayActivity"
-            android:exported="false" />
-        <activity
             android:name=".boundary.MapActivity"
             android:exported="false" />
 
